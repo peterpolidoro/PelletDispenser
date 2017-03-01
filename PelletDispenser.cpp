@@ -17,14 +17,7 @@ PelletDispenser::PelletDispenser()
 void PelletDispenser::setup()
 {
   // Parent Setup
-  StepDirController::setup();
-
-  // TMC26X Setup
-  for (size_t tmc26x_i=0; tmc26x_i<constants::TMC26X_COUNT; ++tmc26x_i)
-  {
-    TMC26X & tmc26x = tmc26xs_[tmc26x_i];
-    tmc26x.setup(constants::cs_pins[tmc26x_i]);
-  }
+  StepperController::setup();
 
   // Pin Setup
 
@@ -46,60 +39,23 @@ void PelletDispenser::setup()
   modular_server::Property & steps_per_position_unit_property = modular_server_.property(step_dir_controller::constants::steps_per_position_unit_property_name);
   steps_per_position_unit_property.setDefaultValue(constants::steps_per_position_unit_default);
 
-  modular_server::Property & current_scale_property = modular_server_.createProperty(constants::current_scale_property_name,constants::current_scale_default);
-  current_scale_property.setUnits(constants::percent_unit);
-  current_scale_property.setRange(constants::current_scale_min,constants::current_scale_max);
-  current_scale_property.attachPostSetElementValueFunctor(makeFunctor((Functor1<const size_t> *)0,*this,&PelletDispenser::setCurrentScaleHandler));
+  modular_server::Property & velocity_max_property = modular_server_.property(step_dir_controller::constants::velocity_max_property_name);
+  velocity_max_property.setDefaultValue(constants::velocity_max_default);
 
-  modular_server::Property & microsteps_per_step_property = modular_server_.createProperty(constants::microsteps_per_step_property_name,constants::microsteps_per_step_default);
-  microsteps_per_step_property.setSubset(constants::microsteps_per_step_subset);
-  microsteps_per_step_property.attachPreSetElementValueFunctor(makeFunctor((Functor1<const size_t> *)0,*this,&PelletDispenser::preSetMicrostepsPerStepHandler));
-  microsteps_per_step_property.attachPostSetElementValueFunctor(makeFunctor((Functor1<const size_t> *)0,*this,&PelletDispenser::postSetMicrostepsPerStepHandler));
+  modular_server::Property & velocity_min_property = modular_server_.property(step_dir_controller::constants::velocity_min_property_name);
+  velocity_min_property.setDefaultValue(constants::velocity_min_default);
 
-  reinitialize();
+  modular_server::Property & acceleration_max_property = modular_server_.property(step_dir_controller::constants::acceleration_max_property_name);
+  acceleration_max_property.setDefaultValue(constants::acceleration_max_default);
+
+  modular_server::Property & current_scale_property = modular_server_.property(stepper_controller::constants::current_scale_property_name);
+  current_scale_property.setDefaultValue(constants::current_scale_default);
 
   // Parameters
 
   // Functions
 
   // Callbacks
-}
-
-void PelletDispenser::reinitialize()
-{
-  StepDirController::reinitialize();
-  for (size_t tmc26x_i=0; tmc26x_i<constants::TMC26X_COUNT; ++tmc26x_i)
-  {
-    TMC26X & tmc26x = tmc26xs_[tmc26x_i];
-    tmc26x.setStepDirInput();
-    tmc26x.setDefaultChopperConfig();
-    tmc26x.disableCoolStep();
-    setCurrentScaleHandler(tmc26x_i);
-    preSetMicrostepsPerStepHandler(tmc26x_i);
-    postSetMicrostepsPerStepHandler(tmc26x_i);
-  }
-}
-
-double PelletDispenser::stepsToPositionUnits(const size_t channel, const double steps)
-{
-  double position_units = StepDirController::stepsToPositionUnits(channel,steps);
-
-  modular_server::Property & microsteps_per_step_property = modular_server_.property(constants::microsteps_per_step_property_name);
-  long microsteps_per_step;
-  microsteps_per_step_property.getElementValue(channel,microsteps_per_step);
-
-  return position_units/microsteps_per_step;
-}
-
-double PelletDispenser::positionUnitsToSteps(const size_t channel, const double position_units)
-{
-  double steps = StepDirController::positionUnitsToSteps(channel,position_units);
-
-  modular_server::Property & microsteps_per_step_property = modular_server_.property(constants::microsteps_per_step_property_name);
-  long microsteps_per_step;
-  microsteps_per_step_property.getElementValue(channel,microsteps_per_step);
-
-  return steps*microsteps_per_step;
 }
 
 // Handlers must be non-blocking (avoid 'delay')
@@ -119,82 +75,3 @@ double PelletDispenser::positionUnitsToSteps(const size_t channel, const double 
 // modular_server_.property(property_name).getElementValue(value) value type must match the property array element default type
 // modular_server_.property(property_name).setElementValue(value) value type must match the property array element default type
 
-void PelletDispenser::setCurrentScaleHandler(const size_t driver)
-{
-  modular_server::Property & current_scale_property = modular_server_.property(constants::current_scale_property_name);
-  long current_scale;
-  current_scale_property.getElementValue(driver,current_scale);
-
-  current_scale = tmc26xs_[driver].setCurrentScalePercent(current_scale);
-
-  current_scale_property.disableFunctors();
-
-  current_scale_property.setElementValue(driver,current_scale);
-
-  current_scale_property.reenableFunctors();
-}
-
-void PelletDispenser::preSetMicrostepsPerStepHandler(const size_t driver)
-{
-  preUpdateLimitsHandler(driver);
-}
-
-void PelletDispenser::postSetMicrostepsPerStepHandler(const size_t driver)
-{
-  postUpdateLimitsHandler(driver);
-
-  modular_server::Property & microsteps_per_step_property = modular_server_.property(constants::microsteps_per_step_property_name);
-  long microsteps_per_step;
-  microsteps_per_step_property.getElementValue(driver,microsteps_per_step);
-
-  TMC26X & tmc26x = tmc26xs_[driver];
-
-  switch (microsteps_per_step)
-  {
-    case 1:
-    {
-      tmc26x.setMicrostepsPerStepTo1();
-      break;
-    }
-    case 2:
-    {
-      tmc26x.setMicrostepsPerStepTo2();
-      break;
-    }
-    case 4:
-    {
-      tmc26x.setMicrostepsPerStepTo4();
-      break;
-    }
-    case 8:
-    {
-      tmc26x.setMicrostepsPerStepTo8();
-      break;
-    }
-    case 16:
-    {
-      tmc26x.setMicrostepsPerStepTo16();
-      break;
-    }
-    case 32:
-    {
-      tmc26x.setMicrostepsPerStepTo32();
-      break;
-    }
-    case 64:
-    {
-      tmc26x.setMicrostepsPerStepTo64();
-      break;
-    }
-    case 128:
-    {
-      tmc26x.setMicrostepsPerStepTo128();
-      break;
-    }
-    case 256:
-    {
-      tmc26x.setMicrostepsPerStepTo256();
-      break;
-    }
-  }
-}

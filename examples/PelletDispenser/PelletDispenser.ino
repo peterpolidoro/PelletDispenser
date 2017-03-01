@@ -20,6 +20,7 @@
 #include "ModularServer.h"
 #include "ModularDevice.h"
 #include "StepDirController.h"
+#include "StepperController.h"
 #include "PelletDispenser.h"
 
 

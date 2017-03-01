@@ -14,7 +14,6 @@ namespace pellet_dispenser
 {
 namespace constants
 {
-const size_t cs_pins[TMC26X_COUNT] = {9,8,7};
 
 // Interrupts
 
@@ -23,23 +22,37 @@ const size_t cs_pins[TMC26X_COUNT] = {9,8,7};
 // Properties
 const double steps_per_position_unit_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
-    steps_per_position_unit_element_default,
-    steps_per_position_unit_element_default,
-    steps_per_position_unit_element_default,
+    31.496, // steps/mm = (200steps/rev)/((0.250in/rev)*(25.4mm/in))
+    31.496, // steps/mm = (200steps/rev)/((0.250in/rev)*(25.4mm/in))
+    12.88, // steps/pellet
   };
 
-const long current_scale_default[TMC26X_COUNT] =
+const double velocity_max_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
-    20,
-    20,
-    20
+    10,
+    10,
+    10,
   };
 
-const long microsteps_per_step_default[TMC26X_COUNT] =
+const double velocity_min_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
-    microsteps_per_step_subset[MICROSTEPS_PER_STEP_SUBSET_LENGTH - 1].l,
-    microsteps_per_step_subset[MICROSTEPS_PER_STEP_SUBSET_LENGTH - 1].l,
-    microsteps_per_step_subset[MICROSTEPS_PER_STEP_SUBSET_LENGTH - 1].l,
+    2,
+    2,
+    2,
+  };
+
+const double acceleration_max_default[step_dir_controller::constants::CHANNEL_COUNT] =
+  {
+    100,
+    100,
+    100,
+  };
+
+const long current_scale_default[stepper_controller::constants::TMC26X_COUNT] =
+  {
+    50,
+    50,
+    50
   };
 
 // Parameters

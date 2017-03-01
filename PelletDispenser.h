@@ -29,21 +29,16 @@
 #include "ModularServer.h"
 #include "ModularDevice.h"
 #include "StepDirController.h"
+#include "StepperController.h"
 
 #include "utility/Constants.h"
 
 
-class PelletDispenser : public StepDirController
+class PelletDispenser : public StepperController
 {
 public:
   PelletDispenser();
   virtual void setup();
-
-  virtual void reinitialize();
-
-protected:
-  virtual double stepsToPositionUnits(const size_t channel, const double steps);
-  virtual double positionUnitsToSteps(const size_t channel, const double position_units);
 
 private:
   modular_server::Property properties_[pellet_dispenser::constants::PROPERTY_COUNT_MAX];
@@ -51,12 +46,7 @@ private:
   modular_server::Function functions_[pellet_dispenser::constants::FUNCTION_COUNT_MAX];
   modular_server::Callback callbacks_[pellet_dispenser::constants::CALLBACK_COUNT_MAX];
 
-  TMC26X tmc26xs_[pellet_dispenser::constants::TMC26X_COUNT];
-
   // Handlers
-  void setCurrentScaleHandler(const size_t driver);
-  void preSetMicrostepsPerStepHandler(const size_t driver);
-  void postSetMicrostepsPerStepHandler(const size_t driver);
 
 };
 

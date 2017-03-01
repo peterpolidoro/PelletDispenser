@@ -9,6 +9,7 @@
 #define PELLET_DISPENSER_CONSTANTS_H
 #include "ConstantVariable.h"
 #include "StepDirController.h"
+#include "StepperController.h"
 
 
 namespace pellet_dispenser
@@ -16,7 +17,7 @@ namespace pellet_dispenser
 namespace constants
 {
 //MAX values must be >= 1, >= created/copied count, < RAM limit
-enum{PROPERTY_COUNT_MAX=6};
+enum{PROPERTY_COUNT_MAX=1};
 enum{PARAMETER_COUNT_MAX=1};
 enum{FUNCTION_COUNT_MAX=1};
 enum{CALLBACK_COUNT_MAX=1};
@@ -29,19 +30,9 @@ extern const modular_server::FirmwareInfo firmware_info;
 // Interrupts
 
 // Units
-extern ConstantString percent_unit;
 
 // Properties
 // Property values must be long, double, bool, long[], double[], bool[], char[], ConstantString *, (ConstantString *)[]
-extern const double steps_per_position_unit_element_default;
-
-extern ConstantString current_scale_property_name;
-extern const long current_scale_min;
-extern const long current_scale_max;
-
-extern ConstantString microsteps_per_step_property_name;
-enum{MICROSTEPS_PER_STEP_SUBSET_LENGTH=9};
-extern modular_server::SubsetMemberType microsteps_per_step_subset[MICROSTEPS_PER_STEP_SUBSET_LENGTH];
 
 // Parameters
 
