@@ -31,21 +31,21 @@ const double velocity_max_default[step_dir_controller::constants::CHANNEL_COUNT]
   {
     10,
     10,
-    10,
+    5,
   };
 
 const double velocity_min_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
     2,
     2,
-    2,
+    1,
   };
 
 const double acceleration_max_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
     100,
     100,
-    100,
+    50,
   };
 
 const long current_scale_default[stepper_controller::constants::TMC26X_COUNT] =
