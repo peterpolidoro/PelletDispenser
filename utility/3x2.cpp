@@ -15,6 +15,9 @@ namespace pellet_dispenser
 namespace constants
 {
 
+const size_t pellet_channel = 2;
+const size_t stage_channels[STAGE_CHANNEL_COUNT] = {0,1};
+
 // Interrupts
 
 // Units
@@ -62,7 +65,7 @@ const double home_velocity_default[step_dir_controller::constants::CHANNEL_COUNT
     -5,
   };
 
-const long current_scale_default[stepper_controller::constants::TMC26X_COUNT] =
+const long current_scale_default[stepper_controller::constants::DRIVER_COUNT] =
   {
     50,
     50,
