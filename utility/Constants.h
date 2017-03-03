@@ -33,6 +33,7 @@ extern const modular_server::FirmwareInfo firmware_info;
 
 // Properties
 // Property values must be long, double, bool, long[], double[], bool[], char[], ConstantString *, (ConstantString *)[]
+extern const ConstantString * const switch_active_polarity_default;
 
 // Parameters
 

@@ -29,6 +29,7 @@ const modular_server::FirmwareInfo firmware_info =
 // Units
 
 // Properties
+const ConstantString * const switch_active_polarity_default = &step_dir_controller::constants::polarity_high;
 
 // Parameters
 

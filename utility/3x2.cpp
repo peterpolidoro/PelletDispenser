@@ -29,8 +29,8 @@ const double steps_per_position_unit_default[step_dir_controller::constants::CHA
 
 const double velocity_max_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
-    10,
-    10,
+    20,
+    20,
     5,
   };
 
@@ -46,6 +46,20 @@ const double acceleration_max_default[step_dir_controller::constants::CHANNEL_CO
     100,
     100,
     50,
+  };
+
+const bool left_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT] =
+  {
+    true,
+    true,
+    false,
+  };
+
+const double home_velocity_default[step_dir_controller::constants::CHANNEL_COUNT] =
+  {
+    -10,
+    -10,
+    -5,
   };
 
 const long current_scale_default[stepper_controller::constants::TMC26X_COUNT] =

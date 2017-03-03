@@ -30,6 +30,10 @@ extern const double velocity_min_default[step_dir_controller::constants::CHANNEL
 
 extern const double acceleration_max_default[step_dir_controller::constants::CHANNEL_COUNT];
 
+extern const bool left_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT];
+
+extern const double home_velocity_default[step_dir_controller::constants::CHANNEL_COUNT];
+
 extern const long current_scale_default[stepper_controller::constants::TMC26X_COUNT];
 
 // Parameters
