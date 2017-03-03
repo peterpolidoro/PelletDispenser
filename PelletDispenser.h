@@ -49,7 +49,7 @@ public:
   bool stageHoming();
   bool stageHomed();
 
-  void moveStageTo(Array<double,pellet_dispenser::constants::STAGE_CHANNEL_COUNT> stage_positions);
+  bool moveStageTo(Array<double,pellet_dispenser::constants::STAGE_CHANNEL_COUNT> stage_positions);
   Array<double,pellet_dispenser::constants::STAGE_CHANNEL_COUNT> getStagePositions();
 
 private:

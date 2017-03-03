@@ -95,6 +95,7 @@ void PelletDispenser::setup()
   modular_server::Function & move_stage_to_function = modular_server_.createFunction(constants::move_stage_to_function_name);
   move_stage_to_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&PelletDispenser::moveStageToHandler));
   move_stage_to_function.addParameter(stage_positions_parameter);
+  move_stage_to_function.setReturnTypeBool();
 
   modular_server::Function & get_stage_positions_function = modular_server_.createFunction(constants::get_stage_positions_function_name);
   get_stage_positions_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&PelletDispenser::getStagePositionsHandler));
@@ -172,15 +173,20 @@ bool PelletDispenser::stageHomed()
   return stage_homed_;
 }
 
-void PelletDispenser::moveStageTo(Array<double,pellet_dispenser::constants::STAGE_CHANNEL_COUNT> stage_positions)
+bool PelletDispenser::moveStageTo(Array<double,pellet_dispenser::constants::STAGE_CHANNEL_COUNT> stage_positions)
 {
   if (stage_homed_)
   {
     for (size_t channel_i=0; channel_i<constants::STAGE_CHANNEL_COUNT; ++channel_i)
     {
-      moveTo(constants::stage_channels[channel_i],stage_positions[channel_i]);
+      moveSoftlyTo(constants::stage_channels[channel_i],stage_positions[channel_i]);
     }
   }
+  else
+  {
+    return false;
+  }
+  return true;
 }
 
 Array<double,pellet_dispenser::constants::STAGE_CHANNEL_COUNT> PelletDispenser::getStagePositions()
@@ -262,7 +268,8 @@ void PelletDispenser::moveStageToHandler()
       ++channel_i;
     }
   }
-  moveStageTo(stage_positions);
+  bool moving = moveStageTo(stage_positions);
+  modular_server_.response().returnResult(moving);
 }
 
 void PelletDispenser::getStagePositionsHandler()

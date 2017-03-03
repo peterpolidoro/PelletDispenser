@@ -13,6 +13,27 @@ License:
 ##API
 
 ```json
+{
+  "id":"getApi",
+  "result":{
+    "firmware":["PelletDispenser"],
+    "functions":[
+      "dispensePellet",
+      "enableDispenser",
+      "disableDispenser",
+      "homeStage",
+      "stageHoming",
+      "stageHomed",
+      "moveStageTo",
+      "getStagePositions"
+    ],
+    "parameters":[
+      "stage_positions"
+    ],
+    "properties":[],
+    "callbacks":[]
+  }
+}
 ```
 
 ##More Detailed Modular Device Information
