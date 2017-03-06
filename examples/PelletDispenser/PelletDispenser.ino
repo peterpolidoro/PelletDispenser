@@ -21,6 +21,7 @@
 #include "ModularDeviceBase.h"
 #include "StepDirController.h"
 #include "StepperController.h"
+#include "StageController.h"
 #include "PelletDispenser.h"
 
 

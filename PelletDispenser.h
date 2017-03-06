@@ -30,27 +30,20 @@
 #include "ModularDeviceBase.h"
 #include "StepDirController.h"
 #include "StepperController.h"
+#include "StageController.h"
 
 #include "utility/Constants.h"
 
 
-class PelletDispenser : public StepperController
+class PelletDispenser : public StageController
 {
 public:
   PelletDispenser();
   virtual void setup();
-  virtual void update();
 
   void dispensePellet();
   void enableDispenser();
   void disableDispenser();
-
-  bool homeStage();
-  bool stageHoming();
-  bool stageHomed();
-
-  bool moveStageTo(Array<double,pellet_dispenser::constants::STAGE_CHANNEL_COUNT> stage_positions);
-  Array<double,pellet_dispenser::constants::STAGE_CHANNEL_COUNT> getStagePositions();
 
 private:
   modular_server::Property properties_[pellet_dispenser::constants::PROPERTY_COUNT_MAX];
@@ -58,18 +51,10 @@ private:
   modular_server::Function functions_[pellet_dispenser::constants::FUNCTION_COUNT_MAX];
   modular_server::Callback callbacks_[pellet_dispenser::constants::CALLBACK_COUNT_MAX];
 
-  bool stage_homing_;
-  bool stage_homed_;
-
   // Handlers
   void dispensePelletHandler();
   void enableDispenserHandler();
   void disableDispenserHandler();
-  void homeStageHandler();
-  void stageHomingHandler();
-  void stageHomedHandler();
-  void moveStageToHandler();
-  void getStagePositionsHandler();
 
 };
 

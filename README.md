@@ -20,16 +20,9 @@ License:
     "functions":[
       "dispensePellet",
       "enableDispenser",
-      "disableDispenser",
-      "homeStage",
-      "stageHoming",
-      "stageHomed",
-      "moveStageTo",
-      "getStagePositions"
+      "disableDispenser"
     ],
-    "parameters":[
-      "stage_positions"
-    ],
+    "parameters":[],
     "properties":[],
     "callbacks":[]
   }

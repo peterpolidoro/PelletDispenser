@@ -14,9 +14,7 @@ namespace pellet_dispenser
 {
 namespace constants
 {
-
 const size_t pellet_channel = 2;
-const size_t stage_channels[STAGE_CHANNEL_COUNT] = {0,1};
 
 // Interrupts
 

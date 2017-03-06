@@ -16,10 +16,7 @@ namespace pellet_dispenser
 {
 namespace constants
 {
-enum{STAGE_CHANNEL_COUNT=2};
-
 extern const size_t pellet_channel;
-extern const size_t stage_channels[STAGE_CHANNEL_COUNT];
 
 // Interrupts
 
