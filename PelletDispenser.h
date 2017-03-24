@@ -45,6 +45,9 @@ public:
   void enableDispenser();
   void disableDispenser();
 
+  void deliver();
+  void abort();
+
 private:
   modular_server::Property properties_[pellet_dispenser::constants::PROPERTY_COUNT_MAX];
   modular_server::Parameter parameters_[pellet_dispenser::constants::PARAMETER_COUNT_MAX];
@@ -55,6 +58,8 @@ private:
   void dispensePelletHandler();
   void enableDispenserHandler();
   void disableDispenserHandler();
+  void deliverHandler(modular_server::Interrupt * interrupt_ptr);
+  void abortHandler(modular_server::Interrupt * interrupt_ptr);
 
 };
 

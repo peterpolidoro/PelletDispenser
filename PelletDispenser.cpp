@@ -62,12 +62,21 @@ void PelletDispenser::setup()
 
   modular_server::Property & stage_channel_count_property = modular_server_.property(stage_controller::constants::stage_channel_count_property_name);
   stage_channel_count_property.setDefaultValue(constants::stage_channel_count_default);
+  stage_channel_count_property.setRange(constants::stage_channel_count_min,constants::stage_channel_count_max);
 
   modular_server::Property & stage_position_min_property = modular_server_.property(stage_controller::constants::stage_position_min_property_name);
   stage_position_min_property.setDefaultValue(constants::stage_position_min_default);
+  stage_position_min_property.setRange(constants::stage_position_min_default,constants::stage_position_max_default);
 
   modular_server::Property & stage_position_max_property = modular_server_.property(stage_controller::constants::stage_position_max_property_name);
   stage_position_max_property.setDefaultValue(constants::stage_position_max_default);
+  stage_position_max_property.setRange(constants::stage_position_min_default,constants::stage_position_max_default);
+
+  modular_server::Property & base_position_property = modular_server_.createProperty(constants::base_position_property_name,constants::base_position_default);
+  base_position_property.setRange(constants::stage_position_min_default,constants::stage_position_max_default);
+
+  modular_server::Property & deliver_position_property = modular_server_.createProperty(constants::deliver_position_property_name,constants::deliver_position_default);
+  deliver_position_property.setRange(constants::stage_position_min_default,constants::stage_position_max_default);
 
   // Parameters
   modular_server::Parameter & stage_positions_parameter = modular_server_.parameter(stage_controller::constants::stage_positions_parameter_name);
@@ -84,6 +93,14 @@ void PelletDispenser::setup()
   disable_dispenser_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&PelletDispenser::disableDispenserHandler));
 
   // Callbacks
+  modular_server::Callback & deliver_callback = modular_server_.createCallback(constants::deliver_callback_name);
+  deliver_callback.attachFunctor(makeFunctor((Functor1<modular_server::Interrupt *> *)0,*this,&PelletDispenser::deliverHandler));
+  deliver_callback.attachTo(modular_device_base::constants::bnc_a_interrupt_name,modular_server::interrupt::mode_falling);
+
+  modular_server::Callback & abort_callback = modular_server_.createCallback(constants::abort_callback_name);
+  abort_callback.attachFunctor(makeFunctor((Functor1<modular_server::Interrupt *> *)0,*this,&PelletDispenser::abortHandler));
+  abort_callback.attachTo(modular_device_base::constants::bnc_b_interrupt_name,modular_server::interrupt::mode_falling);
+
 }
 
 void PelletDispenser::dispensePellet()
@@ -99,6 +116,16 @@ void PelletDispenser::enableDispenser()
 void PelletDispenser::disableDispenser()
 {
   minimizeCurrent(constants::pellet_channel);
+}
+
+void PelletDispenser::deliver()
+{
+  Serial << "deliver!\n";
+}
+
+void PelletDispenser::abort()
+{
+  Serial << "abort!\n";
 }
 
 // Handlers must be non-blocking (avoid 'delay')
@@ -131,5 +158,15 @@ void PelletDispenser::enableDispenserHandler()
 void PelletDispenser::disableDispenserHandler()
 {
   disableDispenser();
+}
+
+void PelletDispenser::deliverHandler(modular_server::Interrupt * interrupt_ptr)
+{
+  deliver();
+}
+
+void PelletDispenser::abortHandler(modular_server::Interrupt * interrupt_ptr)
+{
+  abort();
 }
 

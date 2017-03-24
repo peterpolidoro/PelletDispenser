@@ -38,6 +38,10 @@ extern const double home_velocity_default[step_dir_controller::constants::CHANNE
 
 extern const long current_scale_default[stepper_controller::constants::DRIVER_COUNT];
 
+extern const double base_position_default[STAGE_CHANNEL_COUNT];
+
+extern const double deliver_position_default[STAGE_CHANNEL_COUNT];
+
 // Parameters
 
 // Functions

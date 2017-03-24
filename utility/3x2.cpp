@@ -70,6 +70,18 @@ const long current_scale_default[stepper_controller::constants::DRIVER_COUNT] =
     50
   };
 
+const double base_position_default[STAGE_CHANNEL_COUNT] =
+  {
+    20,
+    120
+  };
+
+const double deliver_position_default[STAGE_CHANNEL_COUNT] =
+  {
+    20,
+    140
+  };
+
 // Parameters
 
 // Functions
