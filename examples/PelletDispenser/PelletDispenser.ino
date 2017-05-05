@@ -24,6 +24,9 @@
 #include "StageController.h"
 #include "PelletDispenser.h"
 
+#include "ModularClient.h"
+#include "AudioController.h"
+
 
 PelletDispenser dev;
 

@@ -32,6 +32,9 @@
 #include "StepperController.h"
 #include "StageController.h"
 
+#include "ModularClient.h"
+#include "AudioController.h"
+
 #include "utility/Constants.h"
 
 
@@ -53,6 +56,8 @@ private:
   modular_server::Parameter parameters_[pellet_dispenser::constants::PARAMETER_COUNT_MAX];
   modular_server::Function functions_[pellet_dispenser::constants::FUNCTION_COUNT_MAX];
   modular_server::Callback callbacks_[pellet_dispenser::constants::CALLBACK_COUNT_MAX];
+
+  ModularClient audio_controller_;
 
   // Handlers
   void dispensePelletHandler();

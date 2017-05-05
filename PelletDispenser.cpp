@@ -101,10 +101,15 @@ void PelletDispenser::setup()
   abort_callback.attachFunctor(makeFunctor((Functor1<modular_server::Interrupt *> *)0,*this,&PelletDispenser::abortHandler));
   abort_callback.attachTo(modular_device_base::constants::bnc_b_interrupt_name,modular_server::interrupt::mode_falling);
 
+  // Clients
+  audio_controller_.setStream(Serial1);
 }
 
 void PelletDispenser::dispensePellet()
 {
+  audio_controller_.callServerMethod(audio_controller::constants::play_tone_function_name,
+                                     5000,
+                                     audio_controller::constants::speaker_all);
   moveBy(constants::pellet_channel,1);
 }
 
@@ -142,8 +147,8 @@ void PelletDispenser::abort()
 //
 // modular_server_.property(property_name).getValue(value) value type must match the property default type
 // modular_server_.property(property_name).setValue(value) value type must match the property default type
-// modular_server_.property(property_name).getElementValue(value) value type must match the property array element default type
-// modular_server_.property(property_name).setElementValue(value) value type must match the property array element default type
+// modular_server_.property(property_name).getElementValue(element_index,value) value type must match the property array element default type
+// modular_server_.property(property_name).setElementValue(element_index,value) value type must match the property array element default type
 
 void PelletDispenser::dispensePelletHandler()
 {
