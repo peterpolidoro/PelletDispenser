@@ -14,7 +14,7 @@ namespace pellet_dispenser
 {
 namespace constants
 {
-const size_t pellet_channel = 2;
+const size_t dispenser_channel = 2;
 
 // Interrupts
 

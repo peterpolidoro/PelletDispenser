@@ -89,14 +89,18 @@ void PelletDispenser::setup()
   stage_positions_parameter.setUnits(constants::mm_unit);
 
   // Functions
-  modular_server::Function & dispense_pellet_function = modular_server_.createFunction(constants::dispense_pellet_function_name);
-  dispense_pellet_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&PelletDispenser::dispensePelletHandler));
+  modular_server::Function & home_rig_function = modular_server_.createFunction(constants::home_rig_function_name);
+  home_rig_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&PelletDispenser::homeRigHandler));
+  home_rig_function.setReturnTypeBool();
 
-  modular_server::Function & enable_dispenser_function = modular_server_.createFunction(constants::enable_dispenser_function_name);
-  enable_dispenser_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&PelletDispenser::enableDispenserHandler));
+  // modular_server::Function & dispense_pellet_function = modular_server_.createFunction(constants::dispense_pellet_function_name);
+  // dispense_pellet_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&PelletDispenser::dispensePelletHandler));
 
-  modular_server::Function & disable_dispenser_function = modular_server_.createFunction(constants::disable_dispenser_function_name);
-  disable_dispenser_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&PelletDispenser::disableDispenserHandler));
+  // modular_server::Function & enable_dispenser_function = modular_server_.createFunction(constants::enable_dispenser_function_name);
+  // enable_dispenser_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&PelletDispenser::enableDispenserHandler));
+
+  // modular_server::Function & disable_dispenser_function = modular_server_.createFunction(constants::disable_dispenser_function_name);
+  // disable_dispenser_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&PelletDispenser::disableDispenserHandler));
 
   // Callbacks
   modular_server::Callback & deliver_callback = modular_server_.createCallback(constants::deliver_callback_name);
@@ -111,23 +115,30 @@ void PelletDispenser::setup()
   // audio_controller_.setStream(Serial1);
 }
 
-void PelletDispenser::dispensePellet()
+bool PelletDispenser::homeRig()
 {
-  // audio_controller_.callServerMethod(audio_controller::constants::play_tone_function_name,
-  //                                    5000,
-  //                                    audio_controller::constants::speaker_all);
-  // moveBy(constants::pellet_channel,1);
+  bool stage_homing = homeStage();
+  bool dispenser_homing = home(constants::dispenser_channel);
+  return (stage_homing || dispenser_homing);
 }
 
-void PelletDispenser::enableDispenser()
-{
-  restoreCurrent(constants::pellet_channel);
-}
+// void PelletDispenser::dispensePellet()
+// {
+//   // audio_controller_.callServerMethod(audio_controller::constants::play_tone_function_name,
+//   //                                    5000,
+//   //                                    audio_controller::constants::speaker_all);
+//   // moveBy(constants::pellet_channel,1);
+// }
 
-void PelletDispenser::disableDispenser()
-{
-  minimizeCurrent(constants::pellet_channel);
-}
+// void PelletDispenser::enableDispenser()
+// {
+//   restoreCurrent(constants::pellet_channel);
+// }
+
+// void PelletDispenser::disableDispenser()
+// {
+//   minimizeCurrent(constants::pellet_channel);
+// }
 
 void PelletDispenser::deliver()
 {
@@ -156,20 +167,26 @@ void PelletDispenser::abort()
 // modular_server_.property(property_name).getElementValue(element_index,value) value type must match the property array element default type
 // modular_server_.property(property_name).setElementValue(element_index,value) value type must match the property array element default type
 
-void PelletDispenser::dispensePelletHandler()
+void PelletDispenser::homeRigHandler()
 {
-  dispensePellet();
+  bool rig_homing = homeRig();
+  modular_server_.response().returnResult(rig_homing);
 }
 
-void PelletDispenser::enableDispenserHandler()
-{
-  enableDispenser();
-}
+// void PelletDispenser::dispensePelletHandler()
+// {
+//   dispensePellet();
+// }
 
-void PelletDispenser::disableDispenserHandler()
-{
-  disableDispenser();
-}
+// void PelletDispenser::enableDispenserHandler()
+// {
+//   enableDispenser();
+// }
+
+// void PelletDispenser::disableDispenserHandler()
+// {
+//   disableDispenser();
+// }
 
 void PelletDispenser::deliverHandler(modular_server::Interrupt * interrupt_ptr)
 {

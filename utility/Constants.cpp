@@ -50,9 +50,10 @@ CONSTANT_STRING(deliver_position_property_name,"deliverPosition");
 // Parameters
 
 // Functions
-CONSTANT_STRING(dispense_pellet_function_name,"dispensePellet");
-CONSTANT_STRING(enable_dispenser_function_name,"enableDispenser");
-CONSTANT_STRING(disable_dispenser_function_name,"disableDispenser");
+CONSTANT_STRING(home_rig_function_name,"homeRig");
+// CONSTANT_STRING(dispense_pellet_function_name,"dispensePellet");
+// CONSTANT_STRING(enable_dispenser_function_name,"enableDispenser");
+// CONSTANT_STRING(disable_dispenser_function_name,"disableDispenser");
 
 // Callbacks
 CONSTANT_STRING(deliver_callback_name,"deliver");

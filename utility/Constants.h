@@ -59,9 +59,11 @@ extern const double stage_position_min;
 extern const double stage_position_max;
 
 // Functions
-extern ConstantString dispense_pellet_function_name;
-extern ConstantString enable_dispenser_function_name;
-extern ConstantString disable_dispenser_function_name;
+extern ConstantString home_rig_function_name;
+// extern ConstantString rig_homed_function_name;
+// extern ConstantString dispense_pellet_function_name;
+// extern ConstantString enable_dispenser_function_name;
+// extern ConstantString disable_dispenser_function_name;
 
 // Callbacks
 extern ConstantString deliver_callback_name;

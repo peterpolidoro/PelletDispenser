@@ -44,9 +44,11 @@ public:
   PelletDispenser();
   virtual void setup();
 
-  void dispensePellet();
-  void enableDispenser();
-  void disableDispenser();
+  bool homeRig();
+  bool rigHomed();
+  // void dispensePellet();
+  // void enableDispenser();
+  // void disableDispenser();
 
   void deliver();
   void abort();
@@ -60,9 +62,11 @@ private:
   ModularClient audio_controller_;
 
   // Handlers
-  void dispensePelletHandler();
-  void enableDispenserHandler();
-  void disableDispenserHandler();
+  void homeRigHandler();
+  // void rigHomedHandler();
+  // void dispensePelletHandler();
+  // void enableDispenserHandler();
+  // void disableDispenserHandler();
   void deliverHandler(modular_server::Interrupt * interrupt_ptr);
   void abortHandler(modular_server::Interrupt * interrupt_ptr);
 
