@@ -34,6 +34,8 @@ CONSTANT_STRING(minutes_unit,"min");
 // Properties
 const ConstantString * const switch_active_polarity_default = &step_dir_controller::constants::polarity_high;
 
+const bool right_switches_enabled_default = true;
+
 const long stage_channel_count_min = STAGE_CHANNEL_COUNT;
 const long stage_channel_count_max = STAGE_CHANNEL_COUNT;
 const long stage_channel_count_default = STAGE_CHANNEL_COUNT;

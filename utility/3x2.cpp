@@ -53,14 +53,21 @@ const bool left_switch_stop_enabled_default[step_dir_controller::constants::CHAN
   {
     true,
     true,
+    true,
+  };
+
+const bool right_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT] =
+  {
     false,
+    false,
+    true,
   };
 
 const double home_velocity_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
     -10,
     -10,
-    -5,
+    5,
   };
 
 const long current_scale_default[stepper_controller::constants::DRIVER_COUNT] =

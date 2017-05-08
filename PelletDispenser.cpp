@@ -48,14 +48,20 @@ void PelletDispenser::setup()
   modular_server::Property & acceleration_max_property = modular_server_.property(step_dir_controller::constants::acceleration_max_property_name);
   acceleration_max_property.setDefaultValue(constants::acceleration_max_default);
 
-  modular_server::Property & home_velocity_property = modular_server_.property(step_dir_controller::constants::home_velocity_property_name);
-  home_velocity_property.setDefaultValue(constants::home_velocity_default);
-
   modular_server::Property & switch_active_polarity_property = modular_server_.property(step_dir_controller::constants::switch_active_polarity_property_name);
   switch_active_polarity_property.setDefaultValue(constants::switch_active_polarity_default);
 
   modular_server::Property & left_switch_stop_enabled_property = modular_server_.property(step_dir_controller::constants::left_switch_stop_enabled_property_name);
   left_switch_stop_enabled_property.setDefaultValue(constants::left_switch_stop_enabled_default);
+
+  modular_server::Property & right_switches_enabled_property = modular_server_.property(step_dir_controller::constants::right_switches_enabled_property_name);
+  right_switches_enabled_property.setDefaultValue(constants::right_switches_enabled_default);
+
+  modular_server::Property & right_switch_stop_enabled_property = modular_server_.property(step_dir_controller::constants::right_switch_stop_enabled_property_name);
+  right_switch_stop_enabled_property.setDefaultValue(constants::right_switch_stop_enabled_default);
+
+  modular_server::Property & home_velocity_property = modular_server_.property(step_dir_controller::constants::home_velocity_property_name);
+  home_velocity_property.setDefaultValue(constants::home_velocity_default);
 
   modular_server::Property & current_scale_property = modular_server_.property(stepper_controller::constants::current_scale_property_name);
   current_scale_property.setDefaultValue(constants::current_scale_default);
@@ -102,15 +108,15 @@ void PelletDispenser::setup()
   abort_callback.attachTo(modular_device_base::constants::bnc_b_interrupt_name,modular_server::interrupt::mode_falling);
 
   // Clients
-  audio_controller_.setStream(Serial1);
+  // audio_controller_.setStream(Serial1);
 }
 
 void PelletDispenser::dispensePellet()
 {
-  audio_controller_.callServerMethod(audio_controller::constants::play_tone_function_name,
-                                     5000,
-                                     audio_controller::constants::speaker_all);
-  moveBy(constants::pellet_channel,1);
+  // audio_controller_.callServerMethod(audio_controller::constants::play_tone_function_name,
+  //                                    5000,
+  //                                    audio_controller::constants::speaker_all);
+  // moveBy(constants::pellet_channel,1);
 }
 
 void PelletDispenser::enableDispenser()

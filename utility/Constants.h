@@ -40,6 +40,8 @@ extern ConstantString minutes_unit;
 // Property values must be long, double, bool, long[], double[], bool[], char[], ConstantString *, (ConstantString *)[]
 extern const ConstantString * const switch_active_polarity_default;
 
+extern const bool right_switches_enabled_default;
+
 extern const long stage_channel_count_min;
 extern const long stage_channel_count_max;
 extern const long stage_channel_count_default;
