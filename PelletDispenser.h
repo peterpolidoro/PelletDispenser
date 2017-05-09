@@ -44,8 +44,8 @@ public:
   PelletDispenser();
   virtual void setup();
 
-  bool homeRig();
-  bool rigHomed();
+  // bool homeRig();
+  // bool rigHomed();
   // void dispensePellet();
   // void enableDispenser();
   // void disableDispenser();
@@ -62,7 +62,7 @@ private:
   ModularClient audio_controller_;
 
   // Handlers
-  void homeRigHandler();
+  // void homeRigHandler();
   // void rigHomedHandler();
   // void dispensePelletHandler();
   // void enableDispenserHandler();

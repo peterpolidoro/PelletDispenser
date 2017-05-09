@@ -16,7 +16,7 @@ namespace pellet_dispenser
 {
 namespace constants
 {
-extern const size_t dispenser_channel;
+enum{STAGE_CHANNEL_COUNT=3};
 
 // Interrupts
 
@@ -32,7 +32,11 @@ extern const double velocity_min_default[step_dir_controller::constants::CHANNEL
 
 extern const double acceleration_max_default[step_dir_controller::constants::CHANNEL_COUNT];
 
+extern const ConstantString * const switch_active_polarity_default;
+
 extern const bool left_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT];
+
+extern const bool right_switches_enabled_default;
 
 extern const bool right_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT];
 
@@ -40,9 +44,17 @@ extern const double home_velocity_default[step_dir_controller::constants::CHANNE
 
 extern const long current_scale_default[stepper_controller::constants::DRIVER_COUNT];
 
-extern const double base_position_default[STAGE_CHANNEL_COUNT];
+extern const long stage_channel_count_min;
+extern const long stage_channel_count_max;
+extern const long stage_channel_count_default;
 
-extern const double deliver_position_default[STAGE_CHANNEL_COUNT];
+extern const double stage_positions_min_default[STAGE_CHANNEL_COUNT];
+
+extern const double stage_positions_max_default[STAGE_CHANNEL_COUNT];
+
+extern const double base_positions_default[STAGE_CHANNEL_COUNT];
+
+extern const double deliver_positions_default[STAGE_CHANNEL_COUNT];
 
 // Parameters
 

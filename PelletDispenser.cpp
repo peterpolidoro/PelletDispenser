@@ -69,29 +69,26 @@ void PelletDispenser::setup()
   modular_server::Property & stage_channel_count_property = modular_server_.property(stage_controller::constants::stage_channel_count_property_name);
   stage_channel_count_property.setDefaultValue(constants::stage_channel_count_default);
   stage_channel_count_property.setRange(constants::stage_channel_count_min,constants::stage_channel_count_max);
+  stage_channel_count_property.setArrayLengthRange(constants::stage_channel_count_min,constants::stage_channel_count_max);
 
-  modular_server::Property & stage_position_min_property = modular_server_.property(stage_controller::constants::stage_position_min_property_name);
-  stage_position_min_property.setDefaultValue(constants::stage_position_min_default);
-  stage_position_min_property.setRange(constants::stage_position_min_default,constants::stage_position_max_default);
+  modular_server::Property & stage_positions_min_property = modular_server_.property(stage_controller::constants::stage_positions_min_property_name);
+  stage_positions_min_property.setDefaultValue(constants::stage_positions_min_default);
 
-  modular_server::Property & stage_position_max_property = modular_server_.property(stage_controller::constants::stage_position_max_property_name);
-  stage_position_max_property.setDefaultValue(constants::stage_position_max_default);
-  stage_position_max_property.setRange(constants::stage_position_min_default,constants::stage_position_max_default);
+  modular_server::Property & stage_positions_max_property = modular_server_.property(stage_controller::constants::stage_positions_max_property_name);
+  stage_positions_max_property.setDefaultValue(constants::stage_positions_max_default);
 
-  modular_server::Property & base_position_property = modular_server_.createProperty(constants::base_position_property_name,constants::base_position_default);
-  base_position_property.setRange(constants::stage_position_min_default,constants::stage_position_max_default);
+  modular_server::Property & base_positions_property = modular_server_.createProperty(constants::base_positions_property_name,constants::base_positions_default);
 
-  modular_server::Property & deliver_position_property = modular_server_.createProperty(constants::deliver_position_property_name,constants::deliver_position_default);
-  deliver_position_property.setRange(constants::stage_position_min_default,constants::stage_position_max_default);
+  modular_server::Property & deliver_positions_property = modular_server_.createProperty(constants::deliver_positions_property_name,constants::deliver_positions_default);
 
   // Parameters
   modular_server::Parameter & stage_positions_parameter = modular_server_.parameter(stage_controller::constants::stage_positions_parameter_name);
   stage_positions_parameter.setUnits(constants::mm_unit);
 
   // Functions
-  modular_server::Function & home_rig_function = modular_server_.createFunction(constants::home_rig_function_name);
-  home_rig_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&PelletDispenser::homeRigHandler));
-  home_rig_function.setReturnTypeBool();
+  // modular_server::Function & home_rig_function = modular_server_.createFunction(constants::home_rig_function_name);
+  // home_rig_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&PelletDispenser::homeRigHandler));
+  // home_rig_function.setReturnTypeBool();
 
   // modular_server::Function & dispense_pellet_function = modular_server_.createFunction(constants::dispense_pellet_function_name);
   // dispense_pellet_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&PelletDispenser::dispensePelletHandler));
@@ -115,12 +112,12 @@ void PelletDispenser::setup()
   // audio_controller_.setStream(Serial1);
 }
 
-bool PelletDispenser::homeRig()
-{
-  bool stage_homing = homeStage();
-  bool dispenser_homing = home(constants::dispenser_channel);
-  return (stage_homing || dispenser_homing);
-}
+// bool PelletDispenser::homeRig()
+// {
+//   bool stage_homing = homeStage();
+//   bool dispenser_homing = home(constants::dispenser_channel);
+//   return (stage_homing || dispenser_homing);
+// }
 
 // void PelletDispenser::dispensePellet()
 // {
@@ -167,11 +164,11 @@ void PelletDispenser::abort()
 // modular_server_.property(property_name).getElementValue(element_index,value) value type must match the property array element default type
 // modular_server_.property(property_name).setElementValue(element_index,value) value type must match the property array element default type
 
-void PelletDispenser::homeRigHandler()
-{
-  bool rig_homing = homeRig();
-  modular_server_.response().returnResult(rig_homing);
-}
+// void PelletDispenser::homeRigHandler()
+// {
+//   bool rig_homing = homeRig();
+//   modular_server_.response().returnResult(rig_homing);
+// }
 
 // void PelletDispenser::dispensePelletHandler()
 // {

@@ -14,8 +14,6 @@ namespace pellet_dispenser
 {
 namespace constants
 {
-const size_t dispenser_channel = 2;
-
 // Interrupts
 
 // Units
@@ -49,12 +47,16 @@ const double acceleration_max_default[step_dir_controller::constants::CHANNEL_CO
     50,
   };
 
+const ConstantString * const switch_active_polarity_default = &step_dir_controller::constants::polarity_high;
+
 const bool left_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
     true,
     true,
     true,
   };
+
+const bool right_switches_enabled_default = true;
 
 const bool right_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
@@ -77,16 +79,36 @@ const long current_scale_default[stepper_controller::constants::DRIVER_COUNT] =
     50
   };
 
-const double base_position_default[STAGE_CHANNEL_COUNT] =
+const long stage_channel_count_min = STAGE_CHANNEL_COUNT;
+const long stage_channel_count_max = STAGE_CHANNEL_COUNT;
+const long stage_channel_count_default = STAGE_CHANNEL_COUNT;
+
+const double stage_positions_min_default[STAGE_CHANNEL_COUNT] =
   {
-    20,
-    120
+    0,
+    0,
+    -19,
   };
 
-const double deliver_position_default[STAGE_CHANNEL_COUNT] =
+const double stage_positions_max_default[STAGE_CHANNEL_COUNT] =
+  {
+    140,
+    140,
+    0,
+  };
+
+const double base_positions_default[STAGE_CHANNEL_COUNT] =
   {
     20,
-    140
+    120,
+    -10,
+  };
+
+const double deliver_positions_default[STAGE_CHANNEL_COUNT] =
+  {
+    20,
+    140,
+    -5
   };
 
 // Parameters
