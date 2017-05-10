@@ -92,7 +92,7 @@ const double stage_positions_min_default[STAGE_CHANNEL_COUNT] =
 
 const double stage_positions_max_default[STAGE_CHANNEL_COUNT] =
   {
-    140,
+    20,
     140,
     0,
   };
@@ -100,11 +100,18 @@ const double stage_positions_max_default[STAGE_CHANNEL_COUNT] =
 const double base_positions_default[STAGE_CHANNEL_COUNT] =
   {
     20,
-    120,
-    -10,
+    130,
+    -18,
   };
 
 const double deliver_positions_default[STAGE_CHANNEL_COUNT] =
+  {
+    20,
+    140,
+    -18
+  };
+
+const double dispense_positions_default[STAGE_CHANNEL_COUNT] =
   {
     20,
     140,

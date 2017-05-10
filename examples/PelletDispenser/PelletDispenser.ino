@@ -16,6 +16,10 @@
 #include "SPI.h"
 #include "TMC429.h"
 #include "TMC26X.h"
+#include "EventController.h"
+
+#include "ModularClient.h"
+#include "AudioController.h"
 
 #include "ModularServer.h"
 #include "ModularDeviceBase.h"
@@ -23,9 +27,6 @@
 #include "StepperController.h"
 #include "StageController.h"
 #include "PelletDispenser.h"
-
-#include "ModularClient.h"
-#include "AudioController.h"
 
 
 PelletDispenser dev;

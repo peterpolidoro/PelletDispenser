@@ -25,15 +25,16 @@
 #include "SPI.h"
 #include "TMC429.h"
 #include "TMC26X.h"
+#include "EventController.h"
+
+// #include "ModularClient.h"
+// #include "AudioController.h"
 
 #include "ModularServer.h"
 #include "ModularDeviceBase.h"
 #include "StepDirController.h"
 #include "StepperController.h"
 #include "StageController.h"
-
-#include "ModularClient.h"
-#include "AudioController.h"
 
 #include "utility/Constants.h"
 
@@ -43,12 +44,20 @@ class PelletDispenser : public StageController
 public:
   PelletDispenser();
   virtual void setup();
+  virtual void update();
 
-  // bool homeRig();
-  // bool rigHomed();
-  // void dispensePellet();
-  // void enableDispenser();
-  // void disableDispenser();
+  pellet_dispenser::constants::AssayStatus getAssayStatus();
+  StageController::PositionsArray getBasePositions();
+  StageController::PositionsArray getDeliverPositions();
+  StageController::PositionsArray getDispensePositions();
+  long getToneDelay();
+
+  void moveStageSoftlyToBase();
+  void moveStageSoftlyToDeliver();
+  void moveStageSoftlyToDispense();
+  void waitToPlayTone();
+  void setPlayToneState();
+  void playTone();
 
   void deliver();
   void abort();
@@ -59,14 +68,14 @@ private:
   modular_server::Function functions_[pellet_dispenser::constants::FUNCTION_COUNT_MAX];
   modular_server::Callback callbacks_[pellet_dispenser::constants::CALLBACK_COUNT_MAX];
 
-  ModularClient audio_controller_;
+  pellet_dispenser::constants::AssayStatus assay_status_;
+  EventController<pellet_dispenser::constants::EVENT_COUNT_MAX> event_controller_;
+
+  // ModularClient audio_controller_;
 
   // Handlers
-  // void homeRigHandler();
-  // void rigHomedHandler();
-  // void dispensePelletHandler();
-  // void enableDispenserHandler();
-  // void disableDispenserHandler();
+  void getAssayStatusHandler();
+  void playToneHandler(int arg);
   void deliverHandler(modular_server::Interrupt * interrupt_ptr);
   void abortHandler(modular_server::Interrupt * interrupt_ptr);
 

@@ -17,6 +17,7 @@ namespace pellet_dispenser
 namespace constants
 {
 enum{STAGE_CHANNEL_COUNT=3};
+enum{EVENT_COUNT_MAX=32};
 
 // Interrupts
 
@@ -55,6 +56,8 @@ extern const double stage_positions_max_default[STAGE_CHANNEL_COUNT];
 extern const double base_positions_default[STAGE_CHANNEL_COUNT];
 
 extern const double deliver_positions_default[STAGE_CHANNEL_COUNT];
+
+extern const double dispense_positions_default[STAGE_CHANNEL_COUNT];
 
 // Parameters
 
