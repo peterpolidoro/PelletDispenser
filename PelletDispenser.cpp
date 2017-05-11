@@ -22,6 +22,8 @@ void PelletDispenser::setup()
   // Event Controller Setup
   event_controller_.setup();
 
+  // Clients Setup
+
   // Pin Setup
 
   // Assay Status Setup

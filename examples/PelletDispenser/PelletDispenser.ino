@@ -18,15 +18,17 @@
 #include "TMC26X.h"
 #include "EventController.h"
 
-#include "ModularClient.h"
-#include "AudioController.h"
-
 #include "ModularServer.h"
 #include "ModularDeviceBase.h"
 #include "StepDirController.h"
 #include "StepperController.h"
 #include "StageController.h"
 #include "PelletDispenser.h"
+
+#include "ModularClient.h"
+#include "HBridgeController.h"
+#include "OpticalSwitchInterface.h"
+#include "AudioController.h"
 
 
 PelletDispenser dev;

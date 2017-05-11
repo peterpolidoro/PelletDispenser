@@ -10,6 +10,26 @@ License:
 
 [Examples](./examples)
 
+## Ancestors
+
+[ModularServer](https://github.com/janelia-arduino/ModularServer)
+
+[ModularDeviceBase](https://github.com/janelia-arduino/ModularDeviceBase)
+
+[StepDirController](https://github.com/janelia-arduino/StepDirController)
+
+[StepperController](https://github.com/janelia-arduino/StepperController)
+
+[StageController](https://github.com/janelia-arduino/StageController)
+
+## Clients
+
+[HBridgeController](https://github.com/janelia-arduino/HBridgeController)
+
+[OpticalSwitchInterface](https://github.com/janelia-arduino/OpticalSwitchInterface)
+
+[AudioController](https://github.com/janelia-arduino/AudioController)
+
 ## API
 
 ```json
@@ -18,13 +38,24 @@ License:
   "result":{
     "firmware":["PelletDispenser"],
     "functions":[
-      "dispensePellet",
-      "enableDispenser",
-      "disableDispenser"
+      "getAssayStatus"
     ],
     "parameters":[],
-    "properties":[],
-    "callbacks":[]
+    "properties":[
+      "basePositions",
+      "deliverPositions",
+      "dispensePositions",
+      "toneDelayMin",
+      "toneDelayMax",
+      "returnDelay",
+      "toneFrequency",
+      "toneDuration",
+      "toneVolume"
+    ],
+    "callbacks":[
+      "deliver",
+      "abort"
+    ]
   }
 }
 ```
