@@ -101,6 +101,17 @@ void PelletDispenser::setup()
   return_delay_property.setUnits(constants::minutes_unit);
   return_delay_property.setRange(constants::return_delay_min,constants::return_delay_max);
 
+  modular_server::Property & tone_frequency_property = modular_server_.createProperty(constants::tone_frequency_property_name,constants::tone_frequency_default);
+  tone_frequency_property.setUnits(audio_controller::constants::hz_unit);
+  tone_frequency_property.setRange(constants::tone_frequency_min,constants::tone_frequency_max);
+
+  modular_server::Property & tone_duration_property = modular_server_.createProperty(constants::tone_duration_property_name,constants::tone_duration_default);
+  tone_duration_property.setUnits(constants::seconds_unit);
+  tone_duration_property.setRange(constants::tone_duration_min,constants::tone_duration_max);
+
+  modular_server::Property & tone_volume_property = modular_server_.createProperty(constants::tone_volume_property_name,constants::tone_volume_default);
+  tone_volume_property.setRange(audio_controller::constants::volume_min,audio_controller::constants::volume_max);
+
   // Parameters
   modular_server::Parameter & stage_positions_parameter = modular_server_.parameter(stage_controller::constants::stage_positions_parameter_name);
   stage_positions_parameter.setUnits(constants::mm_unit);
@@ -186,6 +197,9 @@ void PelletDispenser::update()
     assay_status_.state_ptr = &constants::state_playing_tone_string;
     playTone();
   }
+  else if (state_ptr == &constants::state_playing_tone_string)
+  {
+  }
   else if (state_ptr == &constants::state_move_to_dispense_string)
   {
     assay_status_.state_ptr = &constants::state_moving_to_dispense_string;
@@ -195,8 +209,16 @@ void PelletDispenser::update()
   {
     if (stageAtTargetPositions())
     {
-      assay_status_.state_ptr = &constants::state_move_to_base_stop_string;
+      assay_status_.state_ptr = &constants::state_wait_to_return_string;
     }
+  }
+  else if (state_ptr == &constants::state_wait_to_return_string)
+  {
+    assay_status_.state_ptr = &constants::state_waiting_to_return_string;
+    waitToReturn();
+  }
+  else if (state_ptr == &constants::state_waiting_to_return_string)
+  {
   }
   else if (state_ptr == &constants::state_move_to_base_stop_string)
   {
@@ -257,6 +279,30 @@ long PelletDispenser::getToneDelay()
   return tone_delay;
 }
 
+long PelletDispenser::getToneFrequency()
+{
+  long tone_frequency;
+  modular_server_.property(constants::tone_frequency_property_name).getValue(tone_frequency);
+
+  return tone_frequency;
+}
+
+long PelletDispenser::getToneDuration()
+{
+  long tone_duration;
+  modular_server_.property(constants::tone_duration_property_name).getValue(tone_duration);
+
+  return tone_duration*constants::milliseconds_per_second;
+}
+
+double PelletDispenser::getReturnDelay()
+{
+  double return_delay;
+  modular_server_.property(constants::return_delay_property_name).getValue(return_delay);
+
+  return return_delay*constants::milliseconds_per_minute;
+}
+
 void PelletDispenser::moveStageSoftlyToBase()
 {
   StageController::PositionsArray base_positions = getBasePositions();
@@ -290,6 +336,31 @@ void PelletDispenser::setPlayToneState()
 
 void PelletDispenser::playTone()
 {
+  long tone_frequency = getToneFrequency();
+  long tone_duration = getToneDuration();
+
+  Serial << "play tone!";
+  EventId event_id = event_controller_.addEventUsingDelay(makeFunctor((Functor1<int> *)0,*this,&PelletDispenser::moveToDispenseHandler),
+                                                          tone_duration);
+  event_controller_.enable(event_id);
+}
+
+void PelletDispenser::setMoveToDispenseState()
+{
+  assay_status_.state_ptr = &constants::state_move_to_dispense_string;
+}
+
+void PelletDispenser::waitToReturn()
+{
+  double return_delay = getReturnDelay();
+  EventId event_id = event_controller_.addEventUsingDelay(makeFunctor((Functor1<int> *)0,*this,&PelletDispenser::moveToBaseHandler),
+                                                          return_delay);
+  event_controller_.enable(event_id);
+}
+
+void PelletDispenser::setMoveToBaseStopState()
+{
+  assay_status_.state_ptr = &constants::state_move_to_base_stop_string;
 }
 
 void PelletDispenser::deliver()
@@ -340,6 +411,16 @@ void PelletDispenser::getAssayStatusHandler()
 void PelletDispenser::playToneHandler(int arg)
 {
   setPlayToneState();
+}
+
+void PelletDispenser::moveToDispenseHandler(int arg)
+{
+  setMoveToDispenseState();
+}
+
+void PelletDispenser::moveToBaseHandler(int arg)
+{
+  setMoveToBaseStopState();
 }
 
 void PelletDispenser::deliverHandler(modular_server::Interrupt * interrupt_ptr)

@@ -27,8 +27,8 @@
 #include "TMC26X.h"
 #include "EventController.h"
 
-// #include "ModularClient.h"
-// #include "AudioController.h"
+#include "ModularClient.h"
+#include "AudioController.h"
 
 #include "ModularServer.h"
 #include "ModularDeviceBase.h"
@@ -51,6 +51,9 @@ public:
   StageController::PositionsArray getDeliverPositions();
   StageController::PositionsArray getDispensePositions();
   long getToneDelay();
+  long getToneFrequency();
+  long getToneDuration();
+  double getReturnDelay();
 
   void moveStageSoftlyToBase();
   void moveStageSoftlyToDeliver();
@@ -58,6 +61,9 @@ public:
   void waitToPlayTone();
   void setPlayToneState();
   void playTone();
+  void setMoveToDispenseState();
+  void waitToReturn();
+  void setMoveToBaseStopState();
 
   void deliver();
   void abort();
@@ -76,6 +82,8 @@ private:
   // Handlers
   void getAssayStatusHandler();
   void playToneHandler(int arg);
+  void moveToDispenseHandler(int arg);
+  void moveToBaseHandler(int arg);
   void deliverHandler(modular_server::Interrupt * interrupt_ptr);
   void abortHandler(modular_server::Interrupt * interrupt_ptr);
 
