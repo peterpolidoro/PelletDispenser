@@ -339,7 +339,6 @@ void PelletDispenser::playTone()
   long tone_frequency = getToneFrequency();
   long tone_duration = getToneDuration();
 
-  Serial << "play tone!";
   EventId event_id = event_controller_.addEventUsingDelay(makeFunctor((Functor1<int> *)0,*this,&PelletDispenser::moveToDispenseHandler),
                                                           tone_duration);
   event_controller_.enable(event_id);
@@ -374,7 +373,15 @@ void PelletDispenser::deliver()
 
 void PelletDispenser::abort()
 {
-  Serial << "abort!\n";
+  if (stageHomed())
+  {
+    setMoveToBaseStopState();
+  }
+  else
+  {
+    assay_status_.state_ptr = &constants::state_assay_not_started_string;
+    stopAll();
+  }
 }
 
 // Handlers must be non-blocking (avoid 'delay')
