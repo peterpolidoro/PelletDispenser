@@ -57,12 +57,15 @@ License:
       "basePositions",
       "deliverPositions",
       "dispensePositions",
-      "toneDelayMin",
-      "toneDelayMax",
-      "returnDelay",
+      "buzzPeriod",
+      "buzzOnDuration",
+      "buzzCount",
       "toneFrequency",
       "toneDuration",
-      "toneVolume"
+      "toneVolume",
+      "toneDelayMin",
+      "toneDelayMax",
+      "returnDelay"
     ],
     "callbacks":[
       "deliver",

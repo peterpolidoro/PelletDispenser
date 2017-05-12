@@ -51,9 +51,9 @@ const double steps_per_position_unit_default[step_dir_controller::constants::CHA
 
 const double velocity_max_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
+    40,
+    40,
     20,
-    20,
-    5,
   };
 
 const double velocity_min_default[step_dir_controller::constants::CHANNEL_COUNT] =
@@ -90,8 +90,8 @@ const bool right_switch_stop_enabled_default[step_dir_controller::constants::CHA
 
 const double home_velocity_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
-    -10,
-    -10,
+    -20,
+    -20,
     5,
   };
 

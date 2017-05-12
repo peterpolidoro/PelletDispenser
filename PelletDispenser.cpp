@@ -386,7 +386,7 @@ void PelletDispenser::buzz()
   Array<size_t,constants::BUZZ_CHANNEL_COUNT> buzz_channels_array(constants::buzz_channels);
 
   h_bridge_controller_ptr_->call(h_bridge_controller::constants::add_pwm_function_name,
-                                 &buzz_channels_array,
+                                 buzz_channels_array,
                                  h_bridge_controller::constants::polarity_positive,
                                  0,
                                  buzz_period,
@@ -463,6 +463,11 @@ void PelletDispenser::deliver()
 
 void PelletDispenser::abort()
 {
+  stopAll();
+  event_controller_.removeAllEvents();
+  h_bridge_controller_ptr_->call(h_bridge_controller::constants::stop_all_pwm_function_name);
+  audio_controller_ptr_->call(audio_controller::constants::stop_all_pwm_function_name);
+
   if (stageHomed())
   {
     setMoveToBaseStopState();
@@ -470,7 +475,6 @@ void PelletDispenser::abort()
   else
   {
     assay_status_.state_ptr = &constants::state_assay_not_started_string;
-    stopAll();
   }
 }
 
