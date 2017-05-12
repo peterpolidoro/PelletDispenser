@@ -23,6 +23,9 @@ void PelletDispenser::setup()
   event_controller_.setup();
 
   // Clients Setup
+  h_bridge_controller_ptr_ = &(createClientAtAddress(constants::h_bridge_controller_address));
+  optical_switch_interface_ptr_ = &(createClientAtAddress(constants::optical_switch_interface_address));
+  audio_controller_ptr_ = &(createClientAtAddress(constants::audio_controller_address));
 
   // Pin Setup
 
@@ -341,6 +344,13 @@ void PelletDispenser::playTone()
   long tone_frequency = getToneFrequency();
   long tone_duration = getToneDuration();
 
+  audio_controller_ptr_->call(audio_controller::constants::add_tone_pwm_function_name,
+                              tone_frequency,
+                              audio_controller::constants::speaker_all,
+                              0,
+                              tone_duration*2,
+                              tone_duration,
+                              1);
   EventId event_id = event_controller_.addEventUsingDelay(makeFunctor((Functor1<int> *)0,*this,&PelletDispenser::moveToDispenseHandler),
                                                           tone_duration);
   event_controller_.enable(event_id);

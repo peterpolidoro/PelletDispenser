@@ -19,11 +19,11 @@ namespace constants
 enum{STAGE_CHANNEL_COUNT=3};
 enum{EVENT_COUNT_MAX=32};
 
-extern const size_t h_bridge_controller_full_address[1];
+extern const size_t h_bridge_controller_address[1];
 
-extern const size_t optical_switch_interface_full_address[2];
+extern const size_t optical_switch_interface_address[2];
 
-extern const size_t audio_controller_full_address[3];
+extern const size_t audio_controller_address[3];
 
 // Interrupts
 

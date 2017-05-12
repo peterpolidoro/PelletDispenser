@@ -30,6 +30,18 @@ License:
 
 [AudioController](https://github.com/janelia-arduino/AudioController)
 
+## Devices
+
+[modular_device_base](https://github.com/janelia-modular-devices/modular_device_base.git)
+
+[stepper_controller](https://github.com/janelia-modular-devices/stepper_controller.git)
+
+[h_bridge_controller](https://github.com/janelia-modular-devices/h_bridge_controller.git)
+
+[optical_switch_interface](https://github.com/janelia-modular-devices/optical_switch_interface.git)
+
+[audio_controller](https://github.com/janelia-modular-devices/audio_controller.git)
+
 ## API
 
 ```json

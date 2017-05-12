@@ -27,16 +27,16 @@
 #include "TMC26X.h"
 #include "EventController.h"
 
+#include "ModularClient.h"
+#include "HBridgeController.h"
+#include "OpticalSwitchInterface.h"
+#include "AudioController.h"
+
 #include "ModularServer.h"
 #include "ModularDeviceBase.h"
 #include "StepDirController.h"
 #include "StepperController.h"
 #include "StageController.h"
-
-#include "ModularClient.h"
-#include "HBridgeController.h"
-#include "OpticalSwitchInterface.h"
-#include "AudioController.h"
 
 #include "utility/Constants.h"
 
@@ -79,9 +79,9 @@ private:
   pellet_dispenser::constants::AssayStatus assay_status_;
   EventController<pellet_dispenser::constants::EVENT_COUNT_MAX> event_controller_;
 
-  ModularClient h_bridge_controller_;
-  ModularClient optical_switch_interface_;
-  ModularClient audio_controller_;
+  ModularClient * h_bridge_controller_ptr_;
+  ModularClient * optical_switch_interface_ptr_;
+  ModularClient * audio_controller_ptr_;
 
   // Handlers
   void getAssayStatusHandler();
