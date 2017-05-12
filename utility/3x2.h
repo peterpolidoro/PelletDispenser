@@ -25,6 +25,9 @@ extern const size_t optical_switch_interface_address[2];
 
 extern const size_t audio_controller_address[3];
 
+enum{BUZZ_CHANNEL_COUNT=1};
+extern const size_t buzz_channels[BUZZ_CHANNEL_COUNT];
+
 // Interrupts
 
 // Units

@@ -32,6 +32,11 @@ const size_t audio_controller_address[3] =
     3,
   };
 
+const size_t buzz_channels[BUZZ_CHANNEL_COUNT] =
+  {
+    0,
+  };
+
 // Interrupts
 
 // Units

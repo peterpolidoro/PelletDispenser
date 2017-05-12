@@ -32,6 +32,8 @@ CONSTANT_STRING(state_move_to_base_start_string,"MOVE_TO_BASE_START");
 CONSTANT_STRING(state_moving_to_base_start_string,"MOVING_TO_BASE_START");
 CONSTANT_STRING(state_move_to_deliver_string,"MOVE_TO_DELIVER");
 CONSTANT_STRING(state_moving_to_deliver_string,"MOVING_TO_DELIVER");
+CONSTANT_STRING(state_buzz_string,"BUZZ");
+CONSTANT_STRING(state_buzzing_string,"BUZZING");
 CONSTANT_STRING(state_wait_to_play_tone_string,"WAIT_TO_PLAY_TONE");
 CONSTANT_STRING(state_waiting_to_play_tone_string,"WAITING_TO_PLAY_TONE");
 CONSTANT_STRING(state_play_tone_string,"PLAY_TONE");
@@ -52,6 +54,7 @@ const long milliseconds_per_minute = milliseconds_per_second*seconds_per_minute;
 
 // Units
 CONSTANT_STRING(mm_unit,"mm");
+CONSTANT_STRING(ms_unit,"ms");
 CONSTANT_STRING(seconds_unit,"s");
 CONSTANT_STRING(minutes_unit,"min");
 CONSTANT_STRING(hz_unit,"Hz");
@@ -63,6 +66,21 @@ CONSTANT_STRING(deliver_positions_property_name,"deliverPositions");
 
 CONSTANT_STRING(dispense_positions_property_name,"dispensePositions");
 
+CONSTANT_STRING(buzz_period_property_name,"buzzPeriod");
+const long buzz_period_min = 100;
+const long buzz_period_max = 1000;
+const long buzz_period_default = 500;
+
+CONSTANT_STRING(buzz_on_duration_property_name,"buzzOnDuration");
+const long buzz_on_duration_min = 5;
+const long buzz_on_duration_max = 20;
+const long buzz_on_duration_default = 10;
+
+CONSTANT_STRING(buzz_count_property_name,"buzzCount");
+const long buzz_count_min = 1;
+const long buzz_count_max = 5;
+const long buzz_count_default = 3;
+
 CONSTANT_STRING(tone_delay_min_property_name,"toneDelayMin");
 const long tone_delay_min = 0;
 const long tone_delay_max = 60;
@@ -70,11 +88,6 @@ const long tone_delay_min_default = 2;
 
 CONSTANT_STRING(tone_delay_max_property_name,"toneDelayMax");
 const long tone_delay_max_default = 10;
-
-CONSTANT_STRING(return_delay_property_name,"returnDelay");
-const double return_delay_min = 0.1;
-const double return_delay_max = 15.0;
-const double return_delay_default = 0.1;
 
 CONSTANT_STRING(tone_frequency_property_name,"toneFrequency");
 const long tone_frequency_min = 1000;
@@ -88,6 +101,11 @@ const long tone_duration_default = 1;
 
 CONSTANT_STRING(tone_volume_property_name,"toneVolume");
 const double tone_volume_default = 0.25;
+
+CONSTANT_STRING(return_delay_property_name,"returnDelay");
+const double return_delay_min = 0.1;
+const double return_delay_max = 15.0;
+const double return_delay_default = 0.1;
 
 // Parameters
 
