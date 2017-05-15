@@ -61,10 +61,10 @@ extern const long milliseconds_per_minute;
 // Interrupts
 
 // Units
-extern ConstantString mm_unit;
-extern ConstantString ms_unit;
-extern ConstantString seconds_unit;
-extern ConstantString minutes_unit;
+extern ConstantString mm_units;
+extern ConstantString ms_units;
+extern ConstantString seconds_units;
+extern ConstantString minutes_units;
 
 // Properties
 // Property values must be long, double, bool, long[], double[], bool[], char[], ConstantString *, (ConstantString *)[]

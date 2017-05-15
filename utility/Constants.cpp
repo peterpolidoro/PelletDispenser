@@ -53,11 +53,11 @@ const long milliseconds_per_minute = milliseconds_per_second*seconds_per_minute;
 // Interrupts
 
 // Units
-CONSTANT_STRING(mm_unit,"mm");
-CONSTANT_STRING(ms_unit,"ms");
-CONSTANT_STRING(seconds_unit,"s");
-CONSTANT_STRING(minutes_unit,"min");
-CONSTANT_STRING(hz_unit,"Hz");
+CONSTANT_STRING(mm_units,"mm");
+CONSTANT_STRING(ms_units,"ms");
+CONSTANT_STRING(seconds_units,"s");
+CONSTANT_STRING(minutes_units,"min");
+CONSTANT_STRING(hz_units,"Hz");
 
 // Properties
 CONSTANT_STRING(base_positions_property_name,"basePositions");

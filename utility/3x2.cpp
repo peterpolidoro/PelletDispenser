@@ -42,7 +42,7 @@ const size_t buzz_channels[BUZZ_CHANNEL_COUNT] =
 // Units
 
 // Properties
-const double steps_per_position_unit_default[step_dir_controller::constants::CHANNEL_COUNT] =
+const double steps_per_position_units_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
     31.496, // steps/mm = (200steps/rev)/((0.250in/rev)*(25.4mm/in))
     31.496, // steps/mm = (200steps/rev)/((0.250in/rev)*(25.4mm/in))

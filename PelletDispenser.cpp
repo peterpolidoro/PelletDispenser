@@ -47,8 +47,8 @@ void PelletDispenser::setup()
                               callbacks_);
 
   // Properties
-  modular_server::Property & steps_per_position_unit_property = modular_server_.property(step_dir_controller::constants::steps_per_position_unit_property_name);
-  steps_per_position_unit_property.setDefaultValue(constants::steps_per_position_unit_default);
+  modular_server::Property & steps_per_position_units_property = modular_server_.property(step_dir_controller::constants::steps_per_position_units_property_name);
+  steps_per_position_units_property.setDefaultValue(constants::steps_per_position_units_default);
 
   modular_server::Property & velocity_max_property = modular_server_.property(step_dir_controller::constants::velocity_max_property_name);
   velocity_max_property.setDefaultValue(constants::velocity_max_default);
@@ -95,47 +95,47 @@ void PelletDispenser::setup()
   modular_server::Property & dispense_positions_property = modular_server_.createProperty(constants::dispense_positions_property_name,constants::dispense_positions_default);
 
   modular_server::Property & buzz_period_property = modular_server_.createProperty(constants::buzz_period_property_name,constants::buzz_period_default);
-  buzz_period_property.setUnits(audio_controller::constants::ms_unit);
+  buzz_period_property.setUnits(audio_controller::constants::ms_units);
   buzz_period_property.setRange(constants::buzz_period_min,constants::buzz_period_max);
 
   modular_server::Property & buzz_on_duration_property = modular_server_.createProperty(constants::buzz_on_duration_property_name,constants::buzz_on_duration_default);
-  buzz_on_duration_property.setUnits(audio_controller::constants::ms_unit);
+  buzz_on_duration_property.setUnits(audio_controller::constants::ms_units);
   buzz_on_duration_property.setRange(constants::buzz_on_duration_min,constants::buzz_on_duration_max);
 
   modular_server::Property & buzz_count_property = modular_server_.createProperty(constants::buzz_count_property_name,constants::buzz_count_default);
   buzz_count_property.setRange(constants::buzz_count_min,constants::buzz_count_max);
 
   modular_server::Property & tone_frequency_property = modular_server_.createProperty(constants::tone_frequency_property_name,constants::tone_frequency_default);
-  tone_frequency_property.setUnits(audio_controller::constants::hz_unit);
+  tone_frequency_property.setUnits(audio_controller::constants::hz_units);
   tone_frequency_property.setRange(constants::tone_frequency_min,constants::tone_frequency_max);
 
   modular_server::Property & tone_duration_property = modular_server_.createProperty(constants::tone_duration_property_name,constants::tone_duration_default);
-  tone_duration_property.setUnits(constants::seconds_unit);
+  tone_duration_property.setUnits(constants::seconds_units);
   tone_duration_property.setRange(constants::tone_duration_min,constants::tone_duration_max);
 
   modular_server::Property & tone_volume_property = modular_server_.createProperty(constants::tone_volume_property_name,constants::tone_volume_default);
   tone_volume_property.setRange(audio_controller::constants::volume_min,audio_controller::constants::volume_max);
 
   modular_server::Property & tone_delay_min_property = modular_server_.createProperty(constants::tone_delay_min_property_name,constants::tone_delay_min_default);
-  tone_delay_min_property.setUnits(constants::seconds_unit);
+  tone_delay_min_property.setUnits(constants::seconds_units);
   tone_delay_min_property.setRange(constants::tone_delay_min,constants::tone_delay_max);
 
   modular_server::Property & tone_delay_max_property = modular_server_.createProperty(constants::tone_delay_max_property_name,constants::tone_delay_max_default);
-  tone_delay_max_property.setUnits(constants::seconds_unit);
+  tone_delay_max_property.setUnits(constants::seconds_units);
   tone_delay_max_property.setRange(constants::tone_delay_min,constants::tone_delay_max);
 
   modular_server::Property & return_delay_property = modular_server_.createProperty(constants::return_delay_property_name,constants::return_delay_default);
-  return_delay_property.setUnits(constants::minutes_unit);
+  return_delay_property.setUnits(constants::minutes_units);
   return_delay_property.setRange(constants::return_delay_min,constants::return_delay_max);
 
   // Parameters
   modular_server::Parameter & stage_positions_parameter = modular_server_.parameter(stage_controller::constants::stage_positions_parameter_name);
-  stage_positions_parameter.setUnits(constants::mm_unit);
+  stage_positions_parameter.setUnits(constants::mm_units);
 
   // Functions
   modular_server::Function & get_assay_status_function = modular_server_.createFunction(constants::get_assay_status_function_name);
   get_assay_status_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&PelletDispenser::getAssayStatusHandler));
-  get_assay_status_function.setReturnTypeObject();
+  get_assay_status_function.setResultTypeObject();
 
   // Callbacks
   modular_server::Callback & deliver_callback = modular_server_.createCallback(constants::deliver_callback_name);
