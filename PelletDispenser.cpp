@@ -133,6 +133,9 @@ void PelletDispenser::setup()
   stage_positions_parameter.setUnits(constants::mm_units);
 
   // Functions
+  modular_server::Function & set_client_property_values_function = modular_server_.createFunction(constants::set_client_property_values_function_name);
+  set_client_property_values_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&PelletDispenser::setClientPropertyValuesHandler));
+
   modular_server::Function & get_assay_status_function = modular_server_.createFunction(constants::get_assay_status_function_name);
   get_assay_status_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&PelletDispenser::getAssayStatusHandler));
   get_assay_status_function.setResultTypeObject();
@@ -146,8 +149,6 @@ void PelletDispenser::setup()
   abort_callback.attachFunctor(makeFunctor((Functor1<modular_server::Interrupt *> *)0,*this,&PelletDispenser::abortHandler));
   abort_callback.attachTo(modular_device_base::constants::bnc_b_interrupt_name,modular_server::interrupt::mode_falling);
 
-  // Clients
-  // audio_controller_.setStream(Serial1);
 }
 
 void PelletDispenser::update()
@@ -494,6 +495,19 @@ void PelletDispenser::abort()
 // modular_server_.property(property_name).setValue(value) value type must match the property default type
 // modular_server_.property(property_name).getElementValue(element_index,value) value type must match the property array element default type
 // modular_server_.property(property_name).setElementValue(element_index,value) value type must match the property array element default type
+
+void PelletDispenser::setClientPropertyValuesHandler()
+{
+  h_bridge_controller_ptr_->call(modular_server::constants::set_properties_to_defaults_function_name);
+
+  optical_switch_interface_ptr_->call(modular_server::constants::set_properties_to_defaults_function_name);
+  Array<bool,optical_switch_interface::constants::OUTPUT_COUNT> inverted(constants::inverted);
+  optical_switch_interface_ptr_->call(optical_switch_interface::constants::inverted_property_name,
+                                      modular_server::property::set_value_function_name,
+                                      inverted);
+
+  audio_controller_ptr_->call(modular_server::constants::set_properties_to_defaults_function_name);
+}
 
 void PelletDispenser::getAssayStatusHandler()
 {

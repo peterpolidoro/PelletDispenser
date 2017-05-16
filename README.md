@@ -50,6 +50,7 @@ License:
   "result":{
     "firmware":["PelletDispenser"],
     "functions":[
+      "setClientPropertyValues",
       "getAssayStatus"
     ],
     "parameters":[],
@@ -83,6 +84,10 @@ License:
   "result":{
     "firmware":["PelletDispenser"],
     "functions":[
+      {
+        "name":"setClientPropertyValues",
+        "parameters":[]
+      },
       {
         "name":"getAssayStatus",
         "parameters":[],

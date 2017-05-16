@@ -131,7 +131,7 @@ const double deliver_positions_default[STAGE_CHANNEL_COUNT] =
   {
     20,
     140,
-    -18
+    -18,
   };
 
 const double dispense_positions_default[STAGE_CHANNEL_COUNT] =
@@ -139,6 +139,14 @@ const double dispense_positions_default[STAGE_CHANNEL_COUNT] =
     20,
     140,
     -5
+  };
+
+const bool inverted[optical_switch_interface::constants::OUTPUT_COUNT] =
+  {
+    false,
+    true,
+    false,
+    false,
   };
 
 // Parameters

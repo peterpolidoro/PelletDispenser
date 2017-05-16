@@ -10,6 +10,11 @@
 #include "ConstantVariable.h"
 #include "StepDirController.h"
 #include "StepperController.h"
+#include "StageController.h"
+
+#include "HBridgeController.h"
+#include "OpticalSwitchInterface.h"
+#include "AudioController.h"
 
 
 namespace pellet_dispenser
@@ -19,7 +24,7 @@ namespace constants
 //MAX values must be >= 1, >= created/copied count, < RAM limit
 enum{PROPERTY_COUNT_MAX=12};
 enum{PARAMETER_COUNT_MAX=1};
-enum{FUNCTION_COUNT_MAX=1};
+enum{FUNCTION_COUNT_MAX=2};
 enum{CALLBACK_COUNT_MAX=2};
 
 extern ConstantString device_name;
@@ -118,6 +123,7 @@ extern const double return_delay_default;
 // Parameters
 
 // Functions
+extern ConstantString set_client_property_values_function_name;
 extern ConstantString get_assay_status_function_name;
 
 // Callbacks

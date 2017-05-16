@@ -110,6 +110,7 @@ const double return_delay_default = 0.1;
 // Parameters
 
 // Functions
+CONSTANT_STRING(set_client_property_values_function_name,"setClientPropertyValues");
 CONSTANT_STRING(get_assay_status_function_name,"getAssayStatus");
 
 // Callbacks

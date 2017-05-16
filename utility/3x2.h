@@ -68,6 +68,8 @@ extern const double deliver_positions_default[STAGE_CHANNEL_COUNT];
 
 extern const double dispense_positions_default[STAGE_CHANNEL_COUNT];
 
+extern const bool inverted[optical_switch_interface::constants::OUTPUT_COUNT];
+
 // Parameters
 
 // Functions

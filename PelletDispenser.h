@@ -90,6 +90,7 @@ private:
   ModularClient * audio_controller_ptr_;
 
   // Handlers
+  void setClientPropertyValuesHandler();
   void getAssayStatusHandler();
   void playToneHandler(int arg);
   void moveToDispenseHandler(int arg);
