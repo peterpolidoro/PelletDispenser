@@ -50,6 +50,30 @@ const long seconds_per_minute = 60;
 const long milliseconds_per_second = 1000;
 const long milliseconds_per_minute = milliseconds_per_second*seconds_per_minute;
 
+// Clients
+const size_t optical_switch_interface_address[1] =
+  {
+    3,
+  };
+
+const size_t h_bridge_controller_address[2] =
+  {
+    3,
+    3,
+  };
+
+const size_t audio_controller_address[3] =
+  {
+    3,
+    3,
+    3,
+  };
+
+const size_t buzz_channels[BUZZ_CHANNEL_COUNT] =
+  {
+    0,
+  };
+
 // Interrupts
 
 // Units
@@ -60,6 +84,12 @@ CONSTANT_STRING(minutes_units,"min");
 CONSTANT_STRING(hz_units,"Hz");
 
 // Properties
+const long run_current_element_default = 10;
+
+const long hold_current_element_default = 5;
+
+const long hold_delay_element_default = 50;
+
 CONSTANT_STRING(base_positions_property_name,"basePositions");
 
 CONSTANT_STRING(deliver_positions_property_name,"deliverPositions");

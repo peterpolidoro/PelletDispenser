@@ -14,28 +14,6 @@ namespace pellet_dispenser
 {
 namespace constants
 {
-const size_t h_bridge_controller_address[1] =
-  {
-    3,
-  };
-
-const size_t optical_switch_interface_address[2] =
-  {
-    3,
-    3,
-  };
-
-const size_t audio_controller_address[3] =
-  {
-    3,
-    3,
-    3,
-  };
-
-const size_t buzz_channels[BUZZ_CHANNEL_COUNT] =
-  {
-    0,
-  };
 
 // Interrupts
 
@@ -95,46 +73,60 @@ const double home_velocity_default[step_dir_controller::constants::CHANNEL_COUNT
     5,
   };
 
-const long current_scale_default[stepper_controller::constants::DRIVER_COUNT] =
+const long run_current_default[stepper_controller::constants::DRIVER_COUNT] =
   {
-    50,
-    50,
-    50
+    run_current_element_default,
+    run_current_element_default,
+    run_current_element_default,
   };
 
-const long stage_channel_count_min = STAGE_CHANNEL_COUNT;
-const long stage_channel_count_max = STAGE_CHANNEL_COUNT;
-const long stage_channel_count_default = STAGE_CHANNEL_COUNT;
+const long hold_current_default[stepper_controller::constants::DRIVER_COUNT] =
+  {
+    hold_current_element_default,
+    hold_current_element_default,
+    hold_current_element_default,
+  };
 
-const double stage_positions_min_default[STAGE_CHANNEL_COUNT] =
+const long hold_delay_default[stepper_controller::constants::DRIVER_COUNT] =
+  {
+    hold_delay_element_default,
+    hold_delay_element_default,
+    hold_delay_element_default,
+  };
+
+const long stage_channel_count_min = step_dir_controller::constants::CHANNEL_COUNT;
+const long stage_channel_count_max = step_dir_controller::constants::CHANNEL_COUNT;
+const long stage_channel_count_default = step_dir_controller::constants::CHANNEL_COUNT;
+
+const double stage_positions_min_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
     0,
     0,
     -19,
   };
 
-const double stage_positions_max_default[STAGE_CHANNEL_COUNT] =
+const double stage_positions_max_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
     20,
     140,
     0,
   };
 
-const double base_positions_default[STAGE_CHANNEL_COUNT] =
+const double base_positions_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
     20,
     130,
     -17.5,
   };
 
-const double deliver_positions_default[STAGE_CHANNEL_COUNT] =
+const double deliver_positions_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
     5,
     135,
     -17.5,
   };
 
-const double dispense_positions_default[STAGE_CHANNEL_COUNT] =
+const double dispense_positions_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
     5,
     135,

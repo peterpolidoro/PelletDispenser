@@ -27,6 +27,8 @@ enum{PARAMETER_COUNT_MAX=1};
 enum{FUNCTION_COUNT_MAX=2};
 enum{CALLBACK_COUNT_MAX=2};
 
+enum{EVENT_COUNT_MAX=32};
+
 extern ConstantString device_name;
 
 extern ConstantString firmware_name;
@@ -63,6 +65,16 @@ extern const long seconds_per_minute;
 extern const long milliseconds_per_second;
 extern const long milliseconds_per_minute;
 
+// Clients
+extern const size_t optical_switch_interface_address[1];
+
+extern const size_t h_bridge_controller_address[2];
+
+extern const size_t audio_controller_address[3];
+
+enum{BUZZ_CHANNEL_COUNT=1};
+extern const size_t buzz_channels[BUZZ_CHANNEL_COUNT];
+
 // Interrupts
 
 // Units
@@ -73,6 +85,49 @@ extern ConstantString minutes_units;
 
 // Properties
 // Property values must be long, double, bool, long[], double[], bool[], char[], ConstantString *, (ConstantString *)[]
+extern const double steps_per_position_units_default[step_dir_controller::constants::CHANNEL_COUNT];
+
+extern const double velocity_max_default[step_dir_controller::constants::CHANNEL_COUNT];
+
+extern const double velocity_min_default[step_dir_controller::constants::CHANNEL_COUNT];
+
+extern const double acceleration_max_default[step_dir_controller::constants::CHANNEL_COUNT];
+
+extern const ConstantString * const switch_active_polarity_default;
+
+extern const bool left_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT];
+
+extern const bool right_switches_enabled_default;
+
+extern const bool right_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT];
+
+extern const double home_velocity_default[step_dir_controller::constants::CHANNEL_COUNT];
+
+extern const long run_current_default[stepper_controller::constants::DRIVER_COUNT];
+extern const long run_current_element_default;
+
+extern const long hold_current_default[stepper_controller::constants::DRIVER_COUNT];
+extern const long hold_current_element_default;
+
+extern const long hold_delay_default[stepper_controller::constants::DRIVER_COUNT];
+extern const long hold_delay_element_default;
+
+extern const long stage_channel_count_min;
+extern const long stage_channel_count_max;
+extern const long stage_channel_count_default;
+
+extern const double stage_positions_min_default[step_dir_controller::constants::CHANNEL_COUNT];
+
+extern const double stage_positions_max_default[step_dir_controller::constants::CHANNEL_COUNT];
+
+extern const double base_positions_default[step_dir_controller::constants::CHANNEL_COUNT];
+
+extern const double deliver_positions_default[step_dir_controller::constants::CHANNEL_COUNT];
+
+extern const double dispense_positions_default[step_dir_controller::constants::CHANNEL_COUNT];
+
+extern const bool inverted[optical_switch_interface::constants::OUTPUT_COUNT];
+
 extern ConstantString base_positions_property_name;
 
 extern ConstantString deliver_positions_property_name;

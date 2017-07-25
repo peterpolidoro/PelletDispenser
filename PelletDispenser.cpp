@@ -23,8 +23,8 @@ void PelletDispenser::setup()
   event_controller_.setup();
 
   // Clients Setup
-  h_bridge_controller_ptr_ = &(createClientAtAddress(constants::h_bridge_controller_address));
   optical_switch_interface_ptr_ = &(createClientAtAddress(constants::optical_switch_interface_address));
+  h_bridge_controller_ptr_ = &(createClientAtAddress(constants::h_bridge_controller_address));
   audio_controller_ptr_ = &(createClientAtAddress(constants::audio_controller_address));
 
   // Pin Setup
@@ -74,8 +74,14 @@ void PelletDispenser::setup()
   modular_server::Property & home_velocity_property = modular_server_.property(step_dir_controller::constants::home_velocity_property_name);
   home_velocity_property.setDefaultValue(constants::home_velocity_default);
 
-  modular_server::Property & current_scale_property = modular_server_.property(stepper_controller::constants::current_scale_property_name);
-  current_scale_property.setDefaultValue(constants::current_scale_default);
+  modular_server::Property & run_current_property = modular_server_.property(stepper_controller::constants::run_current_property_name);
+  run_current_property.setDefaultValue(constants::run_current_default);
+
+  modular_server::Property & hold_current_property = modular_server_.property(stepper_controller::constants::hold_current_property_name);
+  hold_current_property.setDefaultValue(constants::hold_current_default);
+
+  modular_server::Property & hold_delay_property = modular_server_.property(stepper_controller::constants::hold_delay_property_name);
+  hold_delay_property.setDefaultValue(constants::hold_delay_default);
 
   modular_server::Property & stage_channel_count_property = modular_server_.property(stage_controller::constants::stage_channel_count_property_name);
   stage_channel_count_property.setDefaultValue(constants::stage_channel_count_default);
@@ -88,11 +94,11 @@ void PelletDispenser::setup()
   modular_server::Property & stage_positions_max_property = modular_server_.property(stage_controller::constants::stage_positions_max_property_name);
   stage_positions_max_property.setDefaultValue(constants::stage_positions_max_default);
 
-  modular_server::Property & base_positions_property = modular_server_.createProperty(constants::base_positions_property_name,constants::base_positions_default);
+  modular_server_.createProperty(constants::base_positions_property_name,constants::base_positions_default);
 
-  modular_server::Property & deliver_positions_property = modular_server_.createProperty(constants::deliver_positions_property_name,constants::deliver_positions_default);
+  modular_server_.createProperty(constants::deliver_positions_property_name,constants::deliver_positions_default);
 
-  modular_server::Property & dispense_positions_property = modular_server_.createProperty(constants::dispense_positions_property_name,constants::dispense_positions_default);
+  modular_server_.createProperty(constants::dispense_positions_property_name,constants::dispense_positions_default);
 
   modular_server::Property & buzz_period_property = modular_server_.createProperty(constants::buzz_period_property_name,constants::buzz_period_default);
   buzz_period_property.setUnits(audio_controller::constants::ms_units);
@@ -266,7 +272,7 @@ constants::AssayStatus PelletDispenser::getAssayStatus()
 
 StageController::PositionsArray PelletDispenser::getBasePositions()
 {
-  double base_positions[constants::STAGE_CHANNEL_COUNT];
+  double base_positions[step_dir_controller::constants::CHANNEL_COUNT];
   modular_server_.property(constants::base_positions_property_name).getValue(base_positions);
 
   StageController::PositionsArray base_positions_array(base_positions);
@@ -275,7 +281,7 @@ StageController::PositionsArray PelletDispenser::getBasePositions()
 
 StageController::PositionsArray PelletDispenser::getDeliverPositions()
 {
-  double deliver_positions[constants::STAGE_CHANNEL_COUNT];
+  double deliver_positions[step_dir_controller::constants::CHANNEL_COUNT];
   modular_server_.property(constants::deliver_positions_property_name).getValue(deliver_positions);
 
   StageController::PositionsArray deliver_positions_array(deliver_positions);
@@ -284,7 +290,7 @@ StageController::PositionsArray PelletDispenser::getDeliverPositions()
 
 StageController::PositionsArray PelletDispenser::getDispensePositions()
 {
-  double dispense_positions[constants::STAGE_CHANNEL_COUNT];
+  double dispense_positions[step_dir_controller::constants::CHANNEL_COUNT];
   modular_server_.property(constants::dispense_positions_property_name).getValue(dispense_positions);
 
   StageController::PositionsArray dispense_positions_array(dispense_positions);
@@ -552,4 +558,3 @@ void PelletDispenser::abortHandler(modular_server::Interrupt * interrupt_ptr)
 {
   abort();
 }
-
