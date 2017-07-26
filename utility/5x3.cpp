@@ -47,8 +47,6 @@ const double acceleration_max_default[step_dir_controller::constants::CHANNEL_CO
     50,
   };
 
-const ConstantString * const switch_active_polarity_default = &step_dir_controller::constants::polarity_high;
-
 const bool left_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
     true,

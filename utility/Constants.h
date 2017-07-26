@@ -93,8 +93,6 @@ extern const double velocity_min_default[step_dir_controller::constants::CHANNEL
 
 extern const double acceleration_max_default[step_dir_controller::constants::CHANNEL_COUNT];
 
-extern const ConstantString * const switch_active_polarity_default;
-
 extern const bool left_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT];
 
 extern const bool right_switches_enabled_default;
@@ -168,7 +166,7 @@ extern const long tone_duration_max;
 extern const long tone_duration_default;
 
 extern ConstantString tone_volume_property_name;
-extern const double tone_volume_default;
+extern const long tone_volume_default;
 
 extern ConstantString return_delay_property_name;
 extern const double return_delay_min;

@@ -59,9 +59,6 @@ void PelletDispenser::setup()
   modular_server::Property & acceleration_max_property = modular_server_.property(step_dir_controller::constants::acceleration_max_property_name);
   acceleration_max_property.setDefaultValue(constants::acceleration_max_default);
 
-  modular_server::Property & switch_active_polarity_property = modular_server_.property(step_dir_controller::constants::switch_active_polarity_property_name);
-  switch_active_polarity_property.setDefaultValue(constants::switch_active_polarity_default);
-
   modular_server::Property & left_switch_stop_enabled_property = modular_server_.property(step_dir_controller::constants::left_switch_stop_enabled_property_name);
   left_switch_stop_enabled_property.setDefaultValue(constants::left_switch_stop_enabled_default);
 

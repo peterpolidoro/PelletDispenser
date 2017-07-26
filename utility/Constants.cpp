@@ -130,7 +130,7 @@ const long tone_duration_max = 5;
 const long tone_duration_default = 1;
 
 CONSTANT_STRING(tone_volume_property_name,"toneVolume");
-const double tone_volume_default = 0.25;
+const long tone_volume_default = 25;
 
 CONSTANT_STRING(return_delay_property_name,"returnDelay");
 const double return_delay_min = 0.1;
