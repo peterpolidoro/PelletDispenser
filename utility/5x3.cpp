@@ -47,15 +47,6 @@ const double acceleration_max_default[step_dir_controller::constants::CHANNEL_CO
     50,
   };
 
-const bool left_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT] =
-  {
-    true,
-    true,
-    true,
-  };
-
-const bool right_switches_enabled_default = true;
-
 const bool right_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
     false,

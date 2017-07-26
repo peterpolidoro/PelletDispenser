@@ -84,9 +84,9 @@ CONSTANT_STRING(minutes_units,"min");
 CONSTANT_STRING(hz_units,"Hz");
 
 // Properties
-const long run_current_element_default = 10;
+const long run_current_element_default = 20;
 
-const long hold_current_element_default = 5;
+const long hold_current_element_default = 10;
 
 const long hold_delay_element_default = 50;
 
