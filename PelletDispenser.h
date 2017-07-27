@@ -58,7 +58,7 @@ public:
   long getToneDelay();
   long getToneFrequency();
   long getToneDuration();
-  double getToneVolume();
+  long getToneVolume();
   double getReturnDelay();
 
   void moveStageSoftlyToBase();

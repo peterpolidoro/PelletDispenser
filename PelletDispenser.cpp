@@ -349,9 +349,9 @@ long PelletDispenser::getToneDuration()
   return tone_duration*constants::milliseconds_per_second;
 }
 
-double PelletDispenser::getToneVolume()
+long PelletDispenser::getToneVolume()
 {
-  double tone_volume;
+  long tone_volume;
   modular_server_.property(constants::tone_volume_property_name).getValue(tone_volume);
 
   return tone_volume;
@@ -425,7 +425,7 @@ void PelletDispenser::playTone()
 {
   long tone_frequency = getToneFrequency();
   long tone_duration = getToneDuration();
-  double tone_volume = getToneVolume();
+  long tone_volume = getToneVolume();
 
   audio_controller_ptr_->call(audio_controller::constants::add_tone_pwm_at_function_name,
                               tone_frequency,
