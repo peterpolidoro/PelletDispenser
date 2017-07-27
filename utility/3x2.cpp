@@ -90,28 +90,28 @@ const double stage_positions_min_default[step_dir_controller::constants::CHANNEL
 const double stage_positions_max_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
     0,
-    140,
-    20,
+    80,
+    80,
   };
 
 const double base_positions_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
     -17.5,
-    130,
+    70,
     20,
   };
 
 const double deliver_positions_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
     -17.5,
-    135,
-    5,
+    75,
+    20,
   };
 
 const bool inverted[optical_switch_interface::constants::OUTPUT_COUNT] =
   {
-    false,
     true,
+    false,
     false,
     false,
   };
