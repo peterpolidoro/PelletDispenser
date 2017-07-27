@@ -29,6 +29,8 @@ enum{CALLBACK_COUNT_MAX=2};
 
 enum{EVENT_COUNT_MAX=32};
 
+enum{DISPENSE_CHANNEL=0};
+
 extern ConstantString device_name;
 
 extern ConstantString firmware_name;
@@ -93,8 +95,6 @@ extern const double velocity_min_default[step_dir_controller::constants::CHANNEL
 
 extern const double acceleration_max_default[step_dir_controller::constants::CHANNEL_COUNT];
 
-extern const bool right_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT];
-
 extern const double home_velocity_default[step_dir_controller::constants::CHANNEL_COUNT];
 
 extern const long run_current_default[stepper_controller::constants::DRIVER_COUNT];
@@ -114,19 +114,16 @@ extern const double stage_positions_min_default[step_dir_controller::constants::
 
 extern const double stage_positions_max_default[step_dir_controller::constants::CHANNEL_COUNT];
 
-extern const double base_positions_default[step_dir_controller::constants::CHANNEL_COUNT];
-
-extern const double deliver_positions_default[step_dir_controller::constants::CHANNEL_COUNT];
-
-extern const double dispense_positions_default[step_dir_controller::constants::CHANNEL_COUNT];
-
 extern const bool inverted[optical_switch_interface::constants::OUTPUT_COUNT];
 
 extern ConstantString base_positions_property_name;
+extern const double base_positions_default[step_dir_controller::constants::CHANNEL_COUNT];
 
 extern ConstantString deliver_positions_property_name;
+extern const double deliver_positions_default[step_dir_controller::constants::CHANNEL_COUNT];
 
-extern ConstantString dispense_positions_property_name;
+extern ConstantString dispense_position_property_name;
+extern const double dispense_position_default;
 
 extern ConstantString buzz_period_property_name;
 extern const long buzz_period_min;

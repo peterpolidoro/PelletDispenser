@@ -94,7 +94,8 @@ CONSTANT_STRING(base_positions_property_name,"basePositions");
 
 CONSTANT_STRING(deliver_positions_property_name,"deliverPositions");
 
-CONSTANT_STRING(dispense_positions_property_name,"dispensePositions");
+CONSTANT_STRING(dispense_position_property_name,"dispensePosition");
+const double dispense_position_default = -5;
 
 CONSTANT_STRING(buzz_period_property_name,"buzzPeriod");
 const long buzz_period_min = 100;

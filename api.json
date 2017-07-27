@@ -66,27 +66,16 @@
         ]
       },
       {
-        "name":"dispensePositions",
-        "type":"array",
-        "array_element_type":"double",
+        "name":"dispensePosition",
+        "type":"double",
         "functions":[
           "getValue",
           "setValue",
           "getDefaultValue",
-          "setValueToDefault",
-          "getElementValue",
-          "setElementValue",
-          "getDefaultElementValue",
-          "setElementValueToDefault",
-          "setAllElementValues",
-          "getArrayLength",
-          "setArrayLength"
+          "setValueToDefault"
         ],
         "parameters":[
-          "value",
-          "element_index",
-          "element_value",
-          "array_length"
+          "value"
         ]
       },
       {
@@ -160,7 +149,7 @@
       },
       {
         "name":"toneVolume",
-        "type":"double",
+        "type":"long",
         "functions":[
           "getValue",
           "setValue",

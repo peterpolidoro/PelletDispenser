@@ -22,44 +22,37 @@ namespace constants
 // Properties
 const double steps_per_position_units_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
-    31.496, // steps/mm = (200steps/rev)/((0.250in/rev)*(25.4mm/in))
-    31.496, // steps/mm = (200steps/rev)/((0.250in/rev)*(25.4mm/in))
     12.88, // steps/pellet
+    31.496, // steps/mm = (200steps/rev)/((0.250in/rev)*(25.4mm/in))
+    31.496, // steps/mm = (200steps/rev)/((0.250in/rev)*(25.4mm/in))
   };
 
 const double velocity_max_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
-    40,
-    40,
     20,
+    40,
+    40,
   };
 
 const double velocity_min_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
-    2,
-    2,
     1,
+    2,
+    2,
   };
 
 const double acceleration_max_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
-    100,
-    100,
     50,
-  };
-
-const bool right_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT] =
-  {
-    false,
-    false,
-    true,
+    100,
+    100,
   };
 
 const double home_velocity_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
-    -20,
-    -20,
     5,
+    -20,
+    -20,
   };
 
 const long run_current_default[stepper_controller::constants::DRIVER_COUNT] =
@@ -89,37 +82,30 @@ const long stage_channel_count_default = step_dir_controller::constants::CHANNEL
 
 const double stage_positions_min_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
-    0,
-    0,
     -19,
+    0,
+    0,
   };
 
 const double stage_positions_max_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
-    20,
-    140,
     0,
+    140,
+    20,
   };
 
 const double base_positions_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
-    20,
-    130,
     -17.5,
+    130,
+    20,
   };
 
 const double deliver_positions_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
-    5,
-    135,
     -17.5,
-  };
-
-const double dispense_positions_default[step_dir_controller::constants::CHANNEL_COUNT] =
-  {
-    5,
     135,
-    -5
+    5,
   };
 
 const bool inverted[optical_switch_interface::constants::OUTPUT_COUNT] =

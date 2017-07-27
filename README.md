@@ -57,7 +57,7 @@ License:
     "properties":[
       "basePositions",
       "deliverPositions",
-      "dispensePositions",
+      "dispensePosition",
       "buzzPeriod",
       "buzzOnDuration",
       "buzzCount",

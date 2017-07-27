@@ -59,9 +59,6 @@ void PelletDispenser::setup()
   modular_server::Property & acceleration_max_property = modular_server_.property(step_dir_controller::constants::acceleration_max_property_name);
   acceleration_max_property.setDefaultValue(constants::acceleration_max_default);
 
-  modular_server::Property & right_switch_stop_enabled_property = modular_server_.property(step_dir_controller::constants::right_switch_stop_enabled_property_name);
-  right_switch_stop_enabled_property.setDefaultValue(constants::right_switch_stop_enabled_default);
-
   modular_server::Property & home_velocity_property = modular_server_.property(step_dir_controller::constants::home_velocity_property_name);
   home_velocity_property.setDefaultValue(constants::home_velocity_default);
 
@@ -89,7 +86,7 @@ void PelletDispenser::setup()
 
   modular_server_.createProperty(constants::deliver_positions_property_name,constants::deliver_positions_default);
 
-  modular_server_.createProperty(constants::dispense_positions_property_name,constants::dispense_positions_default);
+  modular_server_.createProperty(constants::dispense_position_property_name,constants::dispense_position_default);
 
   modular_server::Property & buzz_period_property = modular_server_.createProperty(constants::buzz_period_property_name,constants::buzz_period_default);
   buzz_period_property.setUnits(audio_controller::constants::ms_units);
@@ -140,11 +137,17 @@ void PelletDispenser::setup()
   // Callbacks
   modular_server::Callback & deliver_callback = modular_server_.createCallback(constants::deliver_callback_name);
   deliver_callback.attachFunctor(makeFunctor((Functor1<modular_server::Interrupt *> *)0,*this,&PelletDispenser::deliverHandler));
-  deliver_callback.attachTo(modular_device_base::constants::bnc_a_interrupt_name,modular_server::interrupt::mode_falling);
+  deliver_callback.attachTo(modular_device_base::constants::bnc_b_interrupt_name,modular_server::interrupt::mode_falling);
+#if defined(__MK64FX512__)
+  deliver_callback.attachTo(modular_device_base::constants::btn_b_interrupt_name,modular_server::interrupt::mode_falling);
+#endif
 
   modular_server::Callback & abort_callback = modular_server_.createCallback(constants::abort_callback_name);
   abort_callback.attachFunctor(makeFunctor((Functor1<modular_server::Interrupt *> *)0,*this,&PelletDispenser::abortHandler));
-  abort_callback.attachTo(modular_device_base::constants::bnc_b_interrupt_name,modular_server::interrupt::mode_falling);
+  abort_callback.attachTo(modular_device_base::constants::bnc_a_interrupt_name,modular_server::interrupt::mode_falling);
+#if !defined(__AVR_ATmega2560__)
+  abort_callback.attachTo(modular_device_base::constants::btn_a_interrupt_name,modular_server::interrupt::mode_falling);
+#endif
 
 }
 
@@ -281,10 +284,15 @@ StageController::PositionsArray PelletDispenser::getDeliverPositions()
 
 StageController::PositionsArray PelletDispenser::getDispensePositions()
 {
-  double dispense_positions[step_dir_controller::constants::CHANNEL_COUNT];
-  modular_server_.property(constants::dispense_positions_property_name).getValue(dispense_positions);
+  double deliver_positions[step_dir_controller::constants::CHANNEL_COUNT];
+  modular_server_.property(constants::deliver_positions_property_name).getValue(deliver_positions);
 
-  StageController::PositionsArray dispense_positions_array(dispense_positions);
+  StageController::PositionsArray dispense_positions_array(deliver_positions);
+
+  double dispense_position;
+  modular_server_.property(constants::dispense_position_property_name).getValue(dispense_position);
+  dispense_positions_array[constants::DISPENSE_CHANNEL] = dispense_position;
+
   return dispense_positions_array;
 }
 
