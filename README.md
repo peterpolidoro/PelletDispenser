@@ -42,18 +42,18 @@ License:
 
 [audio_controller](https://github.com/janelia-modular-devices/audio_controller.git)
 
-## API
+## API NAMES
 
 ```json
 {
   "id":"getApi",
   "result":{
     "firmware":["PelletDispenser"],
+    "verbosity":"NAMES",
     "functions":[
       "setClientPropertyValues",
       "getAssayStatus"
     ],
-    "parameters":[],
     "properties":[
       "basePositions",
       "deliverPositions",
@@ -76,9 +76,9 @@ License:
 }
 ```
 
-## API Verbose
+## API GENERAL
 
-[API Verbose](./api.json)
+[API GENERAL](./api/)
 
 ## More Detailed Modular Device Information
 
