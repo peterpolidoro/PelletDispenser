@@ -20,7 +20,7 @@ const modular_server::FirmwareInfo firmware_info =
   {
     .name_ptr=&firmware_name,
     .version_major=1,
-    .version_minor=0,
+    .version_minor=1,
     .version_patch=0,
   };
 
@@ -32,6 +32,10 @@ CONSTANT_STRING(state_move_to_base_start_string,"MOVE_TO_BASE_START");
 CONSTANT_STRING(state_moving_to_base_start_string,"MOVING_TO_BASE_START");
 CONSTANT_STRING(state_move_to_deliver_string,"MOVE_TO_DELIVER");
 CONSTANT_STRING(state_moving_to_deliver_string,"MOVING_TO_DELIVER");
+CONSTANT_STRING(state_move_to_clean_string,"MOVE_TO_CLEAN");
+CONSTANT_STRING(state_moving_to_clean_string,"MOVING_TO_CLEAN");
+CONSTANT_STRING(state_wait_at_clean_string,"WAIT_AT_CLEAN");
+CONSTANT_STRING(state_waiting_at_clean_string,"WAITING_AT_CLEAN");
 CONSTANT_STRING(state_buzz_string,"BUZZ");
 CONSTANT_STRING(state_buzzing_string,"BUZZING");
 CONSTANT_STRING(state_wait_to_play_tone_string,"WAIT_TO_PLAY_TONE");
@@ -96,6 +100,13 @@ CONSTANT_STRING(deliver_positions_property_name,"deliverPositions");
 
 CONSTANT_STRING(dispense_position_property_name,"dispensePosition");
 const double dispense_position_default = -5;
+
+CONSTANT_STRING(clean_positions_property_name,"cleanPositions");
+
+CONSTANT_STRING(clean_duration_property_name,"cleanDuration");
+const long clean_duration_min = 1;
+const long clean_duration_max = 10;
+const long clean_duration_default = 3;
 
 CONSTANT_STRING(buzz_period_property_name,"buzzPeriod");
 const long buzz_period_min = 100;

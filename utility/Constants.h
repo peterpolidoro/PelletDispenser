@@ -22,7 +22,7 @@ namespace pellet_dispenser
 namespace constants
 {
 //MAX values must be >= 1, >= created/copied count, < RAM limit
-enum{PROPERTY_COUNT_MAX=12};
+enum{PROPERTY_COUNT_MAX=15};
 enum{PARAMETER_COUNT_MAX=1};
 enum{FUNCTION_COUNT_MAX=2};
 enum{CALLBACK_COUNT_MAX=2};
@@ -49,6 +49,10 @@ extern ConstantString state_move_to_base_start_string;
 extern ConstantString state_moving_to_base_start_string;
 extern ConstantString state_move_to_deliver_string;
 extern ConstantString state_moving_to_deliver_string;
+extern ConstantString state_move_to_clean_string;
+extern ConstantString state_moving_to_clean_string;
+extern ConstantString state_wait_at_clean_string;
+extern ConstantString state_waiting_at_clean_string;
 extern ConstantString state_buzz_string;
 extern ConstantString state_buzzing_string;
 extern ConstantString state_wait_to_play_tone_string;
@@ -124,6 +128,14 @@ extern const double deliver_positions_default[step_dir_controller::constants::CH
 
 extern ConstantString dispense_position_property_name;
 extern const double dispense_position_default;
+
+extern ConstantString clean_positions_property_name;
+extern const double clean_positions_default[step_dir_controller::constants::CHANNEL_COUNT];
+
+extern ConstantString clean_duration_property_name;
+extern const long clean_duration_min;
+extern const long clean_duration_max;
+extern const long clean_duration_default;
 
 extern ConstantString buzz_period_property_name;
 extern const long buzz_period_min;

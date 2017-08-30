@@ -88,12 +88,18 @@ void PelletDispenser::setup()
 
   modular_server_.createProperty(constants::dispense_position_property_name,constants::dispense_position_default);
 
+  modular_server_.createProperty(constants::clean_positions_property_name,constants::clean_positions_default);
+
+  modular_server::Property & clean_duration_property = modular_server_.createProperty(constants::clean_duration_property_name,constants::clean_duration_default);
+  clean_duration_property.setUnits(constants::seconds_units);
+  clean_duration_property.setRange(constants::clean_duration_min,constants::clean_duration_max);
+
   modular_server::Property & buzz_period_property = modular_server_.createProperty(constants::buzz_period_property_name,constants::buzz_period_default);
-  buzz_period_property.setUnits(audio_controller::constants::ms_units);
+  buzz_period_property.setUnits(constants::ms_units);
   buzz_period_property.setRange(constants::buzz_period_min,constants::buzz_period_max);
 
   modular_server::Property & buzz_on_duration_property = modular_server_.createProperty(constants::buzz_on_duration_property_name,constants::buzz_on_duration_default);
-  buzz_on_duration_property.setUnits(audio_controller::constants::ms_units);
+  buzz_on_duration_property.setUnits(constants::ms_units);
   buzz_on_duration_property.setRange(constants::buzz_on_duration_min,constants::buzz_on_duration_max);
 
   modular_server::Property & buzz_count_property = modular_server_.createProperty(constants::buzz_count_property_name,constants::buzz_count_default);
@@ -129,6 +135,7 @@ void PelletDispenser::setup()
   // Functions
   modular_server::Function & set_client_property_values_function = modular_server_.createFunction(constants::set_client_property_values_function_name);
   set_client_property_values_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&PelletDispenser::setClientPropertyValuesHandler));
+  set_client_property_values_function.setResultTypeObject();
 
   modular_server::Function & get_assay_status_function = modular_server_.createFunction(constants::get_assay_status_function_name);
   get_assay_status_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&PelletDispenser::getAssayStatusHandler));
@@ -245,6 +252,26 @@ void PelletDispenser::update()
   else if (state_ptr == &constants::state_waiting_to_return_string)
   {
   }
+  else if (state_ptr == &constants::state_move_to_clean_string)
+  {
+    assay_status_.state_ptr = &constants::state_moving_to_clean_string;
+    moveStageSoftlyToClean();
+  }
+  else if (state_ptr == &constants::state_moving_to_clean_string)
+  {
+    if (stageAtTargetPositions())
+    {
+      assay_status_.state_ptr = &constants::state_wait_at_clean_string;
+    }
+  }
+  else if (state_ptr == &constants::state_wait_at_clean_string)
+  {
+    assay_status_.state_ptr = &constants::state_waiting_at_clean_string;
+    waitAtClean();
+  }
+  else if (state_ptr == &constants::state_waiting_at_clean_string)
+  {
+  }
   else if (state_ptr == &constants::state_move_to_base_stop_string)
   {
     assay_status_.state_ptr = &constants::state_moving_to_base_stop_string;
@@ -294,6 +321,15 @@ StageController::PositionsArray PelletDispenser::getDispensePositions()
   dispense_positions_array[constants::DISPENSE_CHANNEL] = dispense_position;
 
   return dispense_positions_array;
+}
+
+StageController::PositionsArray PelletDispenser::getCleanPositions()
+{
+  double clean_positions[step_dir_controller::constants::CHANNEL_COUNT];
+  modular_server_.property(constants::clean_positions_property_name).getValue(clean_positions);
+
+  StageController::PositionsArray clean_positions_array(clean_positions);
+  return clean_positions_array;
 }
 
 long PelletDispenser::getBuzzPeriod()
@@ -365,6 +401,14 @@ double PelletDispenser::getReturnDelay()
   return return_delay*constants::milliseconds_per_minute;
 }
 
+long PelletDispenser::getCleanDuration()
+{
+  long clean_duration;
+  modular_server_.property(constants::clean_duration_property_name).getValue(clean_duration);
+
+  return clean_duration*constants::milliseconds_per_second;
+}
+
 void PelletDispenser::moveStageSoftlyToBase()
 {
   StageController::PositionsArray base_positions = getBasePositions();
@@ -381,6 +425,12 @@ void PelletDispenser::moveStageSoftlyToDispense()
 {
   StageController::PositionsArray dispense_positions = getDispensePositions();
   moveStageSoftlyTo(dispense_positions);
+}
+
+void PelletDispenser::moveStageSoftlyToClean()
+{
+  StageController::PositionsArray clean_positions = getCleanPositions();
+  moveStageSoftlyTo(clean_positions);
 }
 
 void PelletDispenser::buzz()
@@ -448,8 +498,21 @@ void PelletDispenser::setMoveToDispenseState()
 void PelletDispenser::waitToReturn()
 {
   double return_delay = getReturnDelay();
-  EventId event_id = event_controller_.addEventUsingDelay(makeFunctor((Functor1<int> *)0,*this,&PelletDispenser::moveToBaseHandler),
+  EventId event_id = event_controller_.addEventUsingDelay(makeFunctor((Functor1<int> *)0,*this,&PelletDispenser::moveToCleanHandler),
                                                           return_delay);
+  event_controller_.enable(event_id);
+}
+
+void PelletDispenser::setMoveToCleanState()
+{
+  assay_status_.state_ptr = &constants::state_move_to_clean_string;
+}
+
+void PelletDispenser::waitAtClean()
+{
+  long clean_duration = getCleanDuration();
+  EventId event_id = event_controller_.addEventUsingDelay(makeFunctor((Functor1<int> *)0,*this,&PelletDispenser::moveToBaseStopHandler),
+                                                          clean_duration);
   event_controller_.enable(event_id);
 }
 
@@ -476,7 +539,7 @@ void PelletDispenser::abort()
 
   if (stageHomed())
   {
-    setMoveToBaseStopState();
+    setMoveToCleanState();
   }
   else
   {
@@ -503,15 +566,45 @@ void PelletDispenser::abort()
 
 void PelletDispenser::setClientPropertyValuesHandler()
 {
-  h_bridge_controller_ptr_->call(modular_server::constants::set_properties_to_defaults_function_name);
+  modular_server_.response().writeResultKey();
 
-  optical_switch_interface_ptr_->call(modular_server::constants::set_properties_to_defaults_function_name);
+  modular_server_.response().beginObject();
+
+  Array<ConstantString *, 1> all_array;
+  all_array.push_back(&modular_server::constants::all_constant_string);
+  bool call_was_successful;
+
+  modular_server_.response().writeKey(h_bridge_controller::constants::device_name);
+  modular_server_.response().beginArray();
+  h_bridge_controller_ptr_->call(modular_server::constants::set_properties_to_defaults_function_name,
+                                 all_array);
+  call_was_successful = h_bridge_controller_ptr_->callWasSuccessful();
+  modular_server_.response().write(call_was_successful);
+  modular_server_.response().endArray();
+
+  modular_server_.response().writeKey(optical_switch_interface::constants::device_name);
+  modular_server_.response().beginArray();
+  optical_switch_interface_ptr_->call(modular_server::constants::set_properties_to_defaults_function_name,
+                                      all_array);
+  call_was_successful = optical_switch_interface_ptr_->callWasSuccessful();
+  modular_server_.response().write(call_was_successful);
   Array<bool,optical_switch_interface::constants::OUTPUT_COUNT> inverted(constants::inverted);
   optical_switch_interface_ptr_->call(optical_switch_interface::constants::inverted_property_name,
                                       modular_server::property::set_value_function_name,
                                       inverted);
+  call_was_successful = optical_switch_interface_ptr_->callWasSuccessful();
+  modular_server_.response().write(call_was_successful);
+  modular_server_.response().endArray();
 
-  audio_controller_ptr_->call(modular_server::constants::set_properties_to_defaults_function_name);
+  modular_server_.response().writeKey(audio_controller::constants::device_name);
+  modular_server_.response().beginArray();
+  audio_controller_ptr_->call(modular_server::constants::set_properties_to_defaults_function_name,
+                              all_array);
+  call_was_successful = audio_controller_ptr_->callWasSuccessful();
+  modular_server_.response().write(call_was_successful);
+  modular_server_.response().endArray();
+
+  modular_server_.response().endObject();
 }
 
 void PelletDispenser::getAssayStatusHandler()
@@ -543,7 +636,12 @@ void PelletDispenser::waitToPlayToneHandler(int arg)
   setWaitToPlayToneState();
 }
 
-void PelletDispenser::moveToBaseHandler(int arg)
+void PelletDispenser::moveToCleanHandler(int arg)
+{
+  setMoveToCleanState();
+}
+
+void PelletDispenser::moveToBaseStopHandler(int arg)
 {
   setMoveToBaseStopState();
 }

@@ -52,6 +52,7 @@ public:
   StageController::PositionsArray getBasePositions();
   StageController::PositionsArray getDeliverPositions();
   StageController::PositionsArray getDispensePositions();
+  StageController::PositionsArray getCleanPositions();
   long getBuzzPeriod();
   long getBuzzOnDuration();
   long getBuzzCount();
@@ -60,10 +61,12 @@ public:
   long getToneDuration();
   long getToneVolume();
   double getReturnDelay();
+  long getCleanDuration();
 
   void moveStageSoftlyToBase();
   void moveStageSoftlyToDeliver();
   void moveStageSoftlyToDispense();
+  void moveStageSoftlyToClean();
   void buzz();
   void setWaitToPlayToneState();
   void waitToPlayTone();
@@ -71,6 +74,8 @@ public:
   void playTone();
   void setMoveToDispenseState();
   void waitToReturn();
+  void setMoveToCleanState();
+  void waitAtClean();
   void setMoveToBaseStopState();
 
   void deliver();
@@ -95,7 +100,8 @@ private:
   void playToneHandler(int arg);
   void moveToDispenseHandler(int arg);
   void waitToPlayToneHandler(int arg);
-  void moveToBaseHandler(int arg);
+  void moveToCleanHandler(int arg);
+  void moveToBaseStopHandler(int arg);
   void deliverHandler(modular_server::Interrupt * interrupt_ptr);
   void abortHandler(modular_server::Interrupt * interrupt_ptr);
 

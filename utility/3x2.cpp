@@ -108,6 +108,13 @@ const double deliver_positions_default[step_dir_controller::constants::CHANNEL_C
     20,
   };
 
+const double clean_positions_default[step_dir_controller::constants::CHANNEL_COUNT] =
+  {
+    -8,
+    60,
+    10,
+  };
+
 const bool inverted[optical_switch_interface::constants::OUTPUT_COUNT] =
   {
     true,
