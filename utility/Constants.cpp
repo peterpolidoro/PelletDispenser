@@ -154,6 +154,10 @@ const double return_delay_default = 0.1;
 // Functions
 CONSTANT_STRING(set_client_property_values_function_name,"setClientPropertyValues");
 CONSTANT_STRING(get_assay_status_function_name,"getAssayStatus");
+CONSTANT_STRING(move_stage_to_base_position_function_name,"moveStageToBasePosition");
+CONSTANT_STRING(move_stage_to_deliver_position_function_name,"moveStageToDeliverPosition");
+CONSTANT_STRING(move_stage_to_dispense_position_function_name,"moveStageToDispensePosition");
+CONSTANT_STRING(move_stage_to_clean_position_function_name,"moveStageToCleanPosition");
 
 // Callbacks
 CONSTANT_STRING(deliver_callback_name,"deliver");

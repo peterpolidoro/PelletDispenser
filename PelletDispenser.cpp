@@ -141,6 +141,18 @@ void PelletDispenser::setup()
   get_assay_status_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&PelletDispenser::getAssayStatusHandler));
   get_assay_status_function.setResultTypeObject();
 
+  modular_server::Function & move_stage_to_base_position_function = modular_server_.createFunction(constants::move_stage_to_base_position_function_name);
+  move_stage_to_base_position_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&PelletDispenser::moveStageToBasePositionHandler));
+
+  modular_server::Function & move_stage_to_deliver_position_function = modular_server_.createFunction(constants::move_stage_to_deliver_position_function_name);
+  move_stage_to_deliver_position_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&PelletDispenser::moveStageToDeliverPositionHandler));
+
+  modular_server::Function & move_stage_to_dispense_position_function = modular_server_.createFunction(constants::move_stage_to_dispense_position_function_name);
+  move_stage_to_dispense_position_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&PelletDispenser::moveStageToDispensePositionHandler));
+
+  modular_server::Function & move_stage_to_clean_position_function = modular_server_.createFunction(constants::move_stage_to_clean_position_function_name);
+  move_stage_to_clean_position_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&PelletDispenser::moveStageToCleanPositionHandler));
+
   // Callbacks
   modular_server::Callback & deliver_callback = modular_server_.createCallback(constants::deliver_callback_name);
   deliver_callback.attachFunctor(makeFunctor((Functor1<modular_server::Interrupt *> *)0,*this,&PelletDispenser::deliverHandler));
@@ -187,7 +199,7 @@ void PelletDispenser::update()
   else if (state_ptr == &constants::state_move_to_base_start_string)
   {
     assay_status_.state_ptr = &constants::state_moving_to_base_start_string;
-    moveStageSoftlyToBase();
+    moveStageToBasePosition();
   }
   else if (state_ptr == &constants::state_moving_to_base_start_string)
   {
@@ -199,7 +211,7 @@ void PelletDispenser::update()
   else if (state_ptr == &constants::state_move_to_deliver_string)
   {
     assay_status_.state_ptr = &constants::state_moving_to_deliver_string;
-    moveStageSoftlyToDeliver();
+    moveStageToDeliverPosition();
   }
   else if (state_ptr == &constants::state_moving_to_deliver_string)
   {
@@ -235,7 +247,7 @@ void PelletDispenser::update()
   else if (state_ptr == &constants::state_move_to_dispense_string)
   {
     assay_status_.state_ptr = &constants::state_moving_to_dispense_string;
-    moveStageSoftlyToDispense();
+    moveStageToDispensePosition();
   }
   else if (state_ptr == &constants::state_moving_to_dispense_string)
   {
@@ -255,7 +267,7 @@ void PelletDispenser::update()
   else if (state_ptr == &constants::state_move_to_clean_string)
   {
     assay_status_.state_ptr = &constants::state_moving_to_clean_string;
-    moveStageSoftlyToClean();
+    moveStageToCleanPosition();
   }
   else if (state_ptr == &constants::state_moving_to_clean_string)
   {
@@ -275,7 +287,7 @@ void PelletDispenser::update()
   else if (state_ptr == &constants::state_move_to_base_stop_string)
   {
     assay_status_.state_ptr = &constants::state_moving_to_base_stop_string;
-    moveStageSoftlyToBase();
+    moveStageToBasePosition();
   }
   else if (state_ptr == &constants::state_moving_to_base_stop_string)
   {
@@ -409,25 +421,25 @@ long PelletDispenser::getCleanDuration()
   return clean_duration*constants::milliseconds_per_second;
 }
 
-void PelletDispenser::moveStageSoftlyToBase()
+void PelletDispenser::moveStageToBasePosition()
 {
   StageController::PositionArray base_position = getBasePosition();
   moveStageSoftlyTo(base_position);
 }
 
-void PelletDispenser::moveStageSoftlyToDeliver()
+void PelletDispenser::moveStageToDeliverPosition()
 {
   StageController::PositionArray deliver_position = getDeliverPosition();
   moveStageSoftlyTo(deliver_position);
 }
 
-void PelletDispenser::moveStageSoftlyToDispense()
+void PelletDispenser::moveStageToDispensePosition()
 {
   StageController::PositionArray dispense_position = getDispensePosition();
   moveStageSoftlyTo(dispense_position);
 }
 
-void PelletDispenser::moveStageSoftlyToClean()
+void PelletDispenser::moveStageToCleanPosition()
 {
   StageController::PositionArray clean_position = getCleanPosition();
   moveStageSoftlyTo(clean_position);
@@ -619,6 +631,42 @@ void PelletDispenser::getAssayStatusHandler()
 
   modular_server_.response().endObject();
 
+}
+
+void PelletDispenser::moveStageToBasePositionHandler()
+{
+  if ((assay_status_.state_ptr == &constants::state_assay_not_started_string) ||
+      (assay_status_.state_ptr == &constants::state_assay_finished_string))
+  {
+    moveStageToBasePosition();
+  }
+}
+
+void PelletDispenser::moveStageToDeliverPositionHandler()
+{
+  if ((assay_status_.state_ptr == &constants::state_assay_not_started_string) ||
+      (assay_status_.state_ptr == &constants::state_assay_finished_string))
+  {
+    moveStageToDeliverPosition();
+  }
+}
+
+void PelletDispenser::moveStageToDispensePositionHandler()
+{
+  if ((assay_status_.state_ptr == &constants::state_assay_not_started_string) ||
+      (assay_status_.state_ptr == &constants::state_assay_finished_string))
+  {
+    moveStageToDispensePosition();
+  }
+}
+
+void PelletDispenser::moveStageToCleanPositionHandler()
+{
+  if ((assay_status_.state_ptr == &constants::state_assay_not_started_string) ||
+      (assay_status_.state_ptr == &constants::state_assay_finished_string))
+  {
+    moveStageToCleanPosition();
+  }
 }
 
 void PelletDispenser::playToneHandler(int arg)

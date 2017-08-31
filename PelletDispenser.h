@@ -63,10 +63,10 @@ public:
   double getReturnDelay();
   long getCleanDuration();
 
-  void moveStageSoftlyToBase();
-  void moveStageSoftlyToDeliver();
-  void moveStageSoftlyToDispense();
-  void moveStageSoftlyToClean();
+  void moveStageToBasePosition();
+  void moveStageToDeliverPosition();
+  void moveStageToDispensePosition();
+  void moveStageToCleanPosition();
   void buzz();
   void setWaitToPlayToneState();
   void waitToPlayTone();
@@ -97,6 +97,10 @@ private:
   // Handlers
   void setClientPropertyValuesHandler();
   void getAssayStatusHandler();
+  void moveStageToBasePositionHandler();
+  void moveStageToDeliverPositionHandler();
+  void moveStageToDispensePositionHandler();
+  void moveStageToCleanPositionHandler();
   void playToneHandler(int arg);
   void moveToDispenseHandler(int arg);
   void waitToPlayToneHandler(int arg);

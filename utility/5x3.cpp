@@ -109,7 +109,7 @@ const long deliver_position_default[step_dir_controller::constants::CHANNEL_COUN
 
 const long clean_position_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
-   -8,
+   -12,
    60,
    10,
   };

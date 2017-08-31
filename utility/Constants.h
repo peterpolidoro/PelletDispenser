@@ -24,7 +24,7 @@ namespace constants
 //MAX values must be >= 1, >= created/copied count, < RAM limit
 enum{PROPERTY_COUNT_MAX=15};
 enum{PARAMETER_COUNT_MAX=1};
-enum{FUNCTION_COUNT_MAX=2};
+enum{FUNCTION_COUNT_MAX=6};
 enum{CALLBACK_COUNT_MAX=2};
 
 enum{EVENT_COUNT_MAX=32};
@@ -183,6 +183,10 @@ extern const double return_delay_default;
 // Functions
 extern ConstantString set_client_property_values_function_name;
 extern ConstantString get_assay_status_function_name;
+extern ConstantString move_stage_to_base_position_function_name;
+extern ConstantString move_stage_to_deliver_position_function_name;
+extern ConstantString move_stage_to_dispense_position_function_name;
+extern ConstantString move_stage_to_clean_position_function_name;
 
 // Callbacks
 extern ConstantString deliver_callback_name;
