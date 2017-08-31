@@ -49,10 +49,10 @@ public:
   virtual void update();
 
   pellet_dispenser::constants::AssayStatus getAssayStatus();
-  StageController::PositionsArray getBasePositions();
-  StageController::PositionsArray getDeliverPositions();
-  StageController::PositionsArray getDispensePositions();
-  StageController::PositionsArray getCleanPositions();
+  StageController::PositionArray getBasePosition();
+  StageController::PositionArray getDeliverPosition();
+  StageController::PositionArray getDispensePosition();
+  StageController::PositionArray getCleanPosition();
   long getBuzzPeriod();
   long getBuzzOnDuration();
   long getBuzzCount();

@@ -91,15 +91,15 @@ extern ConstantString minutes_units;
 
 // Properties
 // Property values must be long, double, bool, long[], double[], bool[], char[], ConstantString *, (ConstantString *)[]
-extern const double steps_per_position_units_default[step_dir_controller::constants::CHANNEL_COUNT];
+extern const long steps_per_position_units_default[step_dir_controller::constants::CHANNEL_COUNT];
 
-extern const double velocity_max_default[step_dir_controller::constants::CHANNEL_COUNT];
+extern const long velocity_max_default[step_dir_controller::constants::CHANNEL_COUNT];
 
-extern const double velocity_min_default[step_dir_controller::constants::CHANNEL_COUNT];
+extern const long velocity_min_default[step_dir_controller::constants::CHANNEL_COUNT];
 
-extern const double acceleration_max_default[step_dir_controller::constants::CHANNEL_COUNT];
+extern const long acceleration_max_default[step_dir_controller::constants::CHANNEL_COUNT];
 
-extern const double home_velocity_default[step_dir_controller::constants::CHANNEL_COUNT];
+extern const long home_velocity_default[step_dir_controller::constants::CHANNEL_COUNT];
 
 extern const long run_current_default[stepper_controller::constants::DRIVER_COUNT];
 extern const long run_current_element_default;
@@ -114,23 +114,23 @@ extern const long stage_channel_count_min;
 extern const long stage_channel_count_max;
 extern const long stage_channel_count_default;
 
-extern const double stage_positions_min_default[step_dir_controller::constants::CHANNEL_COUNT];
+extern const long stage_position_min_default[step_dir_controller::constants::CHANNEL_COUNT];
 
-extern const double stage_positions_max_default[step_dir_controller::constants::CHANNEL_COUNT];
+extern const long stage_position_max_default[step_dir_controller::constants::CHANNEL_COUNT];
 
 extern const bool inverted[optical_switch_interface::constants::OUTPUT_COUNT];
 
-extern ConstantString base_positions_property_name;
-extern const double base_positions_default[step_dir_controller::constants::CHANNEL_COUNT];
+extern ConstantString base_position_property_name;
+extern const long base_position_default[step_dir_controller::constants::CHANNEL_COUNT];
 
-extern ConstantString deliver_positions_property_name;
-extern const double deliver_positions_default[step_dir_controller::constants::CHANNEL_COUNT];
+extern ConstantString deliver_position_property_name;
+extern const long deliver_position_default[step_dir_controller::constants::CHANNEL_COUNT];
 
-extern ConstantString dispense_position_property_name;
-extern const double dispense_position_default;
+extern ConstantString dispense_channel_position_property_name;
+extern const long dispense_channel_position_default;
 
-extern ConstantString clean_positions_property_name;
-extern const double clean_positions_default[step_dir_controller::constants::CHANNEL_COUNT];
+extern ConstantString clean_position_property_name;
+extern const long clean_position_default[step_dir_controller::constants::CHANNEL_COUNT];
 
 extern ConstantString clean_duration_property_name;
 extern const long clean_duration_min;

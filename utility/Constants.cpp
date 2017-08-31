@@ -18,10 +18,10 @@ CONSTANT_STRING(firmware_name,"PelletDispenser");
 // Use semantic versioning http://semver.org/
 const modular_server::FirmwareInfo firmware_info =
   {
-    .name_ptr=&firmware_name,
-    .version_major=1,
-    .version_minor=1,
-    .version_patch=0,
+   .name_ptr=&firmware_name,
+   .version_major=1,
+   .version_minor=1,
+   .version_patch=0,
   };
 
 CONSTANT_STRING(state_string,"state");
@@ -57,25 +57,25 @@ const long milliseconds_per_minute = milliseconds_per_second*seconds_per_minute;
 // Clients
 const size_t optical_switch_interface_address[1] =
   {
-    3,
+   3,
   };
 
 const size_t h_bridge_controller_address[2] =
   {
-    3,
-    3,
+   3,
+   3,
   };
 
 const size_t audio_controller_address[3] =
   {
-    3,
-    3,
-    3,
+   3,
+   3,
+   3,
   };
 
 const size_t buzz_channels[BUZZ_CHANNEL_COUNT] =
   {
-    0,
+   0,
   };
 
 // Interrupts
@@ -94,14 +94,14 @@ const long hold_current_element_default = 10;
 
 const long hold_delay_element_default = 50;
 
-CONSTANT_STRING(base_positions_property_name,"basePositions");
+CONSTANT_STRING(base_position_property_name,"basePosition");
 
-CONSTANT_STRING(deliver_positions_property_name,"deliverPositions");
+CONSTANT_STRING(deliver_position_property_name,"deliverPosition");
 
-CONSTANT_STRING(dispense_position_property_name,"dispensePosition");
-const double dispense_position_default = -5;
+CONSTANT_STRING(dispense_channel_position_property_name,"dispenseChannelPosition");
+const long dispense_channel_position_default = -5;
 
-CONSTANT_STRING(clean_positions_property_name,"cleanPositions");
+CONSTANT_STRING(clean_position_property_name,"cleanPosition");
 
 CONSTANT_STRING(clean_duration_property_name,"cleanDuration");
 const long clean_duration_min = 1;
