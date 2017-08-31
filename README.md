@@ -45,7 +45,42 @@ License:
 ## API NAMES
 
 ```json
-
+{
+  "id":"getApi",
+  "result":{
+    "firmware":["PelletDispenser"],
+    "verbosity":"NAMES",
+    "functions":[
+      "setClientPropertyValues",
+      "getAssayStatus",
+      "moveStageToBasePosition",
+      "moveStageToDeliverPosition",
+      "moveStageToDispensePosition",
+      "moveStageToCleanPosition"
+    ],
+    "properties":[
+      "basePosition",
+      "deliverPosition",
+      "dispenseChannelPosition",
+      "cleanPosition",
+      "cleanDuration",
+      "buzzPeriod",
+      "buzzOnDuration",
+      "buzzCount",
+      "toneFrequency",
+      "toneDuration",
+      "toneVolume",
+      "toneDelayMin",
+      "toneDelayMax",
+      "returnDelayMin",
+      "returnDelayMax"
+    ],
+    "callbacks":[
+      "deliver",
+      "abort"
+    ]
+  }
+}
 ```
 
 ## API GENERAL

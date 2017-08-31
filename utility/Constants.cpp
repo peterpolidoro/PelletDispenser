@@ -19,8 +19,8 @@ CONSTANT_STRING(firmware_name,"PelletDispenser");
 const modular_server::FirmwareInfo firmware_info =
   {
    .name_ptr=&firmware_name,
-   .version_major=1,
-   .version_minor=1,
+   .version_major=2,
+   .version_minor=0,
    .version_patch=0,
   };
 
@@ -144,10 +144,13 @@ const long tone_duration_default = 1;
 CONSTANT_STRING(tone_volume_property_name,"toneVolume");
 const long tone_volume_default = 25;
 
-CONSTANT_STRING(return_delay_property_name,"returnDelay");
+CONSTANT_STRING(return_delay_min_property_name,"returnDelayMin");
 const double return_delay_min = 0.1;
 const double return_delay_max = 15.0;
-const double return_delay_default = 0.1;
+const double return_delay_min_default = 0.1;
+
+CONSTANT_STRING(return_delay_max_property_name,"returnDelayMax");
+const double return_delay_max_default = 0.3;
 
 // Parameters
 

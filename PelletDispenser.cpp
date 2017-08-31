@@ -124,9 +124,13 @@ void PelletDispenser::setup()
   tone_delay_max_property.setUnits(constants::seconds_units);
   tone_delay_max_property.setRange(constants::tone_delay_min,constants::tone_delay_max);
 
-  modular_server::Property & return_delay_property = modular_server_.createProperty(constants::return_delay_property_name,constants::return_delay_default);
-  return_delay_property.setUnits(constants::minutes_units);
-  return_delay_property.setRange(constants::return_delay_min,constants::return_delay_max);
+  modular_server::Property & return_delay_min_property = modular_server_.createProperty(constants::return_delay_min_property_name,constants::return_delay_min_default);
+  return_delay_min_property.setUnits(constants::minutes_units);
+  return_delay_min_property.setRange(constants::return_delay_min,constants::return_delay_max);
+
+  modular_server::Property & return_delay_max_property = modular_server_.createProperty(constants::return_delay_max_property_name,constants::return_delay_max_default);
+  return_delay_max_property.setUnits(constants::minutes_units);
+  return_delay_max_property.setRange(constants::return_delay_min,constants::return_delay_max);
 
   // Parameters
   modular_server::Parameter & stage_position_parameter = modular_server_.parameter(stage_controller::constants::stage_position_parameter_name);
@@ -407,10 +411,16 @@ long PelletDispenser::getToneVolume()
 
 double PelletDispenser::getReturnDelay()
 {
-  double return_delay;
-  modular_server_.property(constants::return_delay_property_name).getValue(return_delay);
+  double return_delay_min;
+  modular_server_.property(constants::return_delay_min_property_name).getValue(return_delay_min);
 
-  return return_delay*constants::milliseconds_per_minute;
+  double return_delay_max;
+  modular_server_.property(constants::return_delay_max_property_name).getValue(return_delay_max);
+
+  long return_delay_min_ms = return_delay_min*constants::milliseconds_per_minute;
+  long return_delay_max_ms = return_delay_max*constants::milliseconds_per_minute;
+  long return_delay = random(return_delay_min_ms,return_delay_max_ms);
+  return return_delay;
 }
 
 long PelletDispenser::getCleanDuration()

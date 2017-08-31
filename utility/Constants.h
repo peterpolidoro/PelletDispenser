@@ -173,10 +173,13 @@ extern const long tone_duration_default;
 extern ConstantString tone_volume_property_name;
 extern const long tone_volume_default;
 
-extern ConstantString return_delay_property_name;
+extern ConstantString return_delay_min_property_name;
 extern const double return_delay_min;
 extern const double return_delay_max;
-extern const double return_delay_default;
+extern const double return_delay_min_default;
+
+extern ConstantString return_delay_max_property_name;
+extern const double return_delay_max_default;
 
 // Parameters
 

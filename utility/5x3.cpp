@@ -21,35 +21,35 @@ namespace constants
 // Properties
 const long steps_per_position_units_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
-   3297, // microsteps/pellet = (12.88steps/pellet)*(256microsteps/step)
+   824, // microsteps/pellet/4 = (12.88steps/pellet)*(256microsteps/step)/4
    8063, // microsteps/mm = (200steps/rev)*(256microsteps/step)/((0.250in/rev)*(25.4mm/in))
    8063, // microsteps/mm = (200steps/rev)*(256microsteps/step)/((0.250in/rev)*(25.4mm/in))
   };
 
 const long velocity_max_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
-   20,
+   80,
    40,
    40,
   };
 
 const long velocity_min_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
-   1,
+   4,
    2,
    2,
   };
 
 const long acceleration_max_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
-   50,
+   200,
    100,
    100,
   };
 
 const long home_velocity_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
-   5,
+   20,
    -20,
    -20,
   };
@@ -81,7 +81,7 @@ const long stage_channel_count_default = step_dir_controller::constants::CHANNEL
 
 const long stage_position_min_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
-   -19,
+   -76,
    0,
    0,
   };
@@ -95,21 +95,21 @@ const long stage_position_max_default[step_dir_controller::constants::CHANNEL_CO
 
 const long base_position_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
-   -18,
+   -74,
    70,
    20,
   };
 
 const long deliver_position_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
-   -18,
+   -74,
    75,
    20,
   };
 
 const long clean_position_default[step_dir_controller::constants::CHANNEL_COUNT] =
   {
-   -12,
+   -48,
    60,
    10,
   };
