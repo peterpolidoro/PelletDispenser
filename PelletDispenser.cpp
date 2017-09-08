@@ -71,11 +71,6 @@ void PelletDispenser::setup()
   modular_server::Property & hold_delay_property = modular_server_.property(stepper_controller::constants::hold_delay_property_name);
   hold_delay_property.setDefaultValue(constants::hold_delay_default);
 
-  modular_server::Property & stage_channel_count_property = modular_server_.property(stage_controller::constants::stage_channel_count_property_name);
-  stage_channel_count_property.setDefaultValue(constants::stage_channel_count_default);
-  stage_channel_count_property.setRange(constants::stage_channel_count_min,constants::stage_channel_count_max);
-  stage_channel_count_property.setArrayLengthRange(constants::stage_channel_count_min,constants::stage_channel_count_max);
-
   modular_server::Property & stage_position_min_property = modular_server_.property(stage_controller::constants::stage_position_min_property_name);
   stage_position_min_property.setDefaultValue(constants::stage_position_min_default);
 
@@ -309,7 +304,7 @@ constants::AssayStatus PelletDispenser::getAssayStatus()
 
 StageController::PositionArray PelletDispenser::getBasePosition()
 {
-  long base_position[step_dir_controller::constants::CHANNEL_COUNT];
+  long base_position[stepper_controller::constants::CHANNEL_COUNT_MAX];
   modular_server_.property(constants::base_position_property_name).getValue(base_position);
 
   StageController::PositionArray base_position_array(base_position);
@@ -318,7 +313,7 @@ StageController::PositionArray PelletDispenser::getBasePosition()
 
 StageController::PositionArray PelletDispenser::getDeliverPosition()
 {
-  long deliver_position[step_dir_controller::constants::CHANNEL_COUNT];
+  long deliver_position[stepper_controller::constants::CHANNEL_COUNT_MAX];
   modular_server_.property(constants::deliver_position_property_name).getValue(deliver_position);
 
   StageController::PositionArray deliver_position_array(deliver_position);
@@ -327,7 +322,7 @@ StageController::PositionArray PelletDispenser::getDeliverPosition()
 
 StageController::PositionArray PelletDispenser::getDispensePosition()
 {
-  long deliver_position[step_dir_controller::constants::CHANNEL_COUNT];
+  long deliver_position[stepper_controller::constants::CHANNEL_COUNT_MAX];
   modular_server_.property(constants::deliver_position_property_name).getValue(deliver_position);
 
   StageController::PositionArray dispense_position_array(deliver_position);
@@ -341,7 +336,7 @@ StageController::PositionArray PelletDispenser::getDispensePosition()
 
 StageController::PositionArray PelletDispenser::getCleanPosition()
 {
-  long clean_position[step_dir_controller::constants::CHANNEL_COUNT];
+  long clean_position[stepper_controller::constants::CHANNEL_COUNT_MAX];
   modular_server_.property(constants::clean_position_property_name).getValue(clean_position);
 
   StageController::PositionArray clean_position_array(clean_position);
