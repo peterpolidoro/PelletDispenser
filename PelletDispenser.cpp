@@ -587,14 +587,12 @@ void PelletDispenser::setClientPropertyValuesHandler()
 
   modular_server_.response().beginObject();
 
-  Array<ConstantString *, 1> all_array;
-  all_array.push_back(&modular_server::constants::all_constant_string);
   bool call_was_successful;
 
   modular_server_.response().writeKey(h_bridge_controller::constants::device_name);
   modular_server_.response().beginArray();
   h_bridge_controller_ptr_->call(modular_server::constants::set_properties_to_defaults_function_name,
-                                 all_array);
+                                 modular_server::constants::all_array);
   call_was_successful = h_bridge_controller_ptr_->callWasSuccessful();
   modular_server_.response().write(call_was_successful);
   modular_server_.response().endArray();
@@ -602,7 +600,7 @@ void PelletDispenser::setClientPropertyValuesHandler()
   modular_server_.response().writeKey(optical_switch_interface::constants::device_name);
   modular_server_.response().beginArray();
   optical_switch_interface_ptr_->call(modular_server::constants::set_properties_to_defaults_function_name,
-                                      all_array);
+                                      modular_server::constants::all_array);
   call_was_successful = optical_switch_interface_ptr_->callWasSuccessful();
   modular_server_.response().write(call_was_successful);
   Array<bool,optical_switch_interface::constants::OUTPUT_COUNT> inverted(constants::inverted);
@@ -616,7 +614,7 @@ void PelletDispenser::setClientPropertyValuesHandler()
   modular_server_.response().writeKey(audio_controller::constants::device_name);
   modular_server_.response().beginArray();
   audio_controller_ptr_->call(modular_server::constants::set_properties_to_defaults_function_name,
-                              all_array);
+                              modular_server::constants::all_array);
   call_was_successful = audio_controller_ptr_->callWasSuccessful();
   modular_server_.response().write(call_was_successful);
   modular_server_.response().endArray();
