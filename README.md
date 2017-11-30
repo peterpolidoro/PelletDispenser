@@ -46,11 +46,13 @@ License:
 
 ```json
 {
-  "id":"getApi",
-  "result":{
-    "firmware":["PelletDispenser"],
-    "verbosity":"NAMES",
-    "functions":[
+  "id": "getApi",
+  "result": {
+    "firmware": [
+      "PelletDispenser"
+    ],
+    "verbosity": "NAMES",
+    "functions": [
       "setClientPropertyValues",
       "getAssayStatus",
       "moveStageToBasePosition",
@@ -58,7 +60,7 @@ License:
       "moveStageToDispensePosition",
       "moveStageToCleanPosition"
     ],
-    "properties":[
+    "properties": [
       "basePosition",
       "deliverPosition",
       "dispenseChannelPosition",
@@ -75,7 +77,7 @@ License:
       "returnDelayMin",
       "returnDelayMax"
     ],
-    "callbacks":[
+    "callbacks": [
       "deliver",
       "abort"
     ]
