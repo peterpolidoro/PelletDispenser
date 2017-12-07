@@ -19,6 +19,9 @@ void PelletDispenser::setup()
   // Parent Setup
   StageController::setup();
 
+  // Reset Watchdog
+  resetWatchdog();
+
   // Event Controller Setup
   event_controller_.setup();
 
