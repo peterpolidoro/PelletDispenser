@@ -307,28 +307,24 @@ constants::AssayStatus PelletDispenser::getAssayStatus()
 
 StageController::PositionArray PelletDispenser::getBasePosition()
 {
-  long base_position[stepper_controller::constants::CHANNEL_COUNT_MAX];
-  modular_server_.property(constants::base_position_property_name).getValue(base_position);
+  StageController::PositionArray base_position_array;
+  modular_server_.property(constants::base_position_property_name).getValue(base_position_array);
 
-  StageController::PositionArray base_position_array(base_position);
   return base_position_array;
 }
 
 StageController::PositionArray PelletDispenser::getDeliverPosition()
 {
-  long deliver_position[stepper_controller::constants::CHANNEL_COUNT_MAX];
-  modular_server_.property(constants::deliver_position_property_name).getValue(deliver_position);
+  StageController::PositionArray deliver_position_array;
+  modular_server_.property(constants::deliver_position_property_name).getValue(deliver_position_array);
 
-  StageController::PositionArray deliver_position_array(deliver_position);
   return deliver_position_array;
 }
 
 StageController::PositionArray PelletDispenser::getDispensePosition()
 {
-  long deliver_position[stepper_controller::constants::CHANNEL_COUNT_MAX];
-  modular_server_.property(constants::deliver_position_property_name).getValue(deliver_position);
-
-  StageController::PositionArray dispense_position_array(deliver_position);
+  StageController::PositionArray dispense_position_array;
+  modular_server_.property(constants::deliver_position_property_name).getValue(dispense_position_array);
 
   long dispense_channel_position;
   modular_server_.property(constants::dispense_channel_position_property_name).getValue(dispense_channel_position);
@@ -339,10 +335,9 @@ StageController::PositionArray PelletDispenser::getDispensePosition()
 
 StageController::PositionArray PelletDispenser::getCleanPosition()
 {
-  long clean_position[stepper_controller::constants::CHANNEL_COUNT_MAX];
-  modular_server_.property(constants::clean_position_property_name).getValue(clean_position);
+  StageController::PositionArray clean_position_array;
+  modular_server_.property(constants::clean_position_property_name).getValue(clean_position_array);
 
-  StageController::PositionArray clean_position_array(clean_position);
   return clean_position_array;
 }
 
