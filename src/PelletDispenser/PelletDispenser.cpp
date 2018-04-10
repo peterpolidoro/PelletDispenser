@@ -158,16 +158,16 @@ void PelletDispenser::setup()
   // Callbacks
   modular_server::Callback & deliver_callback = modular_server_.createCallback(constants::deliver_callback_name);
   deliver_callback.attachFunctor(makeFunctor((Functor1<modular_server::Pin *> *)0,*this,&PelletDispenser::deliverHandler));
-  deliver_callback.attachTo(modular_device_base::constants::bnc_b_pin_name,modular_server::pin::mode_falling);
+  deliver_callback.attachTo(modular_device_base::constants::bnc_b_pin_name,modular_server::constants::pin_mode_interrupt_falling);
 #if defined(__MK64FX512__)
-  deliver_callback.attachTo(modular_device_base::constants::btn_b_pin_name,modular_server::pin::mode_falling);
+  deliver_callback.attachTo(modular_device_base::constants::btn_b_pin_name,modular_server::constants::pin_mode_interrupt_falling);
 #endif
 
   modular_server::Callback & abort_callback = modular_server_.createCallback(constants::abort_callback_name);
   abort_callback.attachFunctor(makeFunctor((Functor1<modular_server::Pin *> *)0,*this,&PelletDispenser::abortHandler));
-  abort_callback.attachTo(modular_device_base::constants::bnc_a_pin_name,modular_server::pin::mode_falling);
+  abort_callback.attachTo(modular_device_base::constants::bnc_a_pin_name,modular_server::constants::pin_mode_interrupt_falling);
 #if !defined(__AVR_ATmega2560__)
-  abort_callback.attachTo(modular_device_base::constants::btn_a_pin_name,modular_server::pin::mode_falling);
+  abort_callback.attachTo(modular_device_base::constants::btn_a_pin_name,modular_server::constants::pin_mode_interrupt_falling);
 #endif
 
 }
