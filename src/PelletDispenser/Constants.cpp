@@ -17,12 +17,12 @@ CONSTANT_STRING(device_name,"pellet_dispenser");
 CONSTANT_STRING(firmware_name,"PelletDispenser");
 // Use semantic versioning http://semver.org/
 const modular_server::FirmwareInfo firmware_info =
-  {
-   .name_ptr=&firmware_name,
-   .version_major=2,
-   .version_minor=1,
-   .version_patch=4,
-  };
+{
+  .name_ptr=&firmware_name,
+  .version_major=2,
+  .version_minor=1,
+  .version_patch=4,
+};
 
 CONSTANT_STRING(state_string,"state");
 CONSTANT_STRING(state_assay_not_started_string,"ASSAY_NOT_STARTED");
@@ -56,29 +56,29 @@ const long milliseconds_per_minute = milliseconds_per_second*seconds_per_minute;
 
 // Clients
 const size_t optical_switch_interface_address[1] =
-  {
-   3,
-  };
+{
+  3,
+};
 
 const size_t h_bridge_controller_address[2] =
-  {
-   3,
-   3,
-  };
+{
+  3,
+  3,
+};
 
 const size_t audio_controller_address[3] =
-  {
-   3,
-   3,
-   3,
-  };
+{
+  3,
+  3,
+  3,
+};
 
 const size_t buzz_channels[BUZZ_CHANNEL_COUNT] =
-  {
-   0,
-  };
+{
+  0,
+};
 
-// Interrupts
+// Pins
 
 // Units
 CONSTANT_STRING(mm_units,"mm");

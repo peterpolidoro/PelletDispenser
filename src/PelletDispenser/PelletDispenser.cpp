@@ -40,7 +40,7 @@ void PelletDispenser::setup()
 
   // Add Hardware
 
-  // Interrupts
+  // Pins
 
   // Add Firmware
   modular_server_.addFirmware(constants::firmware_info,
@@ -157,17 +157,17 @@ void PelletDispenser::setup()
 
   // Callbacks
   modular_server::Callback & deliver_callback = modular_server_.createCallback(constants::deliver_callback_name);
-  deliver_callback.attachFunctor(makeFunctor((Functor1<modular_server::Interrupt *> *)0,*this,&PelletDispenser::deliverHandler));
-  deliver_callback.attachTo(modular_device_base::constants::bnc_b_interrupt_name,modular_server::interrupt::mode_falling);
+  deliver_callback.attachFunctor(makeFunctor((Functor1<modular_server::Pin *> *)0,*this,&PelletDispenser::deliverHandler));
+  deliver_callback.attachTo(modular_device_base::constants::bnc_b_pin_name,modular_server::pin::mode_falling);
 #if defined(__MK64FX512__)
-  deliver_callback.attachTo(modular_device_base::constants::btn_b_interrupt_name,modular_server::interrupt::mode_falling);
+  deliver_callback.attachTo(modular_device_base::constants::btn_b_pin_name,modular_server::pin::mode_falling);
 #endif
 
   modular_server::Callback & abort_callback = modular_server_.createCallback(constants::abort_callback_name);
-  abort_callback.attachFunctor(makeFunctor((Functor1<modular_server::Interrupt *> *)0,*this,&PelletDispenser::abortHandler));
-  abort_callback.attachTo(modular_device_base::constants::bnc_a_interrupt_name,modular_server::interrupt::mode_falling);
+  abort_callback.attachFunctor(makeFunctor((Functor1<modular_server::Pin *> *)0,*this,&PelletDispenser::abortHandler));
+  abort_callback.attachTo(modular_device_base::constants::bnc_a_pin_name,modular_server::pin::mode_falling);
 #if !defined(__AVR_ATmega2560__)
-  abort_callback.attachTo(modular_device_base::constants::btn_a_interrupt_name,modular_server::interrupt::mode_falling);
+  abort_callback.attachTo(modular_device_base::constants::btn_a_pin_name,modular_server::pin::mode_falling);
 #endif
 
 }
@@ -696,12 +696,12 @@ void PelletDispenser::moveToBaseStopHandler(int arg)
   setMoveToBaseStopState();
 }
 
-void PelletDispenser::deliverHandler(modular_server::Interrupt * interrupt_ptr)
+void PelletDispenser::deliverHandler(modular_server::Pin * pin_ptr)
 {
   deliver();
 }
 
-void PelletDispenser::abortHandler(modular_server::Interrupt * interrupt_ptr)
+void PelletDispenser::abortHandler(modular_server::Pin * pin_ptr)
 {
   abort();
 }

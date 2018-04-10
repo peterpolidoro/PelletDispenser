@@ -95,8 +95,8 @@ private:
   void waitToPlayToneHandler(int arg);
   void moveToCleanHandler(int arg);
   void moveToBaseStopHandler(int arg);
-  void deliverHandler(modular_server::Interrupt * interrupt_ptr);
-  void abortHandler(modular_server::Interrupt * interrupt_ptr);
+  void deliverHandler(modular_server::Pin * pin_ptr);
+  void abortHandler(modular_server::Pin * pin_ptr);
 
 };
 

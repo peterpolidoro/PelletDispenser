@@ -17,7 +17,7 @@ namespace pellet_dispenser
 namespace constants
 {
 
-// Interrupts
+// Pins
 
 // Units
 

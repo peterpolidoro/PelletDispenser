@@ -81,7 +81,7 @@ extern const size_t audio_controller_address[3];
 enum{BUZZ_CHANNEL_COUNT=1};
 extern const size_t buzz_channels[BUZZ_CHANNEL_COUNT];
 
-// Interrupts
+// Pins
 
 // Units
 extern ConstantString mm_units;
