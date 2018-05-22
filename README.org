@@ -3,92 +3,100 @@
 #+EMAIL: peterpolidoro@gmail.com
 
 * Library Information
-  - Author :: Peter Polidoro
+  - Name :: PelletDispenser
+  - Version :: 2.1.4
   - License :: BSD
+  - URL :: https://github.com/janelia-arduino/PelletDispenser
+  - Author :: Peter Polidoro
+  - Email :: peterpolidoro@gmail.com
 
-* Ancestors
+** Description
 
-  [[https://github.com/janelia-arduino/ModularServer][ModularServer]]
-
-  [[https://github.com/janelia-arduino/ModularDeviceBase][ModularDeviceBase]]
-
-  [[https://github.com/janelia-arduino/StepDirController][StepDirController]]
-
-  [[https://github.com/janelia-arduino/StepperController][StepperController]]
-
-  [[https://github.com/janelia-arduino/StageController][StageController]]
-
-* Clients
-
-  [[https://github.com/janelia-arduino/HBridgeController][HBridgeController]]
-
-  [[https://github.com/janelia-arduino/OpticalSwitchInterface][OpticalSwitchInterface]]
-
-  [[https://github.com/janelia-arduino/AudioController][AudioController]]
-
-* Devices
-
-  [[https://github.com/janelia-modular-devices/modular_device_base.git][modular_device_base]]
-
-  [[https://github.com/janelia-modular-devices/stepper_controller.git][stepper_controller]]
-
-  [[https://github.com/janelia-modular-devices/h_bridge_controller.git][h_bridge_controller]]
-
-  [[https://github.com/janelia-modular-devices/optical_switch_interface.git][optical_switch_interface]]
-
-  [[https://github.com/janelia-modular-devices/audio_controller.git][audio_controller]]
+   Modular device pellet dispenser library.
 
 * API NAMES
 
   #+BEGIN_SRC js
-{
-  "id": "getApi",
-  "result": {
-    "firmware": [
-      "PelletDispenser"
-    ],
-    "verbosity": "NAMES",
-    "functions": [
-      "setClientPropertyValues",
-      "getAssayStatus",
-      "moveStageToBasePosition",
-      "moveStageToDeliverPosition",
-      "moveStageToDispensePosition",
-      "moveStageToCleanPosition"
-    ],
-    "properties": [
-      "basePosition",
-      "deliverPosition",
-      "dispenseChannelPosition",
-      "cleanPosition",
-      "cleanDuration",
-      "buzzPeriod",
-      "buzzOnDuration",
-      "buzzCount",
-      "toneFrequency",
-      "toneDuration",
-      "toneVolume",
-      "toneDelayMin",
-      "toneDelayMax",
-      "returnDelayMin",
-      "returnDelayMax"
-    ],
-    "callbacks": [
-      "deliver",
-      "abort"
-    ]
-  }
-}
+    {
+      "id": "getApi",
+      "result": {
+        "firmware": [
+          "PelletDispenser"
+        ],
+        "verbosity": "NAMES",
+        "functions": [
+          "setClientPropertyValues",
+          "getAssayStatus",
+          "moveStageToBasePosition",
+          "moveStageToDeliverPosition",
+          "moveStageToDispensePosition",
+          "moveStageToCleanPosition"
+        ],
+        "properties": [
+          "basePosition",
+          "deliverPosition",
+          "dispenseChannelPosition",
+          "cleanPosition",
+          "cleanDuration",
+          "buzzPeriod",
+          "buzzOnDuration",
+          "buzzCount",
+          "toneFrequency",
+          "toneDuration",
+          "toneVolume",
+          "toneDelayMin",
+          "toneDelayMax",
+          "returnDelayMin",
+          "returnDelayMax"
+        ],
+        "callbacks": [
+          "deliver",
+          "abort"
+        ]
+      }
+    }
   #+END_SRC
 
 * API GENERAL
 
-  [[./api/][API GENERAL]]
+  [[./api/]]
+
+* Ancestors
+
+  [[https://github.com/janelia-arduino/ModularServer]]
+
+  [[https://github.com/janelia-arduino/ModularDeviceBase]]
+
+  [[https://github.com/janelia-arduino/StepDirController]]
+
+  [[https://github.com/janelia-arduino/StepperController]]
+
+  [[https://github.com/janelia-arduino/StageController]]
+
+* Clients
+
+  [[https://github.com/janelia-arduino/HBridgeController]]
+
+  [[https://github.com/janelia-arduino/OpticalSwitchInterface]]
+
+  [[https://github.com/janelia-arduino/AudioController]]
+
+* Devices
+
+  [[https://github.com/janelia-modular-devices/modular_device_base.git]]
+
+  [[https://github.com/janelia-modular-devices/stepper_controller.git]]
+
+  [[https://github.com/janelia-modular-devices/h_bridge_controller.git]]
+
+  [[https://github.com/janelia-modular-devices/optical_switch_interface.git]]
+
+  [[https://github.com/janelia-modular-devices/audio_controller.git]]
 
 * More Detailed Modular Device Information
 
-  [[https://github.com/janelia-modular-devices/modular-devices][modular-devices]]
+  [[https://github.com/janelia-modular-devices/modular-devices]]
 
-* Library Dependencies
+* Installation Instructions
 
-  [[https://github.com/janelia-arduino/arduino-libraries][arduino-libraries]]
+  [[https://github.com/janelia-arduino/arduino-libraries]]
