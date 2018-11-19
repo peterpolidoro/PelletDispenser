@@ -26,9 +26,9 @@ void PelletDispenser::setup()
   event_controller_.setup();
 
   // Clients Setup
-  optical_switch_interface_ptr_ = &(createClientAtAddress(constants::optical_switch_interface_address));
-  h_bridge_controller_ptr_ = &(createClientAtAddress(constants::h_bridge_controller_address));
-  audio_controller_ptr_ = &(createClientAtAddress(constants::audio_controller_address));
+  optical_switch_interface_ptr_ = &(createClientAtAddress(optical_switch_interface::constants::device_name,constants::optical_switch_interface_address));
+  h_bridge_controller_ptr_ = &(createClientAtAddress(h_bridge_controller::constants::device_name,constants::h_bridge_controller_address));
+  audio_controller_ptr_ = &(createClientAtAddress(audio_controller::constants::device_name,constants::audio_controller_address));
 
   // Pin Setup
 
