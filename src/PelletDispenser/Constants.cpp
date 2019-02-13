@@ -21,7 +21,7 @@ const modular_server::FirmwareInfo firmware_info =
   .name_ptr=&firmware_name,
   .version_major=2,
   .version_minor=1,
-  .version_patch=5,
+  .version_patch=6,
 };
 
 CONSTANT_STRING(state_string,"state");
@@ -99,7 +99,7 @@ CONSTANT_STRING(base_position_property_name,"basePosition");
 CONSTANT_STRING(deliver_position_property_name,"deliverPosition");
 
 CONSTANT_STRING(dispense_channel_position_property_name,"dispenseChannelPosition");
-const long dispense_channel_position_default = -5;
+const long dispense_channel_position_default = -23;
 
 CONSTANT_STRING(clean_position_property_name,"cleanPosition");
 
@@ -111,30 +111,22 @@ const long clean_duration_default = 3;
 CONSTANT_STRING(buzz_period_property_name,"buzzPeriod");
 const long buzz_period_min = 100;
 const long buzz_period_max = 1000;
-const long buzz_period_default = 500;
+const long buzz_period_default = 100;
 
 CONSTANT_STRING(buzz_on_duration_property_name,"buzzOnDuration");
 const long buzz_on_duration_min = 5;
 const long buzz_on_duration_max = 20;
-const long buzz_on_duration_default = 10;
+const long buzz_on_duration_default = 20;
 
 CONSTANT_STRING(buzz_count_property_name,"buzzCount");
 const long buzz_count_min = 1;
 const long buzz_count_max = 5;
-const long buzz_count_default = 3;
-
-CONSTANT_STRING(tone_delay_min_property_name,"toneDelayMin");
-const long tone_delay_min = 0;
-const long tone_delay_max = 60;
-const long tone_delay_min_default = 2;
-
-CONSTANT_STRING(tone_delay_max_property_name,"toneDelayMax");
-const long tone_delay_max_default = 10;
+const long buzz_count_default = 5;
 
 CONSTANT_STRING(tone_frequency_property_name,"toneFrequency");
 const long tone_frequency_min = 1000;
 const long tone_frequency_max = 15000;
-const long tone_frequency_default = 5000;
+const long tone_frequency_default = 3000;
 
 CONSTANT_STRING(tone_duration_property_name,"toneDuration");
 const long tone_duration_min = 1;
@@ -144,13 +136,21 @@ const long tone_duration_default = 1;
 CONSTANT_STRING(tone_volume_property_name,"toneVolume");
 const long tone_volume_default = 25;
 
+CONSTANT_STRING(tone_delay_min_property_name,"toneDelayMin");
+const long tone_delay_min = 0;
+const long tone_delay_max = 60;
+const long tone_delay_min_default = 1;
+
+CONSTANT_STRING(tone_delay_max_property_name,"toneDelayMax");
+const long tone_delay_max_default = 1;
+
 CONSTANT_STRING(return_delay_min_property_name,"returnDelayMin");
 const double return_delay_min = 0.1;
 const double return_delay_max = 15.0;
 const double return_delay_min_default = 0.1;
 
 CONSTANT_STRING(return_delay_max_property_name,"returnDelayMax");
-const double return_delay_max_default = 0.3;
+const double return_delay_max_default = 0.1;
 
 // Parameters
 

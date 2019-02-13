@@ -92,22 +92,22 @@ const long stage_position_max_default[stepper_controller::constants::CHANNEL_COU
 const long base_position_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
   -74,
-  70,
-  20,
+  50,
+  64,
 };
 
 const long deliver_position_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
-  -74,
-  75,
-  20,
+  -73,
+  50,
+  64,
 };
 
 const long clean_position_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
-  -48,
-  60,
-  10,
+  -45,
+  55,
+  7,
 };
 
 const bool inverted[optical_switch_interface::constants::OUTPUT_COUNT] =

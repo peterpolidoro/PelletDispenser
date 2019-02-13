@@ -148,14 +148,6 @@ extern const long buzz_count_min;
 extern const long buzz_count_max;
 extern const long buzz_count_default;
 
-extern ConstantString tone_delay_min_property_name;
-extern const long tone_delay_min;
-extern const long tone_delay_max;
-extern const long tone_delay_min_default;
-
-extern ConstantString tone_delay_max_property_name;
-extern const long tone_delay_max_default;
-
 extern ConstantString tone_frequency_property_name;
 extern const long tone_frequency_min;
 extern const long tone_frequency_max;
@@ -168,6 +160,14 @@ extern const long tone_duration_default;
 
 extern ConstantString tone_volume_property_name;
 extern const long tone_volume_default;
+
+extern ConstantString tone_delay_min_property_name;
+extern const long tone_delay_min;
+extern const long tone_delay_max;
+extern const long tone_delay_min_default;
+
+extern ConstantString tone_delay_max_property_name;
+extern const long tone_delay_max_default;
 
 extern ConstantString return_delay_min_property_name;
 extern const double return_delay_min;
