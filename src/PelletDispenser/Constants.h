@@ -22,7 +22,7 @@ namespace pellet_dispenser
 namespace constants
 {
 //MAX values must be >= 1, >= created/copied count, < RAM limit
-enum{PROPERTY_COUNT_MAX=15};
+enum{PROPERTY_COUNT_MAX=16};
 enum{PARAMETER_COUNT_MAX=1};
 enum{FUNCTION_COUNT_MAX=6};
 enum{CALLBACK_COUNT_MAX=2};
@@ -59,6 +59,8 @@ extern ConstantString state_wait_to_play_tone_string;
 extern ConstantString state_waiting_to_play_tone_string;
 extern ConstantString state_play_tone_string;
 extern ConstantString state_playing_tone_string;
+extern ConstantString state_wait_to_dispense_string;
+extern ConstantString state_waiting_to_dispense_string;
 extern ConstantString state_move_to_dispense_string;
 extern ConstantString state_moving_to_dispense_string;
 extern ConstantString state_wait_to_return_string;
@@ -168,6 +170,9 @@ extern const long tone_delay_min_default;
 
 extern ConstantString tone_delay_max_property_name;
 extern const long tone_delay_max_default;
+
+extern ConstantString dispense_delay_property_name;
+extern const double dispense_delay_default;
 
 extern ConstantString return_delay_min_property_name;
 extern const double return_delay_min;

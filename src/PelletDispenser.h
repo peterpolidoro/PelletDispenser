@@ -49,7 +49,8 @@ public:
   long getToneFrequency();
   long getToneDuration();
   long getToneVolume();
-  double getReturnDelay();
+  long getDispenseDelay();
+  long getReturnDelay();
   long getCleanDuration();
 
   void moveStageToBasePosition();
@@ -61,6 +62,7 @@ public:
   void waitToPlayTone();
   void setPlayToneState();
   void playTone();
+  void waitToDispense();
   void setMoveToDispenseState();
   void waitToReturn();
   void setMoveToCleanState();
@@ -91,6 +93,7 @@ private:
   void moveStageToDispensePositionHandler();
   void moveStageToCleanPositionHandler();
   void playToneHandler(int arg);
+  void waitToDispenseHandler(int arg);
   void moveToDispenseHandler(int arg);
   void waitToPlayToneHandler(int arg);
   void moveToCleanHandler(int arg);

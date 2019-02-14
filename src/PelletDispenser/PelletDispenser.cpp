@@ -246,6 +246,14 @@ void PelletDispenser::update()
   else if (state_ptr == &constants::state_playing_tone_string)
   {
   }
+  else if (state_ptr == &constants::state_wait_to_dispense_string)
+  {
+    assay_status_.state_ptr = &constants::state_waiting_to_dispense_string;
+    waitToDispense();
+  }
+  else if (state_ptr == &constants::state_waiting_to_dispense_string)
+  {
+  }
   else if (state_ptr == &constants::state_move_to_dispense_string)
   {
     assay_status_.state_ptr = &constants::state_moving_to_dispense_string;
@@ -402,7 +410,21 @@ long PelletDispenser::getToneVolume()
   return tone_volume;
 }
 
-double PelletDispenser::getReturnDelay()
+long PelletDispenser::getDispenseDelay()
+{
+  double dispense_delay;
+  // modular_server_.property(constants::return_delay_min_property_name).getValue(return_delay_min);
+
+  // double return_delay_max;
+  // modular_server_.property(constants::return_delay_max_property_name).getValue(return_delay_max);
+
+  // long return_delay_min_ms = return_delay_min*constants::milliseconds_per_minute;
+  // long return_delay_max_ms = return_delay_max*constants::milliseconds_per_minute;
+  // long return_delay = random(return_delay_min_ms,return_delay_max_ms);
+  return dispense_delay_ms;
+}
+
+long PelletDispenser::getReturnDelay()
 {
   double return_delay_min;
   modular_server_.property(constants::return_delay_min_property_name).getValue(return_delay_min);
@@ -412,8 +434,8 @@ double PelletDispenser::getReturnDelay()
 
   long return_delay_min_ms = return_delay_min*constants::milliseconds_per_minute;
   long return_delay_max_ms = return_delay_max*constants::milliseconds_per_minute;
-  long return_delay = random(return_delay_min_ms,return_delay_max_ms);
-  return return_delay;
+  long return_delay_ms = random(return_delay_min_ms,return_delay_max_ms);
+  return return_delay_ms;
 }
 
 long PelletDispenser::getCleanDuration()
@@ -439,7 +461,7 @@ void PelletDispenser::moveStageToDeliverPosition()
 void PelletDispenser::moveStageToDispensePosition()
 {
   StageController::PositionArray dispense_position = getDispensePosition();
-  moveStageSoftlyTo(dispense_position);
+  moveStageTo(dispense_position);
 }
 
 void PelletDispenser::moveStageToCleanPosition()
@@ -500,8 +522,16 @@ void PelletDispenser::playTone()
     tone_duration,
     tone_duration,
     1);
-  EventId event_id = event_controller_.addEventUsingDelay(makeFunctor((Functor1<int> *)0,*this,&PelletDispenser::moveToDispenseHandler),
+  EventId event_id = event_controller_.addEventUsingDelay(makeFunctor((Functor1<int> *)0,*this,&PelletDispenser::waitToDispenseHandler),
     tone_duration);
+  event_controller_.enable(event_id);
+}
+
+void PelletDispenser::waitToDispense()
+{
+  long dispense_delay = getDispenseDelay();
+  EventId event_id = event_controller_.addEventUsingDelay(makeFunctor((Functor1<int> *)0,*this,&PelletDispenser::moveToDispenseHandler),
+    dispense_delay);
   event_controller_.enable(event_id);
 }
 
@@ -512,7 +542,7 @@ void PelletDispenser::setMoveToDispenseState()
 
 void PelletDispenser::waitToReturn()
 {
-  double return_delay = getReturnDelay();
+  long return_delay = getReturnDelay();
   EventId event_id = event_controller_.addEventUsingDelay(makeFunctor((Functor1<int> *)0,*this,&PelletDispenser::moveToCleanHandler),
     return_delay);
   event_controller_.enable(event_id);
@@ -674,6 +704,11 @@ void PelletDispenser::moveStageToCleanPositionHandler()
 void PelletDispenser::playToneHandler(int arg)
 {
   setPlayToneState();
+}
+
+void PelletDispenser::waitToDispenseHandler(int arg)
+{
+  setWaitToDispenseState();
 }
 
 void PelletDispenser::moveToDispenseHandler(int arg)

@@ -20,8 +20,8 @@ const modular_server::FirmwareInfo firmware_info =
 {
   .name_ptr=&firmware_name,
   .version_major=2,
-  .version_minor=1,
-  .version_patch=6,
+  .version_minor=2,
+  .version_patch=0,
 };
 
 CONSTANT_STRING(state_string,"state");
@@ -42,6 +42,8 @@ CONSTANT_STRING(state_wait_to_play_tone_string,"WAIT_TO_PLAY_TONE");
 CONSTANT_STRING(state_waiting_to_play_tone_string,"WAITING_TO_PLAY_TONE");
 CONSTANT_STRING(state_play_tone_string,"PLAY_TONE");
 CONSTANT_STRING(state_playing_tone_string,"PLAYING_TONE");
+CONSTANT_STRING(state_wait_to_dispense_string,"WAIT_TO_DISPENSE");
+CONSTANT_STRING(state_waiting_to_dispense_string,"WAITING_TO_DISPENSE");
 CONSTANT_STRING(state_move_to_dispense_string,"MOVE_TO_DISPENSE");
 CONSTANT_STRING(state_moving_to_dispense_string,"MOVING_TO_DISPENSE");
 CONSTANT_STRING(state_wait_to_return_string,"WAIT_TO_RETURN");
@@ -140,6 +142,9 @@ CONSTANT_STRING(tone_delay_min_property_name,"toneDelayMin");
 const long tone_delay_min = 0;
 const long tone_delay_max = 60;
 const long tone_delay_min_default = 1;
+
+CONSTANT_STRING(tone_delay_max_property_name,"toneDelayMax");
+const long tone_delay_max_default = 1;
 
 CONSTANT_STRING(tone_delay_max_property_name,"toneDelayMax");
 const long tone_delay_max_default = 1;
