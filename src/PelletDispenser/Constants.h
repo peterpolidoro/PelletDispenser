@@ -156,9 +156,9 @@ extern const long tone_frequency_max;
 extern const long tone_frequency_default;
 
 extern ConstantString tone_duration_property_name;
-extern const long tone_duration_min;
-extern const long tone_duration_max;
-extern const long tone_duration_default;
+extern const double tone_duration_min;
+extern const double tone_duration_max;
+extern const double tone_duration_default;
 
 extern ConstantString tone_volume_property_name;
 extern const long tone_volume_default;
@@ -172,6 +172,8 @@ extern ConstantString tone_delay_max_property_name;
 extern const long tone_delay_max_default;
 
 extern ConstantString dispense_delay_property_name;
+extern const double dispense_delay_min;
+extern const double dispense_delay_max;
 extern const double dispense_delay_default;
 
 extern ConstantString return_delay_min_property_name;

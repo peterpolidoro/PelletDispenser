@@ -122,6 +122,10 @@ void PelletDispenser::setup()
   tone_delay_max_property.setUnits(constants::seconds_units);
   tone_delay_max_property.setRange(constants::tone_delay_min,constants::tone_delay_max);
 
+  modular_server::Property & dispense_delay_property = modular_server_.createProperty(constants::dispense_delay_property_name,constants::dispense_delay_default);
+  dispense_delay_property.setUnits(constants::seconds_units);
+  dispense_delay_property.setRange(constants::dispense_delay_min,constants::dispense_delay_max);
+
   modular_server::Property & return_delay_min_property = modular_server_.createProperty(constants::return_delay_min_property_name,constants::return_delay_min_default);
   return_delay_min_property.setUnits(constants::minutes_units);
   return_delay_min_property.setRange(constants::return_delay_min,constants::return_delay_max);
@@ -382,7 +386,7 @@ long PelletDispenser::getToneDelay()
   modular_server_.property(constants::tone_delay_max_property_name).getValue(tone_delay_max);
 
   long tone_delay = random(tone_delay_min,tone_delay_max);
-  tone_delay = tone_delay*constants::milliseconds_per_second;
+  tone_delay = tone_delay * constants::milliseconds_per_second;
   return tone_delay;
 }
 
@@ -396,10 +400,10 @@ long PelletDispenser::getToneFrequency()
 
 long PelletDispenser::getToneDuration()
 {
-  long tone_duration;
+  double tone_duration;
   modular_server_.property(constants::tone_duration_property_name).getValue(tone_duration);
 
-  return tone_duration*constants::milliseconds_per_second;
+  return tone_duration * constants::milliseconds_per_second;
 }
 
 long PelletDispenser::getToneVolume()
@@ -413,14 +417,9 @@ long PelletDispenser::getToneVolume()
 long PelletDispenser::getDispenseDelay()
 {
   double dispense_delay;
-  // modular_server_.property(constants::return_delay_min_property_name).getValue(return_delay_min);
+  modular_server_.property(constants::dispense_delay_property_name).getValue(dispense_delay);
 
-  // double return_delay_max;
-  // modular_server_.property(constants::return_delay_max_property_name).getValue(return_delay_max);
-
-  // long return_delay_min_ms = return_delay_min*constants::milliseconds_per_minute;
-  // long return_delay_max_ms = return_delay_max*constants::milliseconds_per_minute;
-  // long return_delay = random(return_delay_min_ms,return_delay_max_ms);
+  long dispense_delay_ms = dispense_delay * constants::milliseconds_per_second;
   return dispense_delay_ms;
 }
 
@@ -432,8 +431,8 @@ long PelletDispenser::getReturnDelay()
   double return_delay_max;
   modular_server_.property(constants::return_delay_max_property_name).getValue(return_delay_max);
 
-  long return_delay_min_ms = return_delay_min*constants::milliseconds_per_minute;
-  long return_delay_max_ms = return_delay_max*constants::milliseconds_per_minute;
+  long return_delay_min_ms = return_delay_min * constants::milliseconds_per_minute;
+  long return_delay_max_ms = return_delay_max * constants::milliseconds_per_minute;
   long return_delay_ms = random(return_delay_min_ms,return_delay_max_ms);
   return return_delay_ms;
 }
@@ -443,7 +442,7 @@ long PelletDispenser::getCleanDuration()
   long clean_duration;
   modular_server_.property(constants::clean_duration_property_name).getValue(clean_duration);
 
-  return clean_duration*constants::milliseconds_per_second;
+  return clean_duration * constants::milliseconds_per_second;
 }
 
 void PelletDispenser::moveStageToBasePosition()
@@ -525,6 +524,11 @@ void PelletDispenser::playTone()
   EventId event_id = event_controller_.addEventUsingDelay(makeFunctor((Functor1<int> *)0,*this,&PelletDispenser::waitToDispenseHandler),
     tone_duration);
   event_controller_.enable(event_id);
+}
+
+void PelletDispenser::setWaitToDispenseState()
+{
+  assay_status_.state_ptr = &constants::state_wait_to_dispense_string;
 }
 
 void PelletDispenser::waitToDispense()

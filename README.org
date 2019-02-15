@@ -17,7 +17,45 @@
 * API NAMES
 
   #+BEGIN_SRC js
-
+    {
+      "id": "getApi",
+      "result": {
+        "firmware": [
+          "PelletDispenser"
+        ],
+        "verbosity": "NAMES",
+        "functions": [
+          "setClientPropertyValues",
+          "getAssayStatus",
+          "moveStageToBasePosition",
+          "moveStageToDeliverPosition",
+          "moveStageToDispensePosition",
+          "moveStageToCleanPosition"
+        ],
+        "properties": [
+          "basePosition",
+          "deliverPosition",
+          "dispenseChannelPosition",
+          "cleanPosition",
+          "cleanDuration",
+          "buzzPeriod",
+          "buzzOnDuration",
+          "buzzCount",
+          "toneFrequency",
+          "toneDuration",
+          "toneVolume",
+          "toneDelayMin",
+          "toneDelayMax",
+          "dispenseDelay",
+          "returnDelayMin",
+          "returnDelayMax"
+        ],
+        "callbacks": [
+          "deliver",
+          "abort"
+        ]
+      }
+    }
   #+END_SRC
 
 * API GENERAL

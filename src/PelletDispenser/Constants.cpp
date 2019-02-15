@@ -131,9 +131,9 @@ const long tone_frequency_max = 15000;
 const long tone_frequency_default = 3000;
 
 CONSTANT_STRING(tone_duration_property_name,"toneDuration");
-const long tone_duration_min = 1;
-const long tone_duration_max = 5;
-const long tone_duration_default = 1;
+const double tone_duration_min = 0.001;
+const double tone_duration_max = 10.0;
+const double tone_duration_default = 1.0;
 
 CONSTANT_STRING(tone_volume_property_name,"toneVolume");
 const long tone_volume_default = 25;
@@ -146,8 +146,10 @@ const long tone_delay_min_default = 1;
 CONSTANT_STRING(tone_delay_max_property_name,"toneDelayMax");
 const long tone_delay_max_default = 1;
 
-CONSTANT_STRING(tone_delay_max_property_name,"toneDelayMax");
-const long tone_delay_max_default = 1;
+CONSTANT_STRING(dispense_delay_property_name,"dispenseDelay");
+const double dispense_delay_min = 0.0;
+const double dispense_delay_max = 10.0;
+const double dispense_delay_default = 1.0;
 
 CONSTANT_STRING(return_delay_min_property_name,"returnDelayMin");
 const double return_delay_min = 0.1;

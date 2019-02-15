@@ -62,6 +62,7 @@ public:
   void waitToPlayTone();
   void setPlayToneState();
   void playTone();
+  void setWaitToDispenseState();
   void waitToDispense();
   void setMoveToDispenseState();
   void waitToReturn();
