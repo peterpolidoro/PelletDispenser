@@ -45,8 +45,6 @@ extern ConstantString state_string;
 extern ConstantString state_assay_not_started_string;
 extern ConstantString state_assay_started_string;
 extern ConstantString state_homing_string;
-extern ConstantString state_move_to_base_start_string;
-extern ConstantString state_moving_to_base_start_string;
 extern ConstantString state_move_to_deliver_string;
 extern ConstantString state_moving_to_deliver_string;
 extern ConstantString state_move_to_clean_string;
@@ -55,18 +53,13 @@ extern ConstantString state_wait_at_clean_string;
 extern ConstantString state_waiting_at_clean_string;
 extern ConstantString state_buzz_string;
 extern ConstantString state_buzzing_string;
-extern ConstantString state_wait_to_play_tone_string;
-extern ConstantString state_waiting_to_play_tone_string;
-extern ConstantString state_play_tone_string;
-extern ConstantString state_playing_tone_string;
+extern ConstantString state_ready_to_dispense_string;
 extern ConstantString state_wait_to_dispense_string;
 extern ConstantString state_waiting_to_dispense_string;
 extern ConstantString state_move_to_dispense_string;
 extern ConstantString state_moving_to_dispense_string;
 extern ConstantString state_wait_to_return_string;
 extern ConstantString state_waiting_to_return_string;
-extern ConstantString state_move_to_base_stop_string;
-extern ConstantString state_moving_to_base_stop_string;
 extern ConstantString state_assay_finished_string;
 
 extern const long seconds_per_minute;
@@ -118,9 +111,6 @@ extern const long stage_position_max_default[stepper_controller::constants::CHAN
 
 extern const bool inverted[optical_switch_interface::constants::OUTPUT_COUNT];
 
-extern ConstantString base_position_property_name;
-extern const long base_position_default[stepper_controller::constants::CHANNEL_COUNT_MAX];
-
 extern ConstantString deliver_position_property_name;
 extern const long deliver_position_default[stepper_controller::constants::CHANNEL_COUNT_MAX];
 
@@ -163,14 +153,6 @@ extern const double tone_duration_default;
 extern ConstantString tone_volume_property_name;
 extern const long tone_volume_default;
 
-extern ConstantString tone_delay_min_property_name;
-extern const long tone_delay_min;
-extern const long tone_delay_max;
-extern const long tone_delay_min_default;
-
-extern ConstantString tone_delay_max_property_name;
-extern const long tone_delay_max_default;
-
 extern ConstantString dispense_delay_property_name;
 extern const double dispense_delay_min;
 extern const double dispense_delay_max;
@@ -189,13 +171,12 @@ extern const double return_delay_max_default;
 // Functions
 extern ConstantString set_client_property_values_function_name;
 extern ConstantString get_assay_status_function_name;
-extern ConstantString move_stage_to_base_position_function_name;
 extern ConstantString move_stage_to_deliver_position_function_name;
 extern ConstantString move_stage_to_dispense_position_function_name;
 extern ConstantString move_stage_to_clean_position_function_name;
 
 // Callbacks
-extern ConstantString deliver_callback_name;
+extern ConstantString dispense_callback_name;
 extern ConstantString abort_callback_name;
 
 // Errors

@@ -89,13 +89,6 @@ const long stage_position_max_default[stepper_controller::constants::CHANNEL_COU
   80,
 };
 
-const long base_position_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
-{
-  -74,
-  50,
-  64,
-};
-
 const long deliver_position_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
   -73,

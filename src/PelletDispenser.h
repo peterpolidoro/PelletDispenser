@@ -38,14 +38,12 @@ public:
   virtual void update();
 
   pellet_dispenser::constants::AssayStatus getAssayStatus();
-  StageController::PositionArray getBasePosition();
   StageController::PositionArray getDeliverPosition();
   StageController::PositionArray getDispensePosition();
   StageController::PositionArray getCleanPosition();
   long getBuzzPeriod();
   long getBuzzOnDuration();
   long getBuzzCount();
-  long getToneDelay();
   long getToneFrequency();
   long getToneDuration();
   long getToneVolume();
@@ -53,14 +51,11 @@ public:
   long getReturnDelay();
   long getCleanDuration();
 
-  void moveStageToBasePosition();
   void moveStageToDeliverPosition();
   void moveStageToDispensePosition();
   void moveStageToCleanPosition();
   void buzz();
-  void setWaitToPlayToneState();
-  void waitToPlayTone();
-  void setPlayToneState();
+  void setReadyToDispenseState();
   void playTone();
   void setWaitToDispenseState();
   void waitToDispense();
@@ -68,9 +63,8 @@ public:
   void waitToReturn();
   void setMoveToCleanState();
   void waitAtClean();
-  void setMoveToBaseStopState();
 
-  void deliver();
+  void dispense();
   void abort();
 
 private:
@@ -89,17 +83,14 @@ private:
   // Handlers
   void setClientPropertyValuesHandler();
   void getAssayStatusHandler();
-  void moveStageToBasePositionHandler();
   void moveStageToDeliverPositionHandler();
   void moveStageToDispensePositionHandler();
   void moveStageToCleanPositionHandler();
-  void playToneHandler(int arg);
   void waitToDispenseHandler(int arg);
   void moveToDispenseHandler(int arg);
-  void waitToPlayToneHandler(int arg);
+  void setReadyToDispenseHandler(int arg);
   void moveToCleanHandler(int arg);
-  void moveToBaseStopHandler(int arg);
-  void deliverHandler(modular_server::Pin * pin_ptr);
+  void dispenseHandler(modular_server::Pin * pin_ptr);
   void abortHandler(modular_server::Pin * pin_ptr);
 
 };

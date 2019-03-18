@@ -19,8 +19,8 @@ CONSTANT_STRING(firmware_name,"PelletDispenser");
 const modular_server::FirmwareInfo firmware_info =
 {
   .name_ptr=&firmware_name,
-  .version_major=2,
-  .version_minor=2,
+  .version_major=3,
+  .version_minor=0,
   .version_patch=0,
 };
 
@@ -28,8 +28,6 @@ CONSTANT_STRING(state_string,"state");
 CONSTANT_STRING(state_assay_not_started_string,"ASSAY_NOT_STARTED");
 CONSTANT_STRING(state_assay_started_string,"ASSAY_STARTED");
 CONSTANT_STRING(state_homing_string,"HOMING");
-CONSTANT_STRING(state_move_to_base_start_string,"MOVE_TO_BASE_START");
-CONSTANT_STRING(state_moving_to_base_start_string,"MOVING_TO_BASE_START");
 CONSTANT_STRING(state_move_to_deliver_string,"MOVE_TO_DELIVER");
 CONSTANT_STRING(state_moving_to_deliver_string,"MOVING_TO_DELIVER");
 CONSTANT_STRING(state_move_to_clean_string,"MOVE_TO_CLEAN");
@@ -38,18 +36,13 @@ CONSTANT_STRING(state_wait_at_clean_string,"WAIT_AT_CLEAN");
 CONSTANT_STRING(state_waiting_at_clean_string,"WAITING_AT_CLEAN");
 CONSTANT_STRING(state_buzz_string,"BUZZ");
 CONSTANT_STRING(state_buzzing_string,"BUZZING");
-CONSTANT_STRING(state_wait_to_play_tone_string,"WAIT_TO_PLAY_TONE");
-CONSTANT_STRING(state_waiting_to_play_tone_string,"WAITING_TO_PLAY_TONE");
-CONSTANT_STRING(state_play_tone_string,"PLAY_TONE");
-CONSTANT_STRING(state_playing_tone_string,"PLAYING_TONE");
+CONSTANT_STRING(state_ready_to_dispense_string,"READY_TO_DISPENSE");
 CONSTANT_STRING(state_wait_to_dispense_string,"WAIT_TO_DISPENSE");
 CONSTANT_STRING(state_waiting_to_dispense_string,"WAITING_TO_DISPENSE");
 CONSTANT_STRING(state_move_to_dispense_string,"MOVE_TO_DISPENSE");
 CONSTANT_STRING(state_moving_to_dispense_string,"MOVING_TO_DISPENSE");
 CONSTANT_STRING(state_wait_to_return_string,"WAIT_TO_RETURN");
 CONSTANT_STRING(state_waiting_to_return_string,"WAITING_TO_RETURN");
-CONSTANT_STRING(state_move_to_base_stop_string,"MOVE_TO_BASE_STOP");
-CONSTANT_STRING(state_moving_to_base_stop_string,"MOVING_TO_BASE_STOP");
 CONSTANT_STRING(state_assay_finished_string,"ASSAY_FINISHED");
 
 const long seconds_per_minute = 60;
@@ -96,8 +89,6 @@ const long hold_current_element_default = 10;
 
 const long hold_delay_element_default = 50;
 
-CONSTANT_STRING(base_position_property_name,"basePosition");
-
 CONSTANT_STRING(deliver_position_property_name,"deliverPosition");
 
 CONSTANT_STRING(dispense_channel_position_property_name,"dispenseChannelPosition");
@@ -138,14 +129,6 @@ const double tone_duration_default = 1.0;
 CONSTANT_STRING(tone_volume_property_name,"toneVolume");
 const long tone_volume_default = 25;
 
-CONSTANT_STRING(tone_delay_min_property_name,"toneDelayMin");
-const long tone_delay_min = 0;
-const long tone_delay_max = 60;
-const long tone_delay_min_default = 1;
-
-CONSTANT_STRING(tone_delay_max_property_name,"toneDelayMax");
-const long tone_delay_max_default = 1;
-
 CONSTANT_STRING(dispense_delay_property_name,"dispenseDelay");
 const double dispense_delay_min = 0.0;
 const double dispense_delay_max = 10.0;
@@ -164,13 +147,12 @@ const double return_delay_max_default = 0.1;
 // Functions
 CONSTANT_STRING(set_client_property_values_function_name,"setClientPropertyValues");
 CONSTANT_STRING(get_assay_status_function_name,"getAssayStatus");
-CONSTANT_STRING(move_stage_to_base_position_function_name,"moveStageToBasePosition");
 CONSTANT_STRING(move_stage_to_deliver_position_function_name,"moveStageToDeliverPosition");
 CONSTANT_STRING(move_stage_to_dispense_position_function_name,"moveStageToDispensePosition");
 CONSTANT_STRING(move_stage_to_clean_position_function_name,"moveStageToCleanPosition");
 
 // Callbacks
-CONSTANT_STRING(deliver_callback_name,"deliver");
+CONSTANT_STRING(dispense_callback_name,"dispense");
 CONSTANT_STRING(abort_callback_name,"abort");
 
 // Errors
