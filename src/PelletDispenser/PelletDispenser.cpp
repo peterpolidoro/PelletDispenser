@@ -470,9 +470,14 @@ void PelletDispenser::setMoveToCleanState()
 void PelletDispenser::waitAtClean()
 {
   long clean_duration = getCleanDuration();
-  EventId event_id = event_controller_.addEventUsingDelay(makeFunctor((Functor1<int> *)0,*this,&PelletDispenser::moveToDispenseHandler),
+  EventId event_id = event_controller_.addEventUsingDelay(makeFunctor((Functor1<int> *)0,*this,&PelletDispenser::moveToDeliverHandler),
     clean_duration);
   event_controller_.enable(event_id);
+}
+
+void PelletDispenser::setMoveToDeliverState()
+{
+  assay_status_.state_ptr = &constants::state_move_to_deliver_string;
 }
 
 void PelletDispenser::dispense()
@@ -624,6 +629,11 @@ void PelletDispenser::setReadyToDispenseHandler(int arg)
 void PelletDispenser::moveToCleanHandler(int arg)
 {
   setMoveToCleanState();
+}
+
+void PelletDispenser::moveToDeliverHandler(int arg)
+{
+  setMoveToDeliverState();
 }
 
 void PelletDispenser::dispenseHandler(modular_server::Pin * pin_ptr)
