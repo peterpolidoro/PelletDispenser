@@ -101,16 +101,26 @@ void PelletDispenser::setup()
   modular_server::Property & buzz_count_property = modular_server_.createProperty(constants::buzz_count_property_name,constants::buzz_count_default);
   buzz_count_property.setRange(constants::buzz_count_min,constants::buzz_count_max);
 
-  modular_server::Property & tone_frequency_property = modular_server_.createProperty(constants::tone_frequency_property_name,constants::tone_frequency_default);
-  tone_frequency_property.setUnits(audio_controller::constants::hz_units);
-  tone_frequency_property.setRange(constants::tone_frequency_min,constants::tone_frequency_max);
+  modular_server::Property & position_property = modular_server_.createProperty(constants::position_property_name,constants::position_ptr_default);
+  position_property.setSubset(constants::position_subset);
 
-  modular_server::Property & tone_duration_property = modular_server_.createProperty(constants::tone_duration_property_name,constants::tone_duration_default);
-  tone_duration_property.setUnits(constants::seconds_units);
-  tone_duration_property.setRange(constants::tone_duration_min,constants::tone_duration_max);
+  modular_server::Property & position_tone_frequency_property = modular_server_.createProperty(constants::position_tone_frequency_property_name,constants::position_tone_frequency_default);
+  position_tone_frequency_property.setUnits(audio_controller::constants::hz_units);
+  position_tone_frequency_property.setRange(constants::tone_frequency_min,constants::tone_frequency_max);
 
-  modular_server::Property & tone_volume_property = modular_server_.createProperty(constants::tone_volume_property_name,constants::tone_volume_default);
-  tone_volume_property.setRange(audio_controller::constants::volume_min,audio_controller::constants::volume_max);
+  modular_server::Property & position_tone_volume_property = modular_server_.createProperty(constants::position_tone_volume_property_name,constants::position_tone_volume_default);
+  position_tone_volume_property.setRange(audio_controller::constants::volume_min,audio_controller::constants::volume_max);
+
+  modular_server::Property & position_tone_duration_property = modular_server_.createProperty(constants::position_tone_duration_property_name,constants::position_tone_duration_default);
+  position_tone_duration_property.setUnits(constants::seconds_units);
+  position_tone_duration_property.setRange(constants::position_tone_duration_min,constants::position_tone_duration_max);
+
+  modular_server::Property & dispense_tone_frequency_property = modular_server_.createProperty(constants::dispense_tone_frequency_property_name,constants::dispense_tone_frequency_default);
+  dispense_tone_frequency_property.setUnits(audio_controller::constants::hz_units);
+  dispense_tone_frequency_property.setRange(constants::tone_frequency_min,constants::tone_frequency_max);
+
+  modular_server::Property & dispense_tone_volume_property = modular_server_.createProperty(constants::dispense_tone_volume_property_name,constants::dispense_tone_volume_default);
+  dispense_tone_volume_property.setRange(audio_controller::constants::volume_min,audio_controller::constants::volume_max);
 
   modular_server::Property & dispense_delay_property = modular_server_.createProperty(constants::dispense_delay_property_name,constants::dispense_delay_default);
   dispense_delay_property.setUnits(constants::seconds_units);
@@ -145,6 +155,15 @@ void PelletDispenser::setup()
 
   modular_server::Function & move_stage_to_clean_position_function = modular_server_.createFunction(constants::move_stage_to_clean_position_function_name);
   move_stage_to_clean_position_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&PelletDispenser::moveStageToCleanPositionHandler));
+
+  modular_server::Function & play_position_tone_function = modular_server_.createFunction(constants::play_position_tone_function_name);
+  play_position_tone_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&PelletDispenser::playPositionToneHandler));
+
+  modular_server::Function & play_dispense_tone_function = modular_server_.createFunction(constants::play_dispense_tone_function_name);
+  play_dispense_tone_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&PelletDispenser::playDispenseToneHandler));
+
+  modular_server::Function & stop_dispense_tone_function = modular_server_.createFunction(constants::stop_dispense_tone_function_name);
+  stop_dispense_tone_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&PelletDispenser::stopDispenseToneHandler));
 
   // Callbacks
   modular_server::Callback & dispense_callback = modular_server_.createCallback(constants::dispense_callback_name);
@@ -223,12 +242,14 @@ void PelletDispenser::update()
   else if (state_ptr == &constants::state_move_to_dispense_string)
   {
     assay_status_.state_ptr = &constants::state_moving_to_dispense_string;
+    playDispenseTone();
     moveStageToDispensePosition();
   }
   else if (state_ptr == &constants::state_moving_to_dispense_string)
   {
     if (stageAtTargetPosition())
     {
+      stopDispenseTone();
       assay_status_.state_ptr = &constants::state_wait_to_return_string;
     }
   }
@@ -322,28 +343,44 @@ long PelletDispenser::getBuzzCount()
   return buzz_count;
 }
 
-long PelletDispenser::getToneFrequency()
+long PelletDispenser::getPositionToneFrequency()
 {
-  long tone_frequency;
-  modular_server_.property(constants::tone_frequency_property_name).getValue(tone_frequency);
+  long position_tone_frequency;
+  modular_server_.property(constants::position_tone_frequency_property_name).getValue(position_tone_frequency);
 
-  return tone_frequency;
+  return position_tone_frequency;
 }
 
-long PelletDispenser::getToneDuration()
+long PelletDispenser::getPositionToneVolume()
 {
-  double tone_duration;
-  modular_server_.property(constants::tone_duration_property_name).getValue(tone_duration);
+  long position_tone_volume;
+  modular_server_.property(constants::position_tone_volume_property_name).getValue(position_tone_volume);
 
-  return tone_duration * constants::milliseconds_per_second;
+  return position_tone_volume;
 }
 
-long PelletDispenser::getToneVolume()
+long PelletDispenser::getPositionToneDuration()
 {
-  long tone_volume;
-  modular_server_.property(constants::tone_volume_property_name).getValue(tone_volume);
+  double position_tone_duration;
+  modular_server_.property(constants::position_tone_duration_property_name).getValue(position_tone_duration);
 
-  return tone_volume;
+  return position_tone_duration * constants::milliseconds_per_second;
+}
+
+long PelletDispenser::getDispenseToneFrequency()
+{
+  long dispense_tone_frequency;
+  modular_server_.property(constants::dispense_tone_frequency_property_name).getValue(dispense_tone_frequency);
+
+  return dispense_tone_frequency;
+}
+
+long PelletDispenser::getDispenseToneVolume()
+{
+  long dispense_tone_volume;
+  modular_server_.property(constants::dispense_tone_volume_property_name).getValue(dispense_tone_volume);
+
+  return dispense_tone_volume;
 }
 
 long PelletDispenser::getDispenseDelay()
@@ -420,20 +457,55 @@ void PelletDispenser::setReadyToDispenseState()
   assay_status_.state_ptr = &constants::state_ready_to_dispense_string;
 }
 
-void PelletDispenser::playTone()
+void PelletDispenser::playPositionTone()
 {
-  long tone_frequency = getToneFrequency();
-  long tone_duration = getToneDuration();
-  long tone_volume = getToneVolume();
+  const ConstantString * position_ptr;
+  modular_server_.property(constants::position_property_name).getValue(position_ptr);
+  if (position_ptr == &constants::position_right)
+  {
+    audio_controller_ptr_->call(audio_controller::constants::playing_signal_property_name,
+      constants::set_value_string,
+      audio_controller::constants::playing_signal_bnc_b);
+  }
+  else
+  {
+    audio_controller_ptr_->call(audio_controller::constants::playing_signal_property_name,
+      constants::set_value_string,
+      audio_controller::constants::playing_signal_bnc_a);
+  }
+
+  long position_tone_frequency = getPositionToneFrequency();
+  long position_tone_volume = getPositionToneVolume();
+  long position_tone_duration = getPositionToneDuration();
 
   audio_controller_ptr_->call(audio_controller::constants::add_tone_pwm_at_function_name,
-    tone_frequency,
+    position_tone_frequency,
     audio_controller::constants::speaker_all,
-    tone_volume,
+    position_tone_volume,
     0,
-    tone_duration,
-    tone_duration,
+    position_tone_duration,
+    position_tone_duration,
     1);
+}
+
+void PelletDispenser::playDispenseTone()
+{
+  audio_controller_ptr_->call(audio_controller::constants::playing_signal_property_name,
+    constants::set_value_string,
+    audio_controller::constants::playing_signal_both);
+
+  long dispense_tone_frequency = getDispenseToneFrequency();
+  long dispense_tone_volume = getDispenseToneVolume();
+
+  audio_controller_ptr_->call(audio_controller::constants::play_tone_at_function_name,
+    dispense_tone_frequency,
+    audio_controller::constants::speaker_all,
+    dispense_tone_volume);
+}
+
+void PelletDispenser::stopDispenseTone()
+{
+  audio_controller_ptr_->call(audio_controller::constants::stop_function_name);
 }
 
 void PelletDispenser::setWaitToDispenseState()
@@ -484,7 +556,7 @@ void PelletDispenser::dispense()
 {
   if (assay_status_.state_ptr == &constants::state_ready_to_dispense_string)
   {
-    playTone();
+    playPositionTone();
     assay_status_.state_ptr = &constants::state_wait_to_dispense_string;
   }
   else if ((assay_status_.state_ptr == &constants::state_assay_not_started_string) ||
@@ -609,6 +681,21 @@ void PelletDispenser::moveStageToCleanPositionHandler()
   {
     moveStageToCleanPosition();
   }
+}
+
+void PelletDispenser::playPositionToneHandler()
+{
+  playPositionTone();
+}
+
+void PelletDispenser::playDispenseToneHandler()
+{
+  playDispenseTone();
+}
+
+void PelletDispenser::stopDispenseToneHandler()
+{
+  stopDispenseTone();
 }
 
 void PelletDispenser::waitToDispenseHandler(int arg)

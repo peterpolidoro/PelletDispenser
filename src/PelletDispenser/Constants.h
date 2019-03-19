@@ -24,7 +24,7 @@ namespace constants
 //MAX values must be >= 1, >= created/copied count, < RAM limit
 enum{PROPERTY_COUNT_MAX=16};
 enum{PARAMETER_COUNT_MAX=1};
-enum{FUNCTION_COUNT_MAX=6};
+enum{FUNCTION_COUNT_MAX=8};
 enum{CALLBACK_COUNT_MAX=2};
 
 enum{EVENT_COUNT_MAX=32};
@@ -66,6 +66,8 @@ extern const long seconds_per_minute;
 extern const long milliseconds_per_second;
 extern const long milliseconds_per_minute;
 
+extern ConstantString set_value_string;
+
 // Clients
 extern const size_t optical_switch_interface_address[1];
 
@@ -83,6 +85,9 @@ extern ConstantString mm_units;
 extern ConstantString ms_units;
 extern ConstantString seconds_units;
 extern ConstantString minutes_units;
+
+extern const long tone_frequency_min;
+extern const long tone_frequency_max;
 
 // Properties
 // Property values must be long, double, bool, long[], double[], bool[], char[], ConstantString *, (ConstantString *)[]
@@ -140,18 +145,29 @@ extern const long buzz_count_min;
 extern const long buzz_count_max;
 extern const long buzz_count_default;
 
-extern ConstantString tone_frequency_property_name;
-extern const long tone_frequency_min;
-extern const long tone_frequency_max;
-extern const long tone_frequency_default;
+extern ConstantString position_property_name;
+enum{POSITION_SUBSET_LENGTH=2};
+extern ConstantString position_left;
+extern ConstantString position_right;
+extern modular_server::SubsetMemberType position_subset[POSITION_SUBSET_LENGTH];
+extern const ConstantString * const position_ptr_default;
 
-extern ConstantString tone_duration_property_name;
-extern const double tone_duration_min;
-extern const double tone_duration_max;
-extern const double tone_duration_default;
+extern ConstantString position_tone_frequency_property_name;
+extern const long position_tone_frequency_default;
 
-extern ConstantString tone_volume_property_name;
-extern const long tone_volume_default;
+extern ConstantString position_tone_volume_property_name;
+extern const long position_tone_volume_default;
+
+extern ConstantString position_tone_duration_property_name;
+extern const double position_tone_duration_min;
+extern const double position_tone_duration_max;
+extern const double position_tone_duration_default;
+
+extern ConstantString dispense_tone_frequency_property_name;
+extern const long dispense_tone_frequency_default;
+
+extern ConstantString dispense_tone_volume_property_name;
+extern const long dispense_tone_volume_default;
 
 extern ConstantString dispense_delay_property_name;
 extern const double dispense_delay_min;
@@ -174,6 +190,9 @@ extern ConstantString get_assay_status_function_name;
 extern ConstantString move_stage_to_deliver_position_function_name;
 extern ConstantString move_stage_to_dispense_position_function_name;
 extern ConstantString move_stage_to_clean_position_function_name;
+extern ConstantString play_position_tone_function_name;
+extern ConstantString play_dispense_tone_function_name;
+extern ConstantString stop_dispense_tone_function_name;
 
 // Callbacks
 extern ConstantString dispense_callback_name;
