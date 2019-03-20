@@ -20,7 +20,7 @@ const modular_server::FirmwareInfo firmware_info =
 {
   .name_ptr=&firmware_name,
   .version_major=4,
-  .version_minor=0,
+  .version_minor=1,
   .version_patch=0,
 };
 
@@ -154,12 +154,12 @@ const double dispense_delay_max = 100.0;
 const double dispense_delay_default = 4.0;
 
 CONSTANT_STRING(return_delay_min_property_name,"returnDelayMin");
-const double return_delay_min = 0.1;
-const double return_delay_max = 15.0;
-const double return_delay_min_default = 0.1;
+const double return_delay_min = 1.0;
+const double return_delay_max = 3600.0;
+const double return_delay_min_default = 10.0;
 
 CONSTANT_STRING(return_delay_max_property_name,"returnDelayMax");
-const double return_delay_max_default = 0.1;
+const double return_delay_max_default = 10.0;
 
 // Parameters
 

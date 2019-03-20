@@ -127,11 +127,11 @@ void PelletDispenser::setup()
   dispense_delay_property.setRange(constants::dispense_delay_min,constants::dispense_delay_max);
 
   modular_server::Property & return_delay_min_property = modular_server_.createProperty(constants::return_delay_min_property_name,constants::return_delay_min_default);
-  return_delay_min_property.setUnits(constants::minutes_units);
+  return_delay_min_property.setUnits(constants::seconds_units);
   return_delay_min_property.setRange(constants::return_delay_min,constants::return_delay_max);
 
   modular_server::Property & return_delay_max_property = modular_server_.createProperty(constants::return_delay_max_property_name,constants::return_delay_max_default);
-  return_delay_max_property.setUnits(constants::minutes_units);
+  return_delay_max_property.setUnits(constants::seconds_units);
   return_delay_max_property.setRange(constants::return_delay_min,constants::return_delay_max);
 
   // Parameters
@@ -400,8 +400,8 @@ long PelletDispenser::getReturnDelay()
   double return_delay_max;
   modular_server_.property(constants::return_delay_max_property_name).getValue(return_delay_max);
 
-  long return_delay_min_ms = return_delay_min * constants::milliseconds_per_minute;
-  long return_delay_max_ms = return_delay_max * constants::milliseconds_per_minute;
+  long return_delay_min_ms = return_delay_min * constants::milliseconds_per_second;
+  long return_delay_max_ms = return_delay_max * constants::milliseconds_per_second;
   long return_delay_ms = random(return_delay_min_ms,return_delay_max_ms);
   return return_delay_ms;
 }
