@@ -40,6 +40,7 @@ public:
   pellet_dispenser::constants::AssayStatus getAssayStatus();
   StageController::PositionArray getDeliverPosition();
   StageController::PositionArray getDispensePosition();
+  StageController::PositionArray getDispensePositionAtPreviousDeliverPosition();
   StageController::PositionArray getCleanPosition();
   long getBuzzPeriod();
   long getBuzzOnDuration();
@@ -55,6 +56,7 @@ public:
 
   void moveStageToDeliverPosition();
   void moveStageToDispensePosition();
+  void moveStageToDispensePositionAtPreviousDeliverPosition();
   void moveStageToCleanPosition();
   void buzz();
   void setReadyToDispenseState();
@@ -84,6 +86,8 @@ private:
   ModularClient * h_bridge_controller_ptr_;
   ModularClient * optical_switch_interface_ptr_;
   ModularClient * audio_controller_ptr_;
+
+  StageController::PositionArray deliver_position_previous_;
 
   // Handlers
   void setClientPropertyValuesHandler();
