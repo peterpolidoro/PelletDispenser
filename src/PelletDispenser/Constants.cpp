@@ -19,17 +19,17 @@ CONSTANT_STRING(firmware_name,"PelletDispenser");
 const modular_server::FirmwareInfo firmware_info =
 {
   .name_ptr=&firmware_name,
-  .version_major=4,
-  .version_minor=1,
-  .version_patch=1,
+  .version_major=5,
+  .version_minor=0,
+  .version_patch=0,
 };
 
 CONSTANT_STRING(state_string,"state");
 CONSTANT_STRING(state_assay_not_started_string,"ASSAY_NOT_STARTED");
 CONSTANT_STRING(state_assay_started_string,"ASSAY_STARTED");
 CONSTANT_STRING(state_homing_string,"HOMING");
-CONSTANT_STRING(state_move_to_deliver_string,"MOVE_TO_DELIVER");
-CONSTANT_STRING(state_moving_to_deliver_string,"MOVING_TO_DELIVER");
+CONSTANT_STRING(state_move_to_next_deliver_string,"MOVE_TO_NEXT_DELIVER");
+CONSTANT_STRING(state_moving_to_next_deliver_string,"MOVING_TO_NEXT_DELIVER");
 CONSTANT_STRING(state_move_to_clean_string,"MOVE_TO_CLEAN");
 CONSTANT_STRING(state_moving_to_clean_string,"MOVING_TO_CLEAN");
 CONSTANT_STRING(state_wait_at_clean_string,"WAIT_AT_CLEAN");
@@ -94,7 +94,7 @@ const long hold_current_element_default = 10;
 
 const long hold_delay_element_default = 50;
 
-CONSTANT_STRING(deliver_position_property_name,"deliverPosition");
+CONSTANT_STRING(next_deliver_position_property_name,"next_deliverPosition");
 
 CONSTANT_STRING(dispense_channel_position_property_name,"dispenseChannelPosition");
 const long dispense_channel_position_default = -23;
@@ -166,9 +166,6 @@ const double return_delay_max_default = 10.0;
 // Functions
 CONSTANT_STRING(set_client_property_values_function_name,"setClientPropertyValues");
 CONSTANT_STRING(get_assay_status_function_name,"getAssayStatus");
-CONSTANT_STRING(move_stage_to_deliver_position_function_name,"moveStageToDeliverPosition");
-CONSTANT_STRING(move_stage_to_dispense_position_function_name,"moveStageToDispensePosition");
-CONSTANT_STRING(move_stage_to_clean_position_function_name,"moveStageToCleanPosition");
 CONSTANT_STRING(play_position_tone_function_name,"playPositionTone");
 CONSTANT_STRING(play_dispense_tone_function_name,"playDispenseTone");
 CONSTANT_STRING(stop_dispense_tone_function_name,"stopDispenseTone");

@@ -45,8 +45,8 @@ extern ConstantString state_string;
 extern ConstantString state_assay_not_started_string;
 extern ConstantString state_assay_started_string;
 extern ConstantString state_homing_string;
-extern ConstantString state_move_to_deliver_string;
-extern ConstantString state_moving_to_deliver_string;
+extern ConstantString state_move_to_next_deliver_string;
+extern ConstantString state_moving_to_next_deliver_string;
 extern ConstantString state_move_to_clean_string;
 extern ConstantString state_moving_to_clean_string;
 extern ConstantString state_wait_at_clean_string;
@@ -116,8 +116,8 @@ extern const long stage_position_max_default[stepper_controller::constants::CHAN
 
 extern const bool inverted[optical_switch_interface::constants::OUTPUT_COUNT];
 
-extern ConstantString deliver_position_property_name;
-extern const long deliver_position_default[stepper_controller::constants::CHANNEL_COUNT_MAX];
+extern ConstantString next_deliver_position_property_name;
+extern const long next_deliver_position_default[stepper_controller::constants::CHANNEL_COUNT_MAX];
 
 extern ConstantString dispense_channel_position_property_name;
 extern const long dispense_channel_position_default;
@@ -187,9 +187,6 @@ extern const double return_delay_max_default;
 // Functions
 extern ConstantString set_client_property_values_function_name;
 extern ConstantString get_assay_status_function_name;
-extern ConstantString move_stage_to_deliver_position_function_name;
-extern ConstantString move_stage_to_dispense_position_function_name;
-extern ConstantString move_stage_to_clean_position_function_name;
 extern ConstantString play_position_tone_function_name;
 extern ConstantString play_dispense_tone_function_name;
 extern ConstantString stop_dispense_tone_function_name;

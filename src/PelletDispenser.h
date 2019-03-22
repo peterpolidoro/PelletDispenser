@@ -38,7 +38,7 @@ public:
   virtual void update();
 
   pellet_dispenser::constants::AssayStatus getAssayStatus();
-  StageController::PositionArray getDeliverPosition();
+  StageController::PositionArray getNextDeliverPosition();
   StageController::PositionArray getDispensePosition();
   StageController::PositionArray getDispensePositionAtPreviousDeliverPosition();
   StageController::PositionArray getCleanPosition();
@@ -54,7 +54,7 @@ public:
   long getReturnDelay();
   long getCleanDuration();
 
-  void moveStageToDeliverPosition();
+  void moveStageToNextDeliverPosition();
   void moveStageToDispensePosition();
   void moveStageToDispensePositionAtPreviousDeliverPosition();
   void moveStageToCleanPosition();
@@ -69,7 +69,7 @@ public:
   void waitToReturn();
   void setMoveToCleanState();
   void waitAtClean();
-  void setMoveToDeliverState();
+  void setMoveToNextDeliverState();
 
   void dispense();
   void abort();
@@ -92,7 +92,7 @@ private:
   // Handlers
   void setClientPropertyValuesHandler();
   void getAssayStatusHandler();
-  void moveStageToDeliverPositionHandler();
+  void moveStageToNextDeliverPositionHandler();
   void moveStageToDispensePositionHandler();
   void moveStageToCleanPositionHandler();
   void playPositionToneHandler();
@@ -102,7 +102,7 @@ private:
   void moveToDispenseHandler(int arg);
   void setReadyToDispenseHandler(int arg);
   void moveToCleanHandler(int arg);
-  void moveToDeliverHandler(int arg);
+  void moveToNextDeliverHandler(int arg);
   void dispenseHandler(modular_server::Pin * pin_ptr);
   void abortHandler(modular_server::Pin * pin_ptr);
 
