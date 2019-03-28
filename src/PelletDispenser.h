@@ -40,7 +40,6 @@ public:
   pellet_dispenser::constants::AssayStatus getAssayStatus();
   StageController::PositionArray getNextDeliverPosition();
   StageController::PositionArray getDispensePosition();
-  StageController::PositionArray getDispensePositionAtPreviousDeliverPosition();
   StageController::PositionArray getCleanPosition();
   long getBuzzPeriod();
   long getBuzzOnDuration();
@@ -56,7 +55,6 @@ public:
 
   void moveStageToNextDeliverPosition();
   void moveStageToDispensePosition();
-  void moveStageToDispensePositionAtPreviousDeliverPosition();
   void moveStageToCleanPosition();
   void buzz();
   void setReadyToDispenseState();
@@ -71,6 +69,7 @@ public:
   void waitAtClean();
   void setMoveToNextDeliverState();
 
+  void startAssay();
   void dispense();
   void abort();
 
@@ -87,14 +86,11 @@ private:
   ModularClient * optical_switch_interface_ptr_;
   ModularClient * audio_controller_ptr_;
 
-  StageController::PositionArray deliver_position_previous_;
+  StageController::PositionArray deliver_position_;
 
   // Handlers
   void setClientPropertyValuesHandler();
   void getAssayStatusHandler();
-  void moveStageToNextDeliverPositionHandler();
-  void moveStageToDispensePositionHandler();
-  void moveStageToCleanPositionHandler();
   void playPositionToneHandler();
   void playDispenseToneHandler();
   void stopDispenseToneHandler();
@@ -103,6 +99,7 @@ private:
   void setReadyToDispenseHandler(int arg);
   void moveToCleanHandler(int arg);
   void moveToNextDeliverHandler(int arg);
+  void startAssayHandler(modular_server::Pin * pin_ptr);
   void dispenseHandler(modular_server::Pin * pin_ptr);
   void abortHandler(modular_server::Pin * pin_ptr);
 

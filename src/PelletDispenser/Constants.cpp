@@ -94,7 +94,7 @@ const long hold_current_element_default = 10;
 
 const long hold_delay_element_default = 50;
 
-CONSTANT_STRING(next_deliver_position_property_name,"next_deliverPosition");
+CONSTANT_STRING(next_deliver_position_property_name,"nextDeliverPosition");
 
 CONSTANT_STRING(dispense_channel_position_property_name,"dispenseChannelPosition");
 const long dispense_channel_position_default = -23;
@@ -171,6 +171,7 @@ CONSTANT_STRING(play_dispense_tone_function_name,"playDispenseTone");
 CONSTANT_STRING(stop_dispense_tone_function_name,"stopDispenseTone");
 
 // Callbacks
+CONSTANT_STRING(start_assay_callback_name,"startAssay");
 CONSTANT_STRING(dispense_callback_name,"dispense");
 CONSTANT_STRING(abort_callback_name,"abort");
 

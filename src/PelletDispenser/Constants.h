@@ -24,8 +24,8 @@ namespace constants
 //MAX values must be >= 1, >= created/copied count, < RAM limit
 enum{PROPERTY_COUNT_MAX=16};
 enum{PARAMETER_COUNT_MAX=1};
-enum{FUNCTION_COUNT_MAX=8};
-enum{CALLBACK_COUNT_MAX=2};
+enum{FUNCTION_COUNT_MAX=5};
+enum{CALLBACK_COUNT_MAX=3};
 
 enum{EVENT_COUNT_MAX=32};
 
@@ -192,6 +192,7 @@ extern ConstantString play_dispense_tone_function_name;
 extern ConstantString stop_dispense_tone_function_name;
 
 // Callbacks
+extern ConstantString start_assay_callback_name;
 extern ConstantString dispense_callback_name;
 extern ConstantString abort_callback_name;
 
