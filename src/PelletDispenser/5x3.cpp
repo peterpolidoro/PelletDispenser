@@ -17,7 +17,6 @@ namespace constants
 // Pins
 
 // Units
-
 // Properties
 const long steps_per_position_units_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
@@ -89,7 +88,7 @@ const long stage_position_max_default[stepper_controller::constants::CHANNEL_COU
   80,
 };
 
-const long deliver_position_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
+const long next_deliver_position_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
   -45,
   50,
