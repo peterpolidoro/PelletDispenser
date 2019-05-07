@@ -4,7 +4,7 @@
 
 * Library Information
   - Name :: PelletDispenser
-  - Version :: 5.0.0
+  - Version :: 6.0.0
   - License :: BSD
   - URL :: https://github.com/janelia-arduino/PelletDispenser
   - Author :: Peter Polidoro
@@ -27,9 +27,7 @@
         "functions": [
           "setClientPropertyValues",
           "getAssayStatus",
-          "playPositionTone",
-          "playDispenseTone",
-          "stopDispenseTone"
+          "playPositionTone"
         ],
         "properties": [
           "nextDeliverPosition",
@@ -42,9 +40,8 @@
           "position",
           "positionToneFrequency",
           "positionToneVolume",
+          "positionToneDelay",
           "positionToneDuration",
-          "dispenseToneFrequency",
-          "dispenseToneVolume",
           "dispenseDelay",
           "returnDelayMin",
           "returnDelayMax"

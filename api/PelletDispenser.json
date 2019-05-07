@@ -20,12 +20,6 @@
       },
       {
         "name": "playPositionTone"
-      },
-      {
-        "name": "playDispenseTone"
-      },
-      {
-        "name": "stopDispenseTone"
       }
     ],
     "properties": [
@@ -584,7 +578,7 @@
         ]
       },
       {
-        "name": "positionToneDuration",
+        "name": "positionToneDelay",
         "type": "double",
         "functions": [
           {
@@ -623,13 +617,13 @@
         ]
       },
       {
-        "name": "dispenseToneFrequency",
-        "type": "long",
+        "name": "positionToneDuration",
+        "type": "double",
         "functions": [
           {
             "name": "getValue",
             "result_info": {
-              "type": "long"
+              "type": "double"
             }
           },
           {
@@ -638,65 +632,26 @@
               "value"
             ],
             "result_info": {
-              "type": "long"
+              "type": "double"
             }
           },
           {
             "name": "getDefaultValue",
             "result_info": {
-              "type": "long"
+              "type": "double"
             }
           },
           {
             "name": "setValueToDefault",
             "result_info": {
-              "type": "long"
+              "type": "double"
             }
           }
         ],
         "parameters": [
           {
             "name": "value",
-            "type": "long"
-          }
-        ]
-      },
-      {
-        "name": "dispenseToneVolume",
-        "type": "long",
-        "functions": [
-          {
-            "name": "getValue",
-            "result_info": {
-              "type": "long"
-            }
-          },
-          {
-            "name": "setValue",
-            "parameters": [
-              "value"
-            ],
-            "result_info": {
-              "type": "long"
-            }
-          },
-          {
-            "name": "getDefaultValue",
-            "result_info": {
-              "type": "long"
-            }
-          },
-          {
-            "name": "setValueToDefault",
-            "result_info": {
-              "type": "long"
-            }
-          }
-        ],
-        "parameters": [
-          {
-            "name": "value",
-            "type": "long"
+            "type": "double"
           }
         ]
       },

@@ -19,7 +19,7 @@ CONSTANT_STRING(firmware_name,"PelletDispenser");
 const modular_server::FirmwareInfo firmware_info =
 {
   .name_ptr=&firmware_name,
-  .version_major=5,
+  .version_major=6,
   .version_minor=0,
   .version_patch=0,
 };
@@ -137,16 +137,15 @@ const long position_tone_frequency_default = 5000;
 CONSTANT_STRING(position_tone_volume_property_name,"positionToneVolume");
 const long position_tone_volume_default = 25;
 
+CONSTANT_STRING(position_tone_delay_property_name,"positionToneDelay");
+const double position_tone_delay_min = 0.0;
+const double position_tone_delay_max = 100.0;
+const double position_tone_delay_default = 3.0;
+
 CONSTANT_STRING(position_tone_duration_property_name,"positionToneDuration");
 const double position_tone_duration_min = 0.001;
 const double position_tone_duration_max = 10.0;
 const double position_tone_duration_default = 1.0;
-
-CONSTANT_STRING(dispense_tone_frequency_property_name,"dispenseToneFrequency");
-const long dispense_tone_frequency_default = 3400;
-
-CONSTANT_STRING(dispense_tone_volume_property_name,"dispenseToneVolume");
-const long dispense_tone_volume_default = 25;
 
 CONSTANT_STRING(dispense_delay_property_name,"dispenseDelay");
 const double dispense_delay_min = 0.0;
@@ -167,8 +166,6 @@ const double return_delay_max_default = 10.0;
 CONSTANT_STRING(set_client_property_values_function_name,"setClientPropertyValues");
 CONSTANT_STRING(get_assay_status_function_name,"getAssayStatus");
 CONSTANT_STRING(play_position_tone_function_name,"playPositionTone");
-CONSTANT_STRING(play_dispense_tone_function_name,"playDispenseTone");
-CONSTANT_STRING(stop_dispense_tone_function_name,"stopDispenseTone");
 
 // Callbacks
 CONSTANT_STRING(start_assay_callback_name,"startAssay");

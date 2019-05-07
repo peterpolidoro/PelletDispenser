@@ -46,9 +46,8 @@ public:
   long getBuzzCount();
   long getPositionToneFrequency();
   long getPositionToneVolume();
+  long getPositionToneDelay();
   long getPositionToneDuration();
-  long getDispenseToneFrequency();
-  long getDispenseToneVolume();
   long getDispenseDelay();
   long getReturnDelay();
   long getCleanDuration();
@@ -59,8 +58,6 @@ public:
   void buzz();
   void setReadyToDispenseState();
   void playPositionTone();
-  void playDispenseTone();
-  void stopDispenseTone();
   void setWaitToDispenseState();
   void waitToDispense();
   void setMoveToDispenseState();
@@ -92,8 +89,6 @@ private:
   void setClientPropertyValuesHandler();
   void getAssayStatusHandler();
   void playPositionToneHandler();
-  void playDispenseToneHandler();
-  void stopDispenseToneHandler();
   void waitToDispenseHandler(int arg);
   void moveToDispenseHandler(int arg);
   void setReadyToDispenseHandler(int arg);

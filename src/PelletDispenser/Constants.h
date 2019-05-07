@@ -22,9 +22,9 @@ namespace pellet_dispenser
 namespace constants
 {
 //MAX values must be >= 1, >= created/copied count, < RAM limit
-enum{PROPERTY_COUNT_MAX=16};
+enum{PROPERTY_COUNT_MAX=15};
 enum{PARAMETER_COUNT_MAX=1};
-enum{FUNCTION_COUNT_MAX=5};
+enum{FUNCTION_COUNT_MAX=3};
 enum{CALLBACK_COUNT_MAX=3};
 
 enum{EVENT_COUNT_MAX=32};
@@ -158,16 +158,15 @@ extern const long position_tone_frequency_default;
 extern ConstantString position_tone_volume_property_name;
 extern const long position_tone_volume_default;
 
+extern ConstantString position_tone_delay_property_name;
+extern const double position_tone_delay_min;
+extern const double position_tone_delay_max;
+extern const double position_tone_delay_default;
+
 extern ConstantString position_tone_duration_property_name;
 extern const double position_tone_duration_min;
 extern const double position_tone_duration_max;
 extern const double position_tone_duration_default;
-
-extern ConstantString dispense_tone_frequency_property_name;
-extern const long dispense_tone_frequency_default;
-
-extern ConstantString dispense_tone_volume_property_name;
-extern const long dispense_tone_volume_default;
 
 extern ConstantString dispense_delay_property_name;
 extern const double dispense_delay_min;
@@ -188,8 +187,6 @@ extern const double return_delay_max_default;
 extern ConstantString set_client_property_values_function_name;
 extern ConstantString get_assay_status_function_name;
 extern ConstantString play_position_tone_function_name;
-extern ConstantString play_dispense_tone_function_name;
-extern ConstantString stop_dispense_tone_function_name;
 
 // Callbacks
 extern ConstantString start_assay_callback_name;
