@@ -17,8 +17,6 @@
 #include <EventController.h>
 
 #include <ModularClient.h>
-#include <HBridgeController.h>
-#include <OpticalSwitchInterface.h>
 #include <AudioController.h>
 
 #include <ModularServer.h>
@@ -41,9 +39,6 @@ public:
   StageController::PositionArray getNextDeliverPosition();
   StageController::PositionArray getDispensePosition();
   StageController::PositionArray getCleanPosition();
-  long getBuzzPeriod();
-  long getBuzzOnDuration();
-  long getBuzzCount();
   long getPositionToneFrequency();
   long getPositionToneVolume();
   long getPositionToneDelay();
@@ -55,8 +50,6 @@ public:
   void moveStageToNextDeliverPosition();
   void moveStageToDispensePosition();
   void moveStageToCleanPosition();
-  void buzz();
-  void setReadyToDispenseState();
   void playPositionTone();
   void setWaitToDispenseState();
   void waitToDispense();
@@ -79,8 +72,6 @@ private:
   pellet_dispenser::constants::AssayStatus assay_status_;
   EventController<pellet_dispenser::constants::EVENT_COUNT_MAX> event_controller_;
 
-  ModularClient * h_bridge_controller_ptr_;
-  ModularClient * optical_switch_interface_ptr_;
   ModularClient * audio_controller_ptr_;
 
   StageController::PositionArray deliver_position_;
@@ -91,7 +82,6 @@ private:
   void playPositionToneHandler();
   void waitToDispenseHandler(int arg);
   void moveToDispenseHandler(int arg);
-  void setReadyToDispenseHandler(int arg);
   void moveToCleanHandler(int arg);
   void moveToNextDeliverHandler(int arg);
   void startAssayHandler(modular_server::Pin * pin_ptr);

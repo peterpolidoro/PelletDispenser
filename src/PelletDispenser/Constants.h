@@ -12,8 +12,6 @@
 #include <StepperController.h>
 #include <StageController.h>
 
-#include <HBridgeController.h>
-#include <OpticalSwitchInterface.h>
 #include <AudioController.h>
 
 
@@ -22,7 +20,7 @@ namespace pellet_dispenser
 namespace constants
 {
 //MAX values must be >= 1, >= created/copied count, < RAM limit
-enum{PROPERTY_COUNT_MAX=15};
+enum{PROPERTY_COUNT_MAX=12};
 enum{PARAMETER_COUNT_MAX=1};
 enum{FUNCTION_COUNT_MAX=3};
 enum{CALLBACK_COUNT_MAX=3};
@@ -51,8 +49,6 @@ extern ConstantString state_move_to_clean_string;
 extern ConstantString state_moving_to_clean_string;
 extern ConstantString state_wait_at_clean_string;
 extern ConstantString state_waiting_at_clean_string;
-extern ConstantString state_buzz_string;
-extern ConstantString state_buzzing_string;
 extern ConstantString state_ready_to_dispense_string;
 extern ConstantString state_wait_to_dispense_string;
 extern ConstantString state_waiting_to_dispense_string;
@@ -69,14 +65,7 @@ extern const long milliseconds_per_minute;
 extern ConstantString set_value_string;
 
 // Clients
-extern const size_t optical_switch_interface_address[1];
-
-extern const size_t h_bridge_controller_address[2];
-
-extern const size_t audio_controller_address[3];
-
-enum{BUZZ_CHANNEL_COUNT=1};
-extern const size_t buzz_channels[BUZZ_CHANNEL_COUNT];
+extern const size_t audio_controller_address[1];
 
 // Pins
 
@@ -101,11 +90,15 @@ extern const long acceleration_max_default[stepper_controller::constants::CHANNE
 
 extern const long home_velocity_default[stepper_controller::constants::CHANNEL_COUNT_MAX];
 
+extern const bool invert_driver_direction_default[stepper_controller::constants::CHANNEL_COUNT_MAX];
+
 extern const long run_current_default[stepper_controller::constants::CHANNEL_COUNT_MAX];
-extern const long run_current_element_default;
+extern const long run_current_0_element_default;
+extern const long run_current_1_2_element_default;
 
 extern const long hold_current_default[stepper_controller::constants::CHANNEL_COUNT_MAX];
-extern const long hold_current_element_default;
+extern const long hold_current_0_element_default;
+extern const long hold_current_1_2_element_default;
 
 extern const long hold_delay_default[stepper_controller::constants::CHANNEL_COUNT_MAX];
 extern const long hold_delay_element_default;
@@ -113,8 +106,6 @@ extern const long hold_delay_element_default;
 extern const long stage_position_min_default[stepper_controller::constants::CHANNEL_COUNT_MAX];
 
 extern const long stage_position_max_default[stepper_controller::constants::CHANNEL_COUNT_MAX];
-
-extern const bool inverted[optical_switch_interface::constants::OUTPUT_COUNT];
 
 extern ConstantString next_deliver_position_property_name;
 extern const long next_deliver_position_default[stepper_controller::constants::CHANNEL_COUNT_MAX];
@@ -129,21 +120,6 @@ extern ConstantString clean_duration_property_name;
 extern const long clean_duration_min;
 extern const long clean_duration_max;
 extern const long clean_duration_default;
-
-extern ConstantString buzz_period_property_name;
-extern const long buzz_period_min;
-extern const long buzz_period_max;
-extern const long buzz_period_default;
-
-extern ConstantString buzz_on_duration_property_name;
-extern const long buzz_on_duration_min;
-extern const long buzz_on_duration_max;
-extern const long buzz_on_duration_default;
-
-extern ConstantString buzz_count_property_name;
-extern const long buzz_count_min;
-extern const long buzz_count_max;
-extern const long buzz_count_default;
 
 extern ConstantString position_property_name;
 enum{POSITION_SUBSET_LENGTH=2};

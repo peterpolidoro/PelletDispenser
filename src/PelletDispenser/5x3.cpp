@@ -20,51 +20,58 @@ namespace constants
 // Properties
 const long steps_per_position_units_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
-  824, // microsteps/pellet/4 = (12.88steps/pellet)*(256microsteps/step)/4
+  5039, // microsteps/mm = (24steps/rev)*(256microsteps/step)/((0.048in/rev)*(25.4mm/in))
   8063, // microsteps/mm = (200steps/rev)*(256microsteps/step)/((0.250in/rev)*(25.4mm/in))
   8063, // microsteps/mm = (200steps/rev)*(256microsteps/step)/((0.250in/rev)*(25.4mm/in))
 };
 
 const long velocity_max_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
-  80,
+  10,
   40,
   40,
 };
 
 const long velocity_min_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
-  4,
+  1,
   2,
   2,
 };
 
 const long acceleration_max_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
-  200,
+  25,
   100,
   100,
 };
 
 const long home_velocity_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
-  20,
+  -5,
   -20,
   -20,
+};
+
+const bool invert_driver_direction_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
+{
+  true,
+  false,
+  false,
 };
 
 const long run_current_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
-  run_current_element_default,
-  run_current_element_default,
-  run_current_element_default,
+  run_current_0_element_default,
+  run_current_1_2_element_default,
+  run_current_1_2_element_default,
 };
 
 const long hold_current_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
-  hold_current_element_default,
-  hold_current_element_default,
-  hold_current_element_default,
+  hold_current_0_element_default,
+  hold_current_1_2_element_default,
+  hold_current_1_2_element_default,
 };
 
 const long hold_delay_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
@@ -76,38 +83,30 @@ const long hold_delay_default[stepper_controller::constants::CHANNEL_COUNT_MAX] 
 
 const long stage_position_min_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
-  -76,
+  0,
   0,
   0,
 };
 
 const long stage_position_max_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
-  0,
+  12,
   80,
   80,
 };
 
 const long next_deliver_position_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
-  -45,
+  1,
   50,
   64,
 };
 
 const long clean_position_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
-  -45,
+  1,
   55,
   7,
-};
-
-const bool inverted[optical_switch_interface::constants::OUTPUT_COUNT] =
-{
-  true,
-  false,
-  false,
-  false,
 };
 
 // Parameters

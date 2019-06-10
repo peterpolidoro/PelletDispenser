@@ -19,7 +19,7 @@ CONSTANT_STRING(firmware_name,"PelletDispenser");
 const modular_server::FirmwareInfo firmware_info =
 {
   .name_ptr=&firmware_name,
-  .version_major=6,
+  .version_major=7,
   .version_minor=0,
   .version_patch=0,
 };
@@ -34,8 +34,6 @@ CONSTANT_STRING(state_move_to_clean_string,"MOVE_TO_CLEAN");
 CONSTANT_STRING(state_moving_to_clean_string,"MOVING_TO_CLEAN");
 CONSTANT_STRING(state_wait_at_clean_string,"WAIT_AT_CLEAN");
 CONSTANT_STRING(state_waiting_at_clean_string,"WAITING_AT_CLEAN");
-CONSTANT_STRING(state_buzz_string,"BUZZ");
-CONSTANT_STRING(state_buzzing_string,"BUZZING");
 CONSTANT_STRING(state_ready_to_dispense_string,"READY_TO_DISPENSE");
 CONSTANT_STRING(state_wait_to_dispense_string,"WAIT_TO_DISPENSE");
 CONSTANT_STRING(state_waiting_to_dispense_string,"WAITING_TO_DISPENSE");
@@ -52,27 +50,9 @@ const long milliseconds_per_minute = milliseconds_per_second*seconds_per_minute;
 CONSTANT_STRING(set_value_string,"setValue");
 
 // Clients
-const size_t optical_switch_interface_address[1] =
+const size_t audio_controller_address[1] =
 {
   3,
-};
-
-const size_t h_bridge_controller_address[2] =
-{
-  3,
-  3,
-};
-
-const size_t audio_controller_address[3] =
-{
-  3,
-  3,
-  3,
-};
-
-const size_t buzz_channels[BUZZ_CHANNEL_COUNT] =
-{
-  0,
 };
 
 // Pins
@@ -88,16 +68,18 @@ const long tone_frequency_min = 200;
 const long tone_frequency_max = 22000;
 
 // Properties
-const long run_current_element_default = 20;
+const long run_current_0_element_default = 4;
+const long run_current_1_2_element_default = 20;
 
-const long hold_current_element_default = 10;
+const long hold_current_0_element_default = 2;
+const long hold_current_1_2_element_default = 10;
 
 const long hold_delay_element_default = 50;
 
 CONSTANT_STRING(next_deliver_position_property_name,"nextDeliverPosition");
 
 CONSTANT_STRING(dispense_channel_position_property_name,"dispenseChannelPosition");
-const long dispense_channel_position_default = -23;
+const long dispense_channel_position_default = 11;
 
 CONSTANT_STRING(clean_position_property_name,"cleanPosition");
 
@@ -105,21 +87,6 @@ CONSTANT_STRING(clean_duration_property_name,"cleanDuration");
 const long clean_duration_min = 1;
 const long clean_duration_max = 10;
 const long clean_duration_default = 3;
-
-CONSTANT_STRING(buzz_period_property_name,"buzzPeriod");
-const long buzz_period_min = 100;
-const long buzz_period_max = 1000;
-const long buzz_period_default = 100;
-
-CONSTANT_STRING(buzz_on_duration_property_name,"buzzOnDuration");
-const long buzz_on_duration_min = 5;
-const long buzz_on_duration_max = 20;
-const long buzz_on_duration_default = 20;
-
-CONSTANT_STRING(buzz_count_property_name,"buzzCount");
-const long buzz_count_min = 1;
-const long buzz_count_max = 5;
-const long buzz_count_default = 5;
 
 CONSTANT_STRING(position_property_name,"position");
 CONSTANT_STRING(position_left,"LEFT");
