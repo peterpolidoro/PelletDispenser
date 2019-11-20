@@ -38,25 +38,25 @@ public:
   pellet_dispenser::constants::AssayStatus getAssayStatus();
   StageController::PositionArray getNextDeliverPosition();
   StageController::PositionArray getDispensePosition();
-  StageController::PositionArray getCleanPosition();
+  StageController::PositionArray getShakePosition();
   long getPositionToneFrequency();
   long getPositionToneVolume();
   long getPositionToneDelay();
   long getPositionToneDuration();
   long getDispenseDelay();
   long getReturnDelay();
-  long getCleanDuration();
+  long getShakeDuration();
 
   void moveStageToNextDeliverPosition();
   void moveStageToDispensePosition();
-  void moveStageToCleanPosition();
+  void moveStageToShakePosition();
   void playPositionTone();
   void setWaitToDispenseState();
   void waitToDispense();
   void setMoveToDispenseState();
   void waitToReturn();
-  void setMoveToCleanState();
-  void waitAtClean();
+  void setMoveToShakeState();
+  void waitAtShake();
   void setMoveToNextDeliverState();
 
   void startAssay();
@@ -82,7 +82,7 @@ private:
   void playPositionToneHandler();
   void waitToDispenseHandler(int arg);
   void moveToDispenseHandler(int arg);
-  void moveToCleanHandler(int arg);
+  void moveToShakeHandler(int arg);
   void moveToNextDeliverHandler(int arg);
   void startAssayHandler(modular_server::Pin * pin_ptr);
   void dispenseHandler(modular_server::Pin * pin_ptr);

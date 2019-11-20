@@ -102,7 +102,7 @@ const long next_deliver_position_default[stepper_controller::constants::CHANNEL_
   64,
 };
 
-const long clean_position_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
+const long shake_position_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
   3,
   55,

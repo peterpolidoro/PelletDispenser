@@ -30,10 +30,10 @@ CONSTANT_STRING(state_assay_started_string,"ASSAY_STARTED");
 CONSTANT_STRING(state_homing_string,"HOMING");
 CONSTANT_STRING(state_move_to_next_deliver_string,"MOVE_TO_NEXT_DELIVER");
 CONSTANT_STRING(state_moving_to_next_deliver_string,"MOVING_TO_NEXT_DELIVER");
-CONSTANT_STRING(state_move_to_clean_string,"MOVE_TO_CLEAN");
-CONSTANT_STRING(state_moving_to_clean_string,"MOVING_TO_CLEAN");
-CONSTANT_STRING(state_wait_at_clean_string,"WAIT_AT_CLEAN");
-CONSTANT_STRING(state_waiting_at_clean_string,"WAITING_AT_CLEAN");
+CONSTANT_STRING(state_move_to_shake_string,"MOVE_TO_SHAKE");
+CONSTANT_STRING(state_moving_to_shake_string,"MOVING_TO_SHAKE");
+CONSTANT_STRING(state_wait_at_shake_string,"WAIT_AT_SHAKE");
+CONSTANT_STRING(state_waiting_at_shake_string,"WAITING_AT_SHAKE");
 CONSTANT_STRING(state_ready_to_dispense_string,"READY_TO_DISPENSE");
 CONSTANT_STRING(state_wait_to_dispense_string,"WAIT_TO_DISPENSE");
 CONSTANT_STRING(state_waiting_to_dispense_string,"WAITING_TO_DISPENSE");
@@ -81,12 +81,12 @@ CONSTANT_STRING(next_deliver_position_property_name,"nextDeliverPosition");
 CONSTANT_STRING(dispense_channel_position_property_name,"dispenseChannelPosition");
 const long dispense_channel_position_default = 10;
 
-CONSTANT_STRING(clean_position_property_name,"cleanPosition");
+CONSTANT_STRING(shake_position_property_name,"shakePosition");
 
-CONSTANT_STRING(clean_duration_property_name,"cleanDuration");
-const long clean_duration_min = 1;
-const long clean_duration_max = 10;
-const long clean_duration_default = 3;
+CONSTANT_STRING(shake_duration_property_name,"shakeDuration");
+const long shake_duration_min = 1;
+const long shake_duration_max = 10;
+const long shake_duration_default = 3;
 
 CONSTANT_STRING(position_property_name,"position");
 CONSTANT_STRING(position_left,"LEFT");
