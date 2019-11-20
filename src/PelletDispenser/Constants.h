@@ -20,7 +20,7 @@ namespace pellet_dispenser
 namespace constants
 {
 //MAX values must be >= 1, >= created/copied count, < RAM limit
-enum{PROPERTY_COUNT_MAX=12};
+enum{PROPERTY_COUNT_MAX=10};
 enum{PARAMETER_COUNT_MAX=1};
 enum{FUNCTION_COUNT_MAX=3};
 enum{CALLBACK_COUNT_MAX=3};
@@ -45,10 +45,6 @@ extern ConstantString state_assay_started_string;
 extern ConstantString state_homing_string;
 extern ConstantString state_move_to_next_deliver_string;
 extern ConstantString state_moving_to_next_deliver_string;
-extern ConstantString state_move_to_shake_string;
-extern ConstantString state_moving_to_shake_string;
-extern ConstantString state_wait_at_shake_string;
-extern ConstantString state_waiting_at_shake_string;
 extern ConstantString state_ready_to_dispense_string;
 extern ConstantString state_wait_to_dispense_string;
 extern ConstantString state_waiting_to_dispense_string;
@@ -112,14 +108,6 @@ extern const long next_deliver_position_default[stepper_controller::constants::C
 
 extern ConstantString dispense_channel_position_property_name;
 extern const long dispense_channel_position_default;
-
-extern ConstantString shake_position_property_name;
-extern const long shake_position_default[stepper_controller::constants::CHANNEL_COUNT_MAX];
-
-extern ConstantString shake_duration_property_name;
-extern const long shake_duration_min;
-extern const long shake_duration_max;
-extern const long shake_duration_default;
 
 extern ConstantString position_property_name;
 enum{POSITION_SUBSET_LENGTH=2};

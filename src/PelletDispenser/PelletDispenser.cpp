@@ -85,12 +85,6 @@ void PelletDispenser::setup()
 
   modular_server_.createProperty(constants::dispense_channel_position_property_name,constants::dispense_channel_position_default);
 
-  modular_server_.createProperty(constants::shake_position_property_name,constants::shake_position_default);
-
-  modular_server::Property & shake_duration_property = modular_server_.createProperty(constants::shake_duration_property_name,constants::shake_duration_default);
-  shake_duration_property.setUnits(constants::seconds_units);
-  shake_duration_property.setRange(constants::shake_duration_min,constants::shake_duration_max);
-
   modular_server::Property & position_property = modular_server_.createProperty(constants::position_property_name,constants::position_ptr_default);
   position_property.setSubset(constants::position_subset);
 
@@ -226,26 +220,6 @@ void PelletDispenser::update()
   else if (state_ptr == &constants::state_waiting_to_return_string)
   {
   }
-  else if (state_ptr == &constants::state_move_to_shake_string)
-  {
-    assay_status_.state_ptr = &constants::state_moving_to_shake_string;
-    moveStageToShakePosition();
-  }
-  else if (state_ptr == &constants::state_moving_to_shake_string)
-  {
-    if (stageAtTargetPosition())
-    {
-      assay_status_.state_ptr = &constants::state_wait_at_shake_string;
-    }
-  }
-  else if (state_ptr == &constants::state_wait_at_shake_string)
-  {
-    assay_status_.state_ptr = &constants::state_waiting_at_shake_string;
-    waitAtShake();
-  }
-  else if (state_ptr == &constants::state_waiting_at_shake_string)
-  {
-  }
   else if (state_ptr == &constants::state_assay_finished_string)
   {
   }
@@ -274,14 +248,6 @@ StageController::PositionArray PelletDispenser::getDispensePosition()
   dispense_position[constants::DISPENSE_CHANNEL] = dispense_channel_position;
 
   return dispense_position;
-}
-
-StageController::PositionArray PelletDispenser::getShakePosition()
-{
-  StageController::PositionArray shake_position;
-  modular_server_.property(constants::shake_position_property_name).getValue(shake_position);
-
-  return shake_position;
 }
 
 long PelletDispenser::getPositionToneFrequency()
@@ -339,31 +305,17 @@ long PelletDispenser::getReturnDelay()
   return return_delay_ms;
 }
 
-long PelletDispenser::getShakeDuration()
-{
-  long shake_duration;
-  modular_server_.property(constants::shake_duration_property_name).getValue(shake_duration);
-
-  return shake_duration * constants::milliseconds_per_second;
-}
-
 void PelletDispenser::moveStageToNextDeliverPosition()
 {
   StageController::PositionArray next_deliver_position = getNextDeliverPosition();
   deliver_position_ = next_deliver_position;
-  moveStageSoftlyTo(next_deliver_position);
+  moveStageTo(next_deliver_position);
 }
 
 void PelletDispenser::moveStageToDispensePosition()
 {
   StageController::PositionArray dispense_position = getDispensePosition();
   moveStageTo(dispense_position);
-}
-
-void PelletDispenser::moveStageToShakePosition()
-{
-  StageController::PositionArray shake_position = getShakePosition();
-  moveStageSoftlyTo(shake_position);
 }
 
 void PelletDispenser::playPositionTone()
@@ -419,21 +371,8 @@ void PelletDispenser::setMoveToDispenseState()
 void PelletDispenser::waitToReturn()
 {
   long return_delay = getReturnDelay();
-  EventId event_id = event_controller_.addEventUsingDelay(makeFunctor((Functor1<int> *)0,*this,&PelletDispenser::moveToShakeHandler),
-    return_delay);
-  event_controller_.enable(event_id);
-}
-
-void PelletDispenser::setMoveToShakeState()
-{
-  assay_status_.state_ptr = &constants::state_move_to_shake_string;
-}
-
-void PelletDispenser::waitAtShake()
-{
-  long shake_duration = getShakeDuration();
   EventId event_id = event_controller_.addEventUsingDelay(makeFunctor((Functor1<int> *)0,*this,&PelletDispenser::moveToNextDeliverHandler),
-    shake_duration);
+    return_delay);
   event_controller_.enable(event_id);
 }
 
@@ -468,7 +407,7 @@ void PelletDispenser::abort()
 
   if (stageHomed())
   {
-    setMoveToShakeState();
+    setMoveToNextDeliverState();
   }
   else
   {
@@ -540,11 +479,6 @@ void PelletDispenser::waitToDispenseHandler(int arg)
 void PelletDispenser::moveToDispenseHandler(int arg)
 {
   setMoveToDispenseState();
-}
-
-void PelletDispenser::moveToShakeHandler(int arg)
-{
-  setMoveToShakeState();
 }
 
 void PelletDispenser::moveToNextDeliverHandler(int arg)
