@@ -20,14 +20,14 @@ namespace constants
 // Properties
 const long steps_per_position_units_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
-  5039, // microsteps/mm = (24steps/rev)*(256microsteps/step)/((0.048in/rev)*(25.4mm/in))
+  2520, // microsteps/mm = (24steps/rev)*(256microsteps/step)/((0.048in/rev)*(25.4mm/in))
   8063, // microsteps/mm = (200steps/rev)*(256microsteps/step)/((0.250in/rev)*(25.4mm/in))
   8063, // microsteps/mm = (200steps/rev)*(256microsteps/step)/((0.250in/rev)*(25.4mm/in))
 };
 
 const long velocity_max_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
-  10,
+  500,
   40,
   40,
 };
@@ -41,14 +41,14 @@ const long velocity_min_default[stepper_controller::constants::CHANNEL_COUNT_MAX
 
 const long acceleration_max_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
-  25,
+  1200,
   100,
   100,
 };
 
 const long home_velocity_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
-  -5,
+  -9,
   -20,
   -20,
 };
@@ -90,7 +90,7 @@ const long stage_position_min_default[stepper_controller::constants::CHANNEL_COU
 
 const long stage_position_max_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
-  12,
+  20,
   80,
   80,
 };
@@ -98,13 +98,13 @@ const long stage_position_max_default[stepper_controller::constants::CHANNEL_COU
 const long next_deliver_position_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
   1,
-  50,
+  33,
   64,
 };
 
 const long clean_position_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
-  1,
+  3,
   55,
   7,
 };

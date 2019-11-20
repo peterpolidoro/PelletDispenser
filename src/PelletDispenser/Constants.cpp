@@ -19,7 +19,7 @@ CONSTANT_STRING(firmware_name,"PelletDispenser");
 const modular_server::FirmwareInfo firmware_info =
 {
   .name_ptr=&firmware_name,
-  .version_major=7,
+  .version_major=8,
   .version_minor=0,
   .version_patch=0,
 };
@@ -79,7 +79,7 @@ const long hold_delay_element_default = 50;
 CONSTANT_STRING(next_deliver_position_property_name,"nextDeliverPosition");
 
 CONSTANT_STRING(dispense_channel_position_property_name,"dispenseChannelPosition");
-const long dispense_channel_position_default = 11;
+const long dispense_channel_position_default = 10;
 
 CONSTANT_STRING(clean_position_property_name,"cleanPosition");
 
@@ -99,7 +99,7 @@ modular_server::SubsetMemberType position_subset[POSITION_SUBSET_LENGTH] =
 const ConstantString * const position_ptr_default = &position_left;
 
 CONSTANT_STRING(position_tone_frequency_property_name,"positionToneFrequency");
-const long position_tone_frequency_default = 5000;
+const long position_tone_frequency_default = 5400;
 
 CONSTANT_STRING(position_tone_volume_property_name,"positionToneVolume");
 const long position_tone_volume_default = 25;
