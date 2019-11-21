@@ -51,6 +51,12 @@ const size_t audio_controller_address[1] =
   3,
 };
 
+const size_t power_switch_controller_address[2] =
+{
+  3,
+  3,
+};
+
 // Pins
 
 // Units

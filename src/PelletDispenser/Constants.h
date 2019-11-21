@@ -13,6 +13,7 @@
 #include <StageController.h>
 
 #include <AudioController.h>
+#include <PowerSwitchController.h>
 
 
 namespace pellet_dispenser
@@ -20,7 +21,7 @@ namespace pellet_dispenser
 namespace constants
 {
 //MAX values must be >= 1, >= created/copied count, < RAM limit
-enum{PROPERTY_COUNT_MAX=10};
+enum{PROPERTY_COUNT_MAX=14};
 enum{PARAMETER_COUNT_MAX=1};
 enum{FUNCTION_COUNT_MAX=3};
 enum{CALLBACK_COUNT_MAX=3};
@@ -28,6 +29,7 @@ enum{CALLBACK_COUNT_MAX=3};
 enum{EVENT_COUNT_MAX=32};
 
 enum{DISPENSE_CHANNEL=0};
+enum{BUZZ_CHANNEL=0};
 
 extern ConstantString device_name;
 
@@ -62,6 +64,8 @@ extern ConstantString set_value_string;
 
 // Clients
 extern const size_t audio_controller_address[1];
+
+extern const size_t power_switch_controller_address[2];
 
 // Pins
 

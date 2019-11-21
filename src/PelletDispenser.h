@@ -18,6 +18,7 @@
 
 #include <ModularClient.h>
 #include <AudioController.h>
+#include <PowerSwitchController.h>
 
 #include <ModularServer.h>
 #include <ModularDeviceBase.h>
@@ -44,6 +45,10 @@ public:
   long getPositionToneDuration();
   long getDispenseDelay();
   long getReturnDelay();
+  long getBuzzPower();
+  long getBuzzPeriod();
+  long getBuzzOnDuration();
+  long getBuzzCount();
 
   void moveStageToNextDeliverPosition();
   void moveStageToDispensePosition();
@@ -53,6 +58,7 @@ public:
   void setMoveToDispenseState();
   void waitToReturn();
   void setMoveToNextDeliverState();
+  void buzz();
 
   void startAssay();
   void dispense();
@@ -68,6 +74,7 @@ private:
   EventController<pellet_dispenser::constants::EVENT_COUNT_MAX> event_controller_;
 
   ModularClient * audio_controller_ptr_;
+  ModularClient * power_switch_controller_ptr_;
 
   StageController::PositionArray deliver_position_;
 
@@ -78,6 +85,7 @@ private:
   void waitToDispenseHandler(int arg);
   void moveToDispenseHandler(int arg);
   void moveToNextDeliverHandler(int arg);
+  void buzzHandler(int arg);
   void startAssayHandler(modular_server::Pin * pin_ptr);
   void dispenseHandler(modular_server::Pin * pin_ptr);
   void abortHandler(modular_server::Pin * pin_ptr);
