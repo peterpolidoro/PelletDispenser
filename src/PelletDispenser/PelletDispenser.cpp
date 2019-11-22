@@ -455,7 +455,7 @@ void PelletDispenser::buzz()
 
   power_switch_controller_ptr_->call(power_switch_controller::constants::add_pwm_function_name,
     buzz_channels_array,
-    buzz_period,
+    buzz_on_duration,
     buzz_period,
     buzz_on_duration,
     buzz_count);

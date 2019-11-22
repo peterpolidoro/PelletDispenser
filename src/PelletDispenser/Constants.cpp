@@ -132,19 +132,19 @@ CONSTANT_STRING(return_delay_max_property_name,"returnDelayMax");
 const double return_delay_max_default = 10.0;
 
 CONSTANT_STRING(buzz_power_property_name,"buzzPower");
-const long buzz_power_min = 10;
+const long buzz_power_min = 1;
 const long buzz_power_max = 25;
 const long buzz_power_default = 21;
 
 CONSTANT_STRING(buzz_period_property_name,"buzzPeriod");
-const long buzz_period_min = 100;
-const long buzz_period_max = 10000;
-const long buzz_period_default = 1000;
+const long buzz_period_min = 10;
+const long buzz_period_max = 100000;
+const long buzz_period_default = 500;
 
 CONSTANT_STRING(buzz_on_duration_property_name,"buzzOnDuration");
-const long buzz_on_duration_min = 100;
+const long buzz_on_duration_min = 1;
 const long buzz_on_duration_max = 10000;
-const long buzz_on_duration_default = 100;
+const long buzz_on_duration_default = 20;
 
 CONSTANT_STRING(buzz_count_property_name,"buzzCount");
 const long buzz_count_min = 1;
