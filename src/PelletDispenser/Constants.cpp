@@ -38,6 +38,8 @@ CONSTANT_STRING(state_moving_to_dispense_string,"MOVING_TO_DISPENSE");
 CONSTANT_STRING(state_wait_to_return_string,"WAIT_TO_RETURN");
 CONSTANT_STRING(state_waiting_to_return_string,"WAITING_TO_RETURN");
 CONSTANT_STRING(state_assay_finished_string,"ASSAY_FINISHED");
+CONSTANT_STRING(state_buzz_string,"BUZZ");
+CONSTANT_STRING(state_buzzing_string,"BUZZING");
 
 const long seconds_per_minute = 60;
 const long milliseconds_per_second = 1000;
@@ -57,6 +59,12 @@ const size_t power_switch_controller_address[2] =
   3,
 };
 
+const size_t buzz_channels[BUZZ_CHANNEL_COUNT] =
+{
+  0,
+};
+const size_t buzz_channel_group = 1;
+
 // Pins
 
 // Units
@@ -65,6 +73,7 @@ CONSTANT_STRING(ms_units,"ms");
 CONSTANT_STRING(seconds_units,"s");
 CONSTANT_STRING(minutes_units,"min");
 CONSTANT_STRING(hz_units,"Hz");
+CONSTANT_STRING(percent_units,"%");
 
 const long tone_frequency_min = 200;
 const long tone_frequency_max = 22000;
@@ -122,12 +131,33 @@ const double return_delay_min_default = 10.0;
 CONSTANT_STRING(return_delay_max_property_name,"returnDelayMax");
 const double return_delay_max_default = 10.0;
 
+CONSTANT_STRING(buzz_power_property_name,"buzzPower");
+const long buzz_power_min = 10;
+const long buzz_power_max = 25;
+const long buzz_power_default = 21;
+
+CONSTANT_STRING(buzz_period_property_name,"buzzPeriod");
+const long buzz_period_min = 100;
+const long buzz_period_max = 10000;
+const long buzz_period_default = 1000;
+
+CONSTANT_STRING(buzz_on_duration_property_name,"buzzOnDuration");
+const long buzz_on_duration_min = 100;
+const long buzz_on_duration_max = 10000;
+const long buzz_on_duration_default = 100;
+
+CONSTANT_STRING(buzz_count_property_name,"buzzCount");
+const long buzz_count_min = 1;
+const long buzz_count_max = 5;
+const long buzz_count_default = 3;
+
 // Parameters
 
 // Functions
 CONSTANT_STRING(set_client_property_values_function_name,"setClientPropertyValues");
 CONSTANT_STRING(get_assay_status_function_name,"getAssayStatus");
 CONSTANT_STRING(play_position_tone_function_name,"playPositionTone");
+CONSTANT_STRING(buzz_function_name,"buzz");
 
 // Callbacks
 CONSTANT_STRING(start_assay_callback_name,"startAssay");

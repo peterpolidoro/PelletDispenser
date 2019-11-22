@@ -17,6 +17,42 @@
 * API NAMES
 
   #+BEGIN_SRC js
+    {
+      "id": "getApi",
+      "result": {
+        "firmware": [
+          "PelletDispenser"
+        ],
+        "verbosity": "NAMES",
+        "functions": [
+          "setClientPropertyValues",
+          "getAssayStatus",
+          "playPositionTone",
+          "buzz"
+        ],
+        "properties": [
+          "nextDeliverPosition",
+          "dispenseChannelPosition",
+          "position",
+          "positionToneFrequency",
+          "positionToneVolume",
+          "positionToneDelay",
+          "positionToneDuration",
+          "dispenseDelay",
+          "returnDelayMin",
+          "returnDelayMax",
+          "buzzPower",
+          "buzzPeriod",
+          "buzzOnDuration",
+          "buzzCount"
+        ],
+        "callbacks": [
+          "startAssay",
+          "dispense",
+          "abort"
+        ]
+      }
+    }
   #+END_SRC
 
 * API GENERAL
@@ -38,6 +74,8 @@
 * Clients
 
   [[https://github.com/janelia-arduino/AudioController]]
+
+  [[https://github.com/janelia-arduino/PowerSwitchController]]
 
 * Devices
 

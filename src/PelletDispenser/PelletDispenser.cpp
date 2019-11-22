@@ -27,6 +27,7 @@ void PelletDispenser::setup()
 
   // Clients Setup
   audio_controller_ptr_ = &(createClientAtAddress(audio_controller::constants::device_name,constants::audio_controller_address));
+  power_switch_controller_ptr_ = &(createClientAtAddress(power_switch_controller::constants::device_name,constants::power_switch_controller_address));
 
   // Pin Setup
 
@@ -115,6 +116,21 @@ void PelletDispenser::setup()
   return_delay_max_property.setUnits(constants::seconds_units);
   return_delay_max_property.setRange(constants::return_delay_min,constants::return_delay_max);
 
+  modular_server::Property & buzz_power_property = modular_server_.createProperty(constants::buzz_power_property_name,constants::buzz_power_default);
+  buzz_power_property.setUnits(constants::percent_units);
+  buzz_power_property.setRange(constants::buzz_power_min,constants::buzz_power_max);
+
+  modular_server::Property & buzz_period_property = modular_server_.createProperty(constants::buzz_period_property_name,constants::buzz_period_default);
+  buzz_period_property.setUnits(constants::ms_units);
+  buzz_period_property.setRange(constants::buzz_period_min,constants::buzz_period_max);
+
+  modular_server::Property & buzz_on_duration_property = modular_server_.createProperty(constants::buzz_on_duration_property_name,constants::buzz_on_duration_default);
+  buzz_on_duration_property.setUnits(constants::ms_units);
+  buzz_on_duration_property.setRange(constants::buzz_on_duration_min,constants::buzz_on_duration_max);
+
+  modular_server::Property & buzz_count_property = modular_server_.createProperty(constants::buzz_count_property_name,constants::buzz_count_default);
+  buzz_count_property.setRange(constants::buzz_count_min,constants::buzz_count_max);
+
   // Parameters
   modular_server::Parameter & stage_position_parameter = modular_server_.parameter(stage_controller::constants::stage_position_parameter_name);
   stage_position_parameter.setUnits(constants::mm_units);
@@ -130,6 +146,9 @@ void PelletDispenser::setup()
 
   modular_server::Function & play_position_tone_function = modular_server_.createFunction(constants::play_position_tone_function_name);
   play_position_tone_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&PelletDispenser::playPositionToneHandler));
+
+  modular_server::Function & buzz_function = modular_server_.createFunction(constants::buzz_function_name);
+  buzz_function.attachFunctor(makeFunctor((Functor0 *)0,*this,&PelletDispenser::buzzHandler));
 
   // Callbacks
   modular_server::Callback & start_assay_callback = modular_server_.createCallback(constants::start_assay_callback_name);
@@ -186,8 +205,16 @@ void PelletDispenser::update()
   {
     if (stageAtTargetPosition())
     {
-      assay_status_.state_ptr = &constants::state_ready_to_dispense_string;
+      assay_status_.state_ptr = &constants::state_buzz_string;
     }
+  }
+  else if (state_ptr == &constants::state_buzz_string)
+  {
+    assay_status_.state_ptr = &constants::state_buzzing_string;
+    buzz();
+  }
+  else if (state_ptr == &constants::state_buzzing_string)
+  {
   }
   else if (state_ptr == &constants::state_ready_to_dispense_string)
   {
@@ -305,6 +332,38 @@ long PelletDispenser::getReturnDelay()
   return return_delay_ms;
 }
 
+long PelletDispenser::getBuzzPower()
+{
+  long buzz_power;
+  modular_server_.property(constants::buzz_power_property_name).getValue(buzz_power);
+
+  return buzz_power;
+}
+
+long PelletDispenser::getBuzzPeriod()
+{
+  long buzz_period;
+  modular_server_.property(constants::buzz_period_property_name).getValue(buzz_period);
+
+  return buzz_period;
+}
+
+long PelletDispenser::getBuzzOnDuration()
+{
+  long buzz_on_duration;
+  modular_server_.property(constants::buzz_on_duration_property_name).getValue(buzz_on_duration);
+
+  return buzz_on_duration;
+}
+
+long PelletDispenser::getBuzzCount()
+{
+  long buzz_count;
+  modular_server_.property(constants::buzz_count_property_name).getValue(buzz_count);
+
+  return buzz_count;
+}
+
 void PelletDispenser::moveStageToNextDeliverPosition()
 {
   StageController::PositionArray next_deliver_position = getNextDeliverPosition();
@@ -379,6 +438,35 @@ void PelletDispenser::waitToReturn()
 void PelletDispenser::setMoveToNextDeliverState()
 {
   assay_status_.state_ptr = &constants::state_move_to_next_deliver_string;
+}
+
+void PelletDispenser::buzz()
+{
+  long buzz_power = getBuzzPower();
+  long buzz_period = getBuzzPeriod();
+  long buzz_on_duration = getBuzzOnDuration();
+  long buzz_count = getBuzzCount();
+
+  power_switch_controller_ptr_->call(power_switch_controller::constants::set_power_function_name,
+    constants::buzz_channel_group,
+    buzz_power);
+
+  Array<size_t,constants::BUZZ_CHANNEL_COUNT> buzz_channels_array(constants::buzz_channels);
+
+  power_switch_controller_ptr_->call(power_switch_controller::constants::add_pwm_function_name,
+    buzz_channels_array,
+    buzz_period,
+    buzz_period,
+    buzz_on_duration,
+    buzz_count);
+  EventId event_id = event_controller_.addEventUsingDelay(makeFunctor((Functor1<int> *)0,*this,&PelletDispenser::setReadyToDispenseHandler),
+    buzz_period*buzz_count);
+  event_controller_.enable(event_id);
+}
+
+void PelletDispenser::setReadyToDispenseState()
+{
+  assay_status_.state_ptr = &constants::state_ready_to_dispense_string;
 }
 
 void PelletDispenser::startAssay()
@@ -471,6 +559,15 @@ void PelletDispenser::playPositionToneHandler()
   playPositionTone();
 }
 
+void PelletDispenser::buzzHandler()
+{
+  if ((assay_status_.state_ptr == &constants::state_assay_not_started_string) ||
+    (assay_status_.state_ptr == &constants::state_assay_finished_string))
+  {
+    buzz();
+  }
+}
+
 void PelletDispenser::waitToDispenseHandler(int arg)
 {
   setWaitToDispenseState();
@@ -484,6 +581,14 @@ void PelletDispenser::moveToDispenseHandler(int arg)
 void PelletDispenser::moveToNextDeliverHandler(int arg)
 {
   setMoveToNextDeliverState();
+}
+
+void PelletDispenser::setReadyToDispenseHandler(int arg)
+{
+  if (assay_status_.state_ptr == &constants::state_buzzing_string)
+  {
+    setReadyToDispenseState();
+  }
 }
 
 void PelletDispenser::startAssayHandler(modular_server::Pin * pin_ptr)

@@ -59,6 +59,7 @@ public:
   void waitToReturn();
   void setMoveToNextDeliverState();
   void buzz();
+  void setReadyToDispenseState();
 
   void startAssay();
   void dispense();
@@ -82,10 +83,11 @@ private:
   void setClientPropertyValuesHandler();
   void getAssayStatusHandler();
   void playPositionToneHandler();
+  void buzzHandler();
   void waitToDispenseHandler(int arg);
   void moveToDispenseHandler(int arg);
   void moveToNextDeliverHandler(int arg);
-  void buzzHandler(int arg);
+  void setReadyToDispenseHandler(int arg);
   void startAssayHandler(modular_server::Pin * pin_ptr);
   void dispenseHandler(modular_server::Pin * pin_ptr);
   void abortHandler(modular_server::Pin * pin_ptr);
