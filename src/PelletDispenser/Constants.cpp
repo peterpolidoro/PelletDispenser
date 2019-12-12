@@ -29,7 +29,7 @@ CONSTANT_STRING(state_assay_not_started_string,"ASSAY_NOT_STARTED");
 CONSTANT_STRING(state_assay_started_string,"ASSAY_STARTED");
 CONSTANT_STRING(state_homing_string,"HOMING");
 CONSTANT_STRING(state_move_to_load_string,"MOVE_TO_LOAD");
-CONSTANT_STRING(state_moving_load_deliver_string,"MOVING_TO_LOAD");
+CONSTANT_STRING(state_moving_to_load_string,"MOVING_TO_LOAD");
 CONSTANT_STRING(state_move_to_next_deliver_string,"MOVE_TO_NEXT_DELIVER");
 CONSTANT_STRING(state_moving_to_next_deliver_string,"MOVING_TO_NEXT_DELIVER");
 CONSTANT_STRING(state_ready_to_dispense_string,"READY_TO_DISPENSE");
