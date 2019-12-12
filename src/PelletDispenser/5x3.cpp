@@ -95,9 +95,16 @@ const long stage_position_max_default[stepper_controller::constants::CHANNEL_COU
   80,
 };
 
-const long next_deliver_position_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
+const long load_position_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
   1,
+  33,
+  64,
+};
+
+const long next_deliver_position_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
+{
+  5,
   33,
   64,
 };

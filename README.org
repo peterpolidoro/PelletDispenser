@@ -4,7 +4,7 @@
 
 * Library Information
   - Name :: PelletDispenser
-  - Version :: 8.0.1
+  - Version :: 9.0.0
   - License :: BSD
   - URL :: https://github.com/janelia-arduino/PelletDispenser
   - Author :: Peter Polidoro
@@ -17,42 +17,6 @@
 * API NAMES
 
   #+BEGIN_SRC js
-    {
-      "id": "getApi",
-      "result": {
-        "firmware": [
-          "PelletDispenser"
-        ],
-        "verbosity": "NAMES",
-        "functions": [
-          "setClientPropertyValues",
-          "getAssayStatus",
-          "playPositionTone",
-          "buzz"
-        ],
-        "properties": [
-          "nextDeliverPosition",
-          "dispenseChannelPosition",
-          "position",
-          "positionToneFrequency",
-          "positionToneVolume",
-          "positionToneDelay",
-          "positionToneDuration",
-          "dispenseDelay",
-          "returnDelayMin",
-          "returnDelayMax",
-          "buzzPower",
-          "buzzPeriod",
-          "buzzOnDuration",
-          "buzzCount"
-        ],
-        "callbacks": [
-          "startAssay",
-          "dispense",
-          "abort"
-        ]
-      }
-    }
   #+END_SRC
 
 * API GENERAL
