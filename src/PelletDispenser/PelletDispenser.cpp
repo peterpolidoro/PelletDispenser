@@ -388,9 +388,8 @@ long PelletDispenser::getBuzzCount()
 
 void PelletDispenser::moveStageToLoadPosition()
 {
-  StageController::PositionArray load_position = getNextDeliverPosition();
-  deliver_position_ = load_position;
-  moveStageSoftlyTo(load_position);
+  StageController::PositionArray load_position = getLoadPosition();
+  moveStageTo(load_position);
 }
 
 void PelletDispenser::moveStageToNextDeliverPosition()
