@@ -28,6 +28,8 @@ CONSTANT_STRING(state_string,"state");
 CONSTANT_STRING(state_assay_not_started_string,"ASSAY_NOT_STARTED");
 CONSTANT_STRING(state_assay_started_string,"ASSAY_STARTED");
 CONSTANT_STRING(state_homing_string,"HOMING");
+CONSTANT_STRING(state_move_to_buzz_string,"MOVE_TO_BUZZ");
+CONSTANT_STRING(state_moving_to_buzz_string,"MOVING_TO_BUZZ");
 CONSTANT_STRING(state_move_to_load_string,"MOVE_TO_LOAD");
 CONSTANT_STRING(state_moving_to_load_string,"MOVING_TO_LOAD");
 CONSTANT_STRING(state_move_to_next_deliver_string,"MOVE_TO_NEXT_DELIVER");
@@ -88,6 +90,8 @@ const long hold_current_0_element_default = 2;
 const long hold_current_1_2_element_default = 10;
 
 const long hold_delay_element_default = 50;
+
+CONSTANT_STRING(buzz_position_property_name,"buzzPosition");
 
 CONSTANT_STRING(load_position_property_name,"loadPosition");
 

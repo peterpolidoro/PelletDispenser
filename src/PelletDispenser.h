@@ -37,6 +37,7 @@ public:
   virtual void update();
 
   pellet_dispenser::constants::AssayStatus getAssayStatus();
+  StageController::PositionArray getBuzzPosition();
   StageController::PositionArray getLoadPosition();
   StageController::PositionArray getNextDeliverPosition();
   StageController::PositionArray getDispensePosition();
@@ -51,6 +52,7 @@ public:
   long getBuzzOnDuration();
   long getBuzzCount();
 
+  void moveStageToBuzzPosition();
   void moveStageToLoadPosition();
   void moveStageToNextDeliverPosition();
   void moveStageToDispensePosition();
@@ -59,10 +61,9 @@ public:
   void waitToDispense();
   void setMoveToDispenseState();
   void waitToReturn();
+  void setMoveToBuzzState();
   void setMoveToLoadState();
-  void setMoveToNextDeliverState();
   void buzz();
-  void setReadyToDispenseState();
 
   void startAssay();
   void dispense();
@@ -87,11 +88,9 @@ private:
   void getAssayStatusHandler();
   void playPositionToneHandler();
   void buzzHandler();
-  void waitToDispenseHandler(int arg);
   void moveToDispenseHandler(int arg);
-  void moveToLoadHandler(int arg);
-  void moveToNextDeliverHandler(int arg);
-  void setReadyToDispenseHandler(int arg);
+  void moveToBuzzHandler(int arg);
+  void setMoveToLoadHandler(int arg);
   void startAssayHandler(modular_server::Pin * pin_ptr);
   void dispenseHandler(modular_server::Pin * pin_ptr);
   void abortHandler(modular_server::Pin * pin_ptr);

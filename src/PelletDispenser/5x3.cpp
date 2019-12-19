@@ -95,6 +95,13 @@ const long stage_position_max_default[stepper_controller::constants::CHANNEL_COU
   80,
 };
 
+const long buzz_position_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
+{
+  10,
+  33,
+  64,
+};
+
 const long load_position_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
   1,
@@ -104,7 +111,7 @@ const long load_position_default[stepper_controller::constants::CHANNEL_COUNT_MA
 
 const long next_deliver_position_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
-  5,
+  8,
   33,
   64,
 };

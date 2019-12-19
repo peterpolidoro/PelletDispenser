@@ -21,7 +21,7 @@ namespace pellet_dispenser
 namespace constants
 {
 //MAX values must be >= 1, >= created/copied count, < RAM limit
-enum{PROPERTY_COUNT_MAX=15};
+enum{PROPERTY_COUNT_MAX=16};
 enum{PARAMETER_COUNT_MAX=1};
 enum{FUNCTION_COUNT_MAX=4};
 enum{CALLBACK_COUNT_MAX=3};
@@ -44,6 +44,8 @@ extern ConstantString state_string;
 extern ConstantString state_assay_not_started_string;
 extern ConstantString state_assay_started_string;
 extern ConstantString state_homing_string;
+extern ConstantString state_move_to_buzz_string;
+extern ConstantString state_moving_to_buzz_string;
 extern ConstantString state_move_to_load_string;
 extern ConstantString state_moving_to_load_string;
 extern ConstantString state_move_to_next_deliver_string;
@@ -114,6 +116,9 @@ extern const long hold_delay_element_default;
 extern const long stage_position_min_default[stepper_controller::constants::CHANNEL_COUNT_MAX];
 
 extern const long stage_position_max_default[stepper_controller::constants::CHANNEL_COUNT_MAX];
+
+extern ConstantString buzz_position_property_name;
+extern const long buzz_position_default[stepper_controller::constants::CHANNEL_COUNT_MAX];
 
 extern ConstantString load_position_property_name;
 extern const long load_position_default[stepper_controller::constants::CHANNEL_COUNT_MAX];
