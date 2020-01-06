@@ -21,7 +21,7 @@ namespace pellet_dispenser
 namespace constants
 {
 //MAX values must be >= 1, >= created/copied count, < RAM limit
-enum{PROPERTY_COUNT_MAX=16};
+enum{PROPERTY_COUNT_MAX=17};
 enum{PARAMETER_COUNT_MAX=1};
 enum{FUNCTION_COUNT_MAX=4};
 enum{CALLBACK_COUNT_MAX=3};
@@ -48,6 +48,8 @@ extern ConstantString state_move_to_buzz_string;
 extern ConstantString state_moving_to_buzz_string;
 extern ConstantString state_move_to_load_string;
 extern ConstantString state_moving_to_load_string;
+extern ConstantString state_wait_at_load_string;
+extern ConstantString state_waiting_at_load_string;
 extern ConstantString state_move_to_next_deliver_string;
 extern ConstantString state_moving_to_next_deliver_string;
 extern ConstantString state_ready_to_dispense_string;
@@ -184,6 +186,11 @@ extern ConstantString buzz_count_property_name;
 extern const long buzz_count_min;
 extern const long buzz_count_max;
 extern const long buzz_count_default;
+
+extern ConstantString wait_at_load_duration_property_name;
+extern const long wait_at_load_duration_min;
+extern const long wait_at_load_duration_max;
+extern const long wait_at_load_duration_default;
 
 // Parameters
 

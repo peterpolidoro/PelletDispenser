@@ -51,9 +51,11 @@ public:
   long getBuzzPeriod();
   long getBuzzOnDuration();
   long getBuzzCount();
+  long getWaitAtLoadDuration();
 
   void moveStageToBuzzPosition();
   void moveStageToLoadPosition();
+  void waitAtLoad();
   void moveStageToNextDeliverPosition();
   void moveStageToDispensePosition();
   void playPositionTone();
@@ -63,6 +65,7 @@ public:
   void waitToReturn();
   void setMoveToBuzzState();
   void setMoveToLoadState();
+  void setMoveToNextDeliverPositionState();
   void buzz();
 
   void startAssay();
@@ -91,6 +94,7 @@ private:
   void moveToDispenseHandler(int arg);
   void moveToBuzzHandler(int arg);
   void setMoveToLoadHandler(int arg);
+  void setMoveToNextDeliverPositionHandler(int arg);
   void startAssayHandler(modular_server::Pin * pin_ptr);
   void dispenseHandler(modular_server::Pin * pin_ptr);
   void abortHandler(modular_server::Pin * pin_ptr);

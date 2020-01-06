@@ -20,7 +20,7 @@ const modular_server::FirmwareInfo firmware_info =
 {
   .name_ptr=&firmware_name,
   .version_major=9,
-  .version_minor=0,
+  .version_minor=1,
   .version_patch=0,
 };
 
@@ -32,6 +32,8 @@ CONSTANT_STRING(state_move_to_buzz_string,"MOVE_TO_BUZZ");
 CONSTANT_STRING(state_moving_to_buzz_string,"MOVING_TO_BUZZ");
 CONSTANT_STRING(state_move_to_load_string,"MOVE_TO_LOAD");
 CONSTANT_STRING(state_moving_to_load_string,"MOVING_TO_LOAD");
+CONSTANT_STRING(state_wait_at_load_string,"WAIT_AT_LOAD");
+CONSTANT_STRING(state_waiting_at_load_string,"WAITING_AT_LOAD");
 CONSTANT_STRING(state_move_to_next_deliver_string,"MOVE_TO_NEXT_DELIVER");
 CONSTANT_STRING(state_moving_to_next_deliver_string,"MOVING_TO_NEXT_DELIVER");
 CONSTANT_STRING(state_ready_to_dispense_string,"READY_TO_DISPENSE");
@@ -158,6 +160,11 @@ CONSTANT_STRING(buzz_count_property_name,"buzzCount");
 const long buzz_count_min = 1;
 const long buzz_count_max = 5;
 const long buzz_count_default = 3;
+
+CONSTANT_STRING(wait_at_load_duration_property_name,"waitAtLoadDuration");
+const long wait_at_load_duration_min = 1;
+const long wait_at_load_duration_max = 10000;
+const long wait_at_load_duration_default = 1000;
 
 // Parameters
 

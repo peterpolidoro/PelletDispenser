@@ -135,6 +135,10 @@ void PelletDispenser::setup()
   modular_server::Property & buzz_count_property = modular_server_.createProperty(constants::buzz_count_property_name,constants::buzz_count_default);
   buzz_count_property.setRange(constants::buzz_count_min,constants::buzz_count_max);
 
+  modular_server::Property & wait_at_load_duration_property = modular_server_.createProperty(constants::wait_at_load_duration_property_name,constants::wait_at_load_duration_default);
+  wait_at_load_duration_property.setUnits(constants::ms_units);
+  wait_at_load_duration_property.setRange(constants::wait_at_load_duration_min,constants::wait_at_load_duration_max);
+
   // Parameters
   modular_server::Parameter & stage_position_parameter = modular_server_.parameter(stage_controller::constants::stage_position_parameter_name);
   stage_position_parameter.setUnits(constants::mm_units);
@@ -229,8 +233,16 @@ void PelletDispenser::update()
   {
     if (stageAtTargetPosition())
     {
-      assay_status_.state_ptr = &constants::state_move_to_next_deliver_string;
+      assay_status_.state_ptr = &constants::state_wait_at_load_string;
     }
+  }
+  else if (state_ptr == &constants::state_wait_at_load_string)
+  {
+    assay_status_.state_ptr = &constants::state_waiting_at_load_string;
+    waitAtLoad();
+  }
+  else if (state_ptr == &constants::state_waiting_at_load_string)
+  {
   }
   else if (state_ptr == &constants::state_move_to_next_deliver_string)
   {
@@ -408,6 +420,14 @@ long PelletDispenser::getBuzzCount()
   return buzz_count;
 }
 
+long PelletDispenser::getWaitAtLoadDuration()
+{
+  long wait_at_load_duration;
+  modular_server_.property(constants::wait_at_load_duration_property_name).getValue(wait_at_load_duration);
+
+  return wait_at_load_duration;
+}
+
 void PelletDispenser::moveStageToBuzzPosition()
 {
   StageController::PositionArray buzz_position = getBuzzPosition();
@@ -418,6 +438,14 @@ void PelletDispenser::moveStageToLoadPosition()
 {
   StageController::PositionArray load_position = getLoadPosition();
   moveStageSoftlyTo(load_position);
+}
+
+void PelletDispenser::waitAtLoad()
+{
+  long wait_at_load_duration = getWaitAtLoadDuration();
+  EventId event_id = event_controller_.addEventUsingDelay(makeFunctor((Functor1<int> *)0,*this,&PelletDispenser::setMoveToNextDeliverPositionHandler),
+    wait_at_load_duration);
+  event_controller_.enable(event_id);
 }
 
 void PelletDispenser::moveStageToNextDeliverPosition()
@@ -499,6 +527,11 @@ void PelletDispenser::setMoveToBuzzState()
 void PelletDispenser::setMoveToLoadState()
 {
   assay_status_.state_ptr = &constants::state_move_to_load_string;
+}
+
+void PelletDispenser::setMoveToNextDeliverPositionState()
+{
+  assay_status_.state_ptr = &constants::state_move_to_next_deliver_string;
 }
 
 void PelletDispenser::buzz()
@@ -639,6 +672,14 @@ void PelletDispenser::setMoveToLoadHandler(int arg)
   if (assay_status_.state_ptr == &constants::state_buzzing_string)
   {
     setMoveToLoadState();
+  }
+}
+
+void PelletDispenser::setMoveToNextDeliverPositionHandler(int arg)
+{
+  if (assay_status_.state_ptr == &constants::state_waiting_at_load_string)
+  {
+    setMoveToNextDeliverPositionState();
   }
 }
 
