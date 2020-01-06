@@ -52,6 +52,9 @@ public:
   long getBuzzOnDuration();
   long getBuzzCount();
   long getWaitAtLoadDuration();
+  long getTapPeriod();
+  long getTapOnDuration();
+  long getTapCount();
 
   void moveStageToBuzzPosition();
   void moveStageToLoadPosition();
@@ -65,8 +68,10 @@ public:
   void waitToReturn();
   void setMoveToBuzzState();
   void setMoveToLoadState();
+  void setWaitAtLoadState();
   void setMoveToNextDeliverPositionState();
   void buzz();
+  void tap();
 
   void startAssay();
   void dispense();
@@ -94,6 +99,7 @@ private:
   void moveToDispenseHandler(int arg);
   void moveToBuzzHandler(int arg);
   void setMoveToLoadHandler(int arg);
+  void setWaitAtLoadHandler(int arg);
   void setMoveToNextDeliverPositionHandler(int arg);
   void startAssayHandler(modular_server::Pin * pin_ptr);
   void dispenseHandler(modular_server::Pin * pin_ptr);

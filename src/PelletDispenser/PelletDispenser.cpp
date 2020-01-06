@@ -139,6 +139,17 @@ void PelletDispenser::setup()
   wait_at_load_duration_property.setUnits(constants::ms_units);
   wait_at_load_duration_property.setRange(constants::wait_at_load_duration_min,constants::wait_at_load_duration_max);
 
+  modular_server::Property & tap_period_property = modular_server_.createProperty(constants::tap_period_property_name,constants::tap_period_default);
+  tap_period_property.setUnits(constants::ms_units);
+  tap_period_property.setRange(constants::tap_period_min,constants::tap_period_max);
+
+  modular_server::Property & tap_on_duration_property = modular_server_.createProperty(constants::tap_on_duration_property_name,constants::tap_on_duration_default);
+  tap_on_duration_property.setUnits(constants::ms_units);
+  tap_on_duration_property.setRange(constants::tap_on_duration_min,constants::tap_on_duration_max);
+
+  modular_server::Property & tap_count_property = modular_server_.createProperty(constants::tap_count_property_name,constants::tap_count_default);
+  tap_count_property.setRange(constants::tap_count_min,constants::tap_count_max);
+
   // Parameters
   modular_server::Parameter & stage_position_parameter = modular_server_.parameter(stage_controller::constants::stage_position_parameter_name);
   stage_position_parameter.setUnits(constants::mm_units);
@@ -233,8 +244,16 @@ void PelletDispenser::update()
   {
     if (stageAtTargetPosition())
     {
-      assay_status_.state_ptr = &constants::state_wait_at_load_string;
+      assay_status_.state_ptr = &constants::state_tap_string;
     }
+  }
+  else if (state_ptr == &constants::state_tap_string)
+  {
+    assay_status_.state_ptr = &constants::state_tapping_string;
+    tap();
+  }
+  else if (state_ptr == &constants::state_tapping_string)
+  {
   }
   else if (state_ptr == &constants::state_wait_at_load_string)
   {
@@ -428,6 +447,30 @@ long PelletDispenser::getWaitAtLoadDuration()
   return wait_at_load_duration;
 }
 
+long PelletDispenser::getTapPeriod()
+{
+  long tap_period;
+  modular_server_.property(constants::tap_period_property_name).getValue(tap_period);
+
+  return tap_period;
+}
+
+long PelletDispenser::getTapOnDuration()
+{
+  long tap_on_duration;
+  modular_server_.property(constants::tap_on_duration_property_name).getValue(tap_on_duration);
+
+  return tap_on_duration;
+}
+
+long PelletDispenser::getTapCount()
+{
+  long tap_count;
+  modular_server_.property(constants::tap_count_property_name).getValue(tap_count);
+
+  return tap_count;
+}
+
 void PelletDispenser::moveStageToBuzzPosition()
 {
   StageController::PositionArray buzz_position = getBuzzPosition();
@@ -529,6 +572,11 @@ void PelletDispenser::setMoveToLoadState()
   assay_status_.state_ptr = &constants::state_move_to_load_string;
 }
 
+void PelletDispenser::setWaitAtLoadState()
+{
+  assay_status_.state_ptr = &constants::state_wait_at_load_string;
+}
+
 void PelletDispenser::setMoveToNextDeliverPositionState()
 {
   assay_status_.state_ptr = &constants::state_move_to_next_deliver_string;
@@ -555,6 +603,30 @@ void PelletDispenser::buzz()
     buzz_count);
   EventId event_id = event_controller_.addEventUsingDelay(makeFunctor((Functor1<int> *)0,*this,&PelletDispenser::setMoveToLoadHandler),
     buzz_period*buzz_count);
+  event_controller_.enable(event_id);
+}
+
+void PelletDispenser::tap()
+{
+  long tap_power = getBuzzPower();
+  long tap_period = getTapPeriod();
+  long tap_on_duration = getTapOnDuration();
+  long tap_count = getTapCount();
+
+  power_switch_controller_ptr_->call(power_switch_controller::constants::set_power_function_name,
+    constants::buzz_channel_group,
+    tap_power);
+
+  Array<size_t,constants::BUZZ_CHANNEL_COUNT> buzz_channels_array(constants::buzz_channels);
+
+  power_switch_controller_ptr_->call(power_switch_controller::constants::add_pwm_function_name,
+    buzz_channels_array,
+    tap_on_duration,
+    tap_period,
+    tap_on_duration,
+    tap_count);
+  EventId event_id = event_controller_.addEventUsingDelay(makeFunctor((Functor1<int> *)0,*this,&PelletDispenser::setWaitAtLoadHandler),
+    tap_period*tap_count);
   event_controller_.enable(event_id);
 }
 
@@ -672,6 +744,14 @@ void PelletDispenser::setMoveToLoadHandler(int arg)
   if (assay_status_.state_ptr == &constants::state_buzzing_string)
   {
     setMoveToLoadState();
+  }
+}
+
+void PelletDispenser::setWaitAtLoadHandler(int arg)
+{
+  if (assay_status_.state_ptr == &constants::state_tapping_string)
+  {
+    setWaitAtLoadState();
   }
 }
 

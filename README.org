@@ -4,7 +4,7 @@
 
 * Library Information
   - Name :: PelletDispenser
-  - Version :: 9.1.0
+  - Version :: 9.2.0
   - License :: BSD
   - URL :: https://github.com/janelia-arduino/PelletDispenser
   - Author :: Peter Polidoro
@@ -47,7 +47,10 @@
           "buzzPeriod",
           "buzzOnDuration",
           "buzzCount",
-          "waitAtLoadDuration"
+          "waitAtLoadDuration",
+          "tapPeriod",
+          "tapOnDuration",
+          "tapCount"
         ],
         "callbacks": [
           "startAssay",

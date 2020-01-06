@@ -20,7 +20,7 @@ const modular_server::FirmwareInfo firmware_info =
 {
   .name_ptr=&firmware_name,
   .version_major=9,
-  .version_minor=1,
+  .version_minor=2,
   .version_patch=0,
 };
 
@@ -46,6 +46,8 @@ CONSTANT_STRING(state_waiting_to_return_string,"WAITING_TO_RETURN");
 CONSTANT_STRING(state_assay_finished_string,"ASSAY_FINISHED");
 CONSTANT_STRING(state_buzz_string,"BUZZ");
 CONSTANT_STRING(state_buzzing_string,"BUZZING");
+CONSTANT_STRING(state_tap_string,"TAP");
+CONSTANT_STRING(state_tapping_string,"TAPPING");
 
 const long seconds_per_minute = 60;
 const long milliseconds_per_second = 1000;
@@ -165,6 +167,21 @@ CONSTANT_STRING(wait_at_load_duration_property_name,"waitAtLoadDuration");
 const long wait_at_load_duration_min = 1;
 const long wait_at_load_duration_max = 10000;
 const long wait_at_load_duration_default = 1000;
+
+CONSTANT_STRING(tap_period_property_name,"tapPeriod");
+const long tap_period_min = 10;
+const long tap_period_max = 100000;
+const long tap_period_default = 500;
+
+CONSTANT_STRING(tap_on_duration_property_name,"tapOnDuration");
+const long tap_on_duration_min = 1;
+const long tap_on_duration_max = 10000;
+const long tap_on_duration_default = 5;
+
+CONSTANT_STRING(tap_count_property_name,"tapCount");
+const long tap_count_min = 1;
+const long tap_count_max = 5;
+const long tap_count_default = 2;
 
 // Parameters
 
