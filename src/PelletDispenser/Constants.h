@@ -21,7 +21,7 @@ namespace pellet_dispenser
 namespace constants
 {
 //MAX values must be >= 1, >= created/copied count, < RAM limit
-enum{PROPERTY_COUNT_MAX=20};
+enum{PROPERTY_COUNT_MAX=21};
 enum{PARAMETER_COUNT_MAX=1};
 enum{FUNCTION_COUNT_MAX=4};
 enum{CALLBACK_COUNT_MAX=3};
@@ -208,6 +208,11 @@ extern ConstantString tap_count_property_name;
 extern const long tap_count_min;
 extern const long tap_count_max;
 extern const long tap_count_default;
+
+extern ConstantString deliver_velocity_property_name;
+extern const long deliver_velocity_min;
+extern const long deliver_velocity_max;
+extern const long deliver_velocity_default;
 
 // Parameters
 

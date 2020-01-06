@@ -20,7 +20,7 @@ const modular_server::FirmwareInfo firmware_info =
 {
   .name_ptr=&firmware_name,
   .version_major=9,
-  .version_minor=2,
+  .version_minor=3,
   .version_patch=0,
 };
 
@@ -176,12 +176,17 @@ const long tap_period_default = 500;
 CONSTANT_STRING(tap_on_duration_property_name,"tapOnDuration");
 const long tap_on_duration_min = 1;
 const long tap_on_duration_max = 10000;
-const long tap_on_duration_default = 5;
+const long tap_on_duration_default = 15;
 
 CONSTANT_STRING(tap_count_property_name,"tapCount");
 const long tap_count_min = 1;
 const long tap_count_max = 5;
 const long tap_count_default = 2;
+
+CONSTANT_STRING(deliver_velocity_property_name,"deliverVelocity");
+const long deliver_velocity_min = 1;
+const long deliver_velocity_max = 500;
+const long deliver_velocity_default = 10;
 
 // Parameters
 
