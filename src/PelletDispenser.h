@@ -60,6 +60,8 @@ public:
   void moveStageToLoadPosition();
   void waitAtLoad();
   void moveStageToNextDeliverPosition();
+  void setDispenseVelocityLimit();
+  void restoreVelocityLimit();
   void moveStageToDispensePosition();
   void playPositionTone();
   void setWaitToDispenseState();

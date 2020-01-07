@@ -1053,7 +1053,7 @@
         ]
       },
       {
-        "name": "deliverVelocity",
+        "name": "dispenseVelocity",
         "type": "long",
         "functions": [
           {

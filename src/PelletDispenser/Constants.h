@@ -209,10 +209,10 @@ extern const long tap_count_min;
 extern const long tap_count_max;
 extern const long tap_count_default;
 
-extern ConstantString deliver_velocity_property_name;
-extern const long deliver_velocity_min;
-extern const long deliver_velocity_max;
-extern const long deliver_velocity_default;
+extern ConstantString dispense_velocity_property_name;
+extern const long dispense_velocity_min;
+extern const long dispense_velocity_max;
+extern const long dispense_velocity_default;
 
 // Parameters
 

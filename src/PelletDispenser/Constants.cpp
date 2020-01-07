@@ -19,9 +19,9 @@ CONSTANT_STRING(firmware_name,"PelletDispenser");
 const modular_server::FirmwareInfo firmware_info =
 {
   .name_ptr=&firmware_name,
-  .version_major=9,
-  .version_minor=3,
-  .version_patch=1,
+  .version_major=10,
+  .version_minor=0,
+  .version_patch=0,
 };
 
 CONSTANT_STRING(state_string,"state");
@@ -102,7 +102,7 @@ CONSTANT_STRING(load_position_property_name,"loadPosition");
 CONSTANT_STRING(next_deliver_position_property_name,"nextDeliverPosition");
 
 CONSTANT_STRING(dispense_channel_position_property_name,"dispenseChannelPosition");
-const long dispense_channel_position_default = 10;
+const long dispense_channel_position_default = 15;
 
 CONSTANT_STRING(position_property_name,"position");
 CONSTANT_STRING(position_left,"LEFT");
@@ -183,10 +183,10 @@ const long tap_count_min = 1;
 const long tap_count_max = 5;
 const long tap_count_default = 2;
 
-CONSTANT_STRING(deliver_velocity_property_name,"deliverVelocity");
-const long deliver_velocity_min = 1;
-const long deliver_velocity_max = 500;
-const long deliver_velocity_default = 10;
+CONSTANT_STRING(dispense_velocity_property_name,"dispenseVelocity");
+const long dispense_velocity_min = 1;
+const long dispense_velocity_max = 500;
+const long dispense_velocity_default = 500;
 
 // Parameters
 
