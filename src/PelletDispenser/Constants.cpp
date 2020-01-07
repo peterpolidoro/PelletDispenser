@@ -21,7 +21,7 @@ const modular_server::FirmwareInfo firmware_info =
   .name_ptr=&firmware_name,
   .version_major=9,
   .version_minor=3,
-  .version_patch=0,
+  .version_patch=1,
 };
 
 CONSTANT_STRING(state_string,"state");
@@ -133,15 +133,15 @@ const double position_tone_duration_default = 1.0;
 CONSTANT_STRING(dispense_delay_property_name,"dispenseDelay");
 const double dispense_delay_min = 0.0;
 const double dispense_delay_max = 100.0;
-const double dispense_delay_default = 4.0;
+const double dispense_delay_default = 1.0;
 
 CONSTANT_STRING(return_delay_min_property_name,"returnDelayMin");
 const double return_delay_min = 1.0;
 const double return_delay_max = 3600.0;
-const double return_delay_min_default = 10.0;
+const double return_delay_min_default = 2.0;
 
 CONSTANT_STRING(return_delay_max_property_name,"returnDelayMax");
-const double return_delay_max_default = 10.0;
+const double return_delay_max_default = 4.0;
 
 CONSTANT_STRING(buzz_power_property_name,"buzzPower");
 const long buzz_power_min = 1;

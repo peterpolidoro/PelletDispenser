@@ -505,7 +505,7 @@ void PelletDispenser::moveStageToNextDeliverPosition()
   modular_server_.property(step_dir_controller::constants::velocity_min_property_name).getElementValue(channel,velocity_min);
 
   long deliver_velocity;
-  modular_server_.property(constants::deliver_velocity_property_name).getElementValue(channel,deliver_velocity);
+  modular_server_.property(constants::deliver_velocity_property_name).getValue(deliver_velocity);
 
   long acceleration_max;
   modular_server_.property(step_dir_controller::constants::acceleration_max_property_name).getElementValue(channel,acceleration_max);
