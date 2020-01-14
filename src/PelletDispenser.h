@@ -40,7 +40,7 @@ public:
   StageController::PositionArray getBuzzPosition();
   StageController::PositionArray getLoadPosition();
   StageController::PositionArray getNextDeliverPosition();
-  StageController::PositionArray getDispensePosition();
+  StageController::PositionArray getNextDispensePosition();
   long getPositionToneFrequency();
   long getPositionToneVolume();
   long getPositionToneDelay();
@@ -62,7 +62,7 @@ public:
   void moveStageToNextDeliverPosition();
   void setDispenseVelocityLimit();
   void restoreVelocityLimit();
-  void moveStageToDispensePosition();
+  void moveStageToNextDispensePosition();
   void playPositionTone();
   void setWaitToDispenseState();
   void waitToDispense();

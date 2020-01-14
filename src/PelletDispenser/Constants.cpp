@@ -19,7 +19,7 @@ CONSTANT_STRING(firmware_name,"PelletDispenser");
 const modular_server::FirmwareInfo firmware_info =
 {
   .name_ptr=&firmware_name,
-  .version_major=10,
+  .version_major=11,
   .version_minor=0,
   .version_patch=0,
 };
@@ -101,8 +101,7 @@ CONSTANT_STRING(load_position_property_name,"loadPosition");
 
 CONSTANT_STRING(next_deliver_position_property_name,"nextDeliverPosition");
 
-CONSTANT_STRING(dispense_channel_position_property_name,"dispenseChannelPosition");
-const long dispense_channel_position_default = 15;
+CONSTANT_STRING(next_dispense_position_property_name,"nextDispensePosition");
 
 CONSTANT_STRING(position_property_name,"position");
 CONSTANT_STRING(position_left,"LEFT");
@@ -176,17 +175,16 @@ const long tap_period_default = 500;
 CONSTANT_STRING(tap_on_duration_property_name,"tapOnDuration");
 const long tap_on_duration_min = 1;
 const long tap_on_duration_max = 10000;
-const long tap_on_duration_default = 15;
+const long tap_on_duration_default = 17;
 
 CONSTANT_STRING(tap_count_property_name,"tapCount");
 const long tap_count_min = 1;
 const long tap_count_max = 5;
-const long tap_count_default = 2;
+const long tap_count_default = 3;
 
 CONSTANT_STRING(dispense_velocity_property_name,"dispenseVelocity");
 const long dispense_velocity_min = 1;
 const long dispense_velocity_max = 500;
-const long dispense_velocity_default = 500;
 
 // Parameters
 

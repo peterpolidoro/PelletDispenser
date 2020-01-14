@@ -88,7 +88,7 @@ void PelletDispenser::setup()
 
   modular_server_.createProperty(constants::next_deliver_position_property_name,constants::next_deliver_position_default);
 
-  modular_server_.createProperty(constants::dispense_channel_position_property_name,constants::dispense_channel_position_default);
+  modular_server_.createProperty(constants::next_dispense_position_property_name,constants::next_dispense_position_default);
 
   modular_server::Property & position_property = modular_server_.createProperty(constants::position_property_name,constants::position_ptr_default);
   position_property.setSubset(constants::position_subset);
@@ -294,7 +294,7 @@ void PelletDispenser::update()
   else if (state_ptr == &constants::state_move_to_dispense_string)
   {
     assay_status_.state_ptr = &constants::state_moving_to_dispense_string;
-    moveStageToDispensePosition();
+    moveStageToNextDispensePosition();
   }
   else if (state_ptr == &constants::state_moving_to_dispense_string)
   {
@@ -346,16 +346,12 @@ StageController::PositionArray PelletDispenser::getNextDeliverPosition()
   return next_deliver_position;
 }
 
-StageController::PositionArray PelletDispenser::getDispensePosition()
+StageController::PositionArray PelletDispenser::getNextDispensePosition()
 {
-  StageController::PositionArray dispense_position = deliver_position_;
+  StageController::PositionArray next_dispense_position;
+  modular_server_.property(constants::next_dispense_position_property_name).getValue(next_dispense_position);
 
-  long dispense_channel_position;
-  modular_server_.property(constants::dispense_channel_position_property_name).getValue(dispense_channel_position);
-
-  dispense_position[constants::DISPENSE_CHANNEL] = dispense_channel_position;
-
-  return dispense_position;
+  return next_dispense_position;
 }
 
 long PelletDispenser::getPositionToneFrequency()
@@ -506,29 +502,33 @@ void PelletDispenser::moveStageToNextDeliverPosition()
 
 void PelletDispenser::setDispenseVelocityLimit()
 {
-  const long channel = constants::DISPENSE_CHANNEL;
+  for (size_t channel=0; channel<getChannelCount(); ++channel)
+  {
+    long velocity_min;
+    modular_server_.property(step_dir_controller::constants::velocity_min_property_name).getElementValue(channel,velocity_min);
 
-  long velocity_min;
-  modular_server_.property(step_dir_controller::constants::velocity_min_property_name).getElementValue(channel,velocity_min);
+    long dispense_velocity;
+    modular_server_.property(constants::dispense_velocity_property_name).getElementValue(channel,dispense_velocity);
 
-  long dispense_velocity;
-  modular_server_.property(constants::dispense_velocity_property_name).getValue(dispense_velocity);
+    long acceleration_max;
+    modular_server_.property(step_dir_controller::constants::acceleration_max_property_name).getElementValue(channel,acceleration_max);
 
-  long acceleration_max;
-  modular_server_.property(step_dir_controller::constants::acceleration_max_property_name).getElementValue(channel,acceleration_max);
-
-  temporarilySetLimits(channel,velocity_min,dispense_velocity,acceleration_max);
+    temporarilySetLimits(channel,velocity_min,dispense_velocity,acceleration_max);
+  }
 }
 
 void PelletDispenser::restoreVelocityLimit()
 {
-  restoreLimits(constants::DISPENSE_CHANNEL);
+  for (size_t channel=0; channel<getChannelCount(); ++channel)
+  {
+    restoreLimits(channel);
+  }
 }
 
-void PelletDispenser::moveStageToDispensePosition()
+void PelletDispenser::moveStageToNextDispensePosition()
 {
-  StageController::PositionArray dispense_position = getDispensePosition();
-  moveStageTo(dispense_position);
+  StageController::PositionArray next_dispense_position = getNextDispensePosition();
+  moveStageTo(next_dispense_position);
 }
 
 void PelletDispenser::playPositionTone()

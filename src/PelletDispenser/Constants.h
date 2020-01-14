@@ -28,8 +28,6 @@ enum{CALLBACK_COUNT_MAX=3};
 
 enum{EVENT_COUNT_MAX=32};
 
-enum{DISPENSE_CHANNEL=0};
-
 extern ConstantString device_name;
 
 extern ConstantString firmware_name;
@@ -130,8 +128,8 @@ extern const long load_position_default[stepper_controller::constants::CHANNEL_C
 extern ConstantString next_deliver_position_property_name;
 extern const long next_deliver_position_default[stepper_controller::constants::CHANNEL_COUNT_MAX];
 
-extern ConstantString dispense_channel_position_property_name;
-extern const long dispense_channel_position_default;
+extern ConstantString next_dispense_position_property_name;
+extern const long next_dispense_position_default[stepper_controller::constants::CHANNEL_COUNT_MAX];
 
 extern ConstantString position_property_name;
 enum{POSITION_SUBSET_LENGTH=2};
@@ -212,7 +210,7 @@ extern const long tap_count_default;
 extern ConstantString dispense_velocity_property_name;
 extern const long dispense_velocity_min;
 extern const long dispense_velocity_max;
-extern const long dispense_velocity_default;
+extern const long dispense_velocity_default[stepper_controller::constants::CHANNEL_COUNT_MAX];
 
 // Parameters
 

@@ -111,9 +111,23 @@ const long load_position_default[stepper_controller::constants::CHANNEL_COUNT_MA
 
 const long next_deliver_position_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
-  10,
-  33,
+  7,
+  38,
   64,
+};
+
+const long next_dispense_position_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
+{
+  17,
+  38,
+  64,
+};
+
+const long dispense_velocity_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
+{
+  500,
+  400,
+  400,
 };
 
 // Parameters
