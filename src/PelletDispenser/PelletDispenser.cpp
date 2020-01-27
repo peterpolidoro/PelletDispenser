@@ -223,6 +223,7 @@ void PelletDispenser::update()
   else if (state_ptr == &constants::state_move_to_buzz_string)
   {
     assay_status_.state_ptr = &constants::state_moving_to_buzz_string;
+    restoreVelocityLimits();
     moveStageToBuzzPosition();
   }
   else if (state_ptr == &constants::state_moving_to_buzz_string)
