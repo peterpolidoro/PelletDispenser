@@ -28,8 +28,8 @@ const long steps_per_position_units_default[stepper_controller::constants::CHANN
 const long velocity_max_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
   7,
-  200,
-  200,
+  20,
+  20,
 };
 
 const long velocity_min_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
@@ -42,8 +42,8 @@ const long velocity_min_default[stepper_controller::constants::CHANNEL_COUNT_MAX
 const long acceleration_max_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
   1200,
-  1200,
-  1200,
+  2500,
+  2500,
 };
 
 const long home_velocity_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
@@ -126,8 +126,8 @@ const long next_dispense_position_default[stepper_controller::constants::CHANNEL
 const long dispense_velocity_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
   500,
-  500,
-  500,
+  490,
+  490,
 };
 
 // Parameters

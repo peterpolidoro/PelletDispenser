@@ -21,7 +21,7 @@ const modular_server::FirmwareInfo firmware_info =
   .name_ptr=&firmware_name,
   .version_major=11,
   .version_minor=0,
-  .version_patch=1,
+  .version_patch=2,
 };
 
 CONSTANT_STRING(state_string,"state");
@@ -184,7 +184,7 @@ const long tap_count_default = 3;
 
 CONSTANT_STRING(dispense_velocity_property_name,"dispenseVelocity");
 const long dispense_velocity_min = 1;
-const long dispense_velocity_max = 2500;
+const long dispense_velocity_max = 500;
 
 // Parameters
 
