@@ -151,6 +151,7 @@ void PelletDispenser::setup()
   tap_count_property.setRange(constants::tap_count_min,constants::tap_count_max);
 
   modular_server::Property & dispense_velocity_property = modular_server_.createProperty(constants::dispense_velocity_property_name,constants::dispense_velocity_default);
+  dispense_velocity_property.attachPostSetElementValueFunctor(makeFunctor((Functor1<size_t> *)0,*this,&PelletDispenser::setDispenseVelocityLimitHandler));
   dispense_velocity_property.setUnits(step_dir_controller::constants::position_units_per_second_units);
   dispense_velocity_property.setRange(constants::dispense_velocity_min,constants::dispense_velocity_max);
 
@@ -276,7 +277,7 @@ void PelletDispenser::update()
   {
     if (stageAtTargetPosition())
     {
-      setDispenseVelocityLimit();
+      setDispenseVelocityLimits();
       assay_status_.state_ptr = &constants::state_ready_to_dispense_string;
     }
   }
@@ -300,7 +301,7 @@ void PelletDispenser::update()
   {
     if (stageAtTargetPosition())
     {
-      restoreVelocityLimit();
+      restoreVelocityLimits();
       assay_status_.state_ptr = &constants::state_wait_to_return_string;
     }
   }
@@ -500,24 +501,29 @@ void PelletDispenser::moveStageToNextDeliverPosition()
   moveStageSoftlyTo(next_deliver_position);
 }
 
-void PelletDispenser::setDispenseVelocityLimit()
+void PelletDispenser::setDispenseVelocityLimit(size_t channel)
+{
+  long velocity_min;
+  modular_server_.property(step_dir_controller::constants::velocity_min_property_name).getElementValue(channel,velocity_min);
+
+  long dispense_velocity;
+  modular_server_.property(constants::dispense_velocity_property_name).getElementValue(channel,dispense_velocity);
+
+  long acceleration_max;
+  modular_server_.property(step_dir_controller::constants::acceleration_max_property_name).getElementValue(channel,acceleration_max);
+
+  temporarilySetLimits(channel,velocity_min,dispense_velocity,acceleration_max);
+}
+
+void PelletDispenser::setDispenseVelocityLimits()
 {
   for (size_t channel=0; channel<getChannelCount(); ++channel)
   {
-    long velocity_min;
-    modular_server_.property(step_dir_controller::constants::velocity_min_property_name).getElementValue(channel,velocity_min);
-
-    long dispense_velocity;
-    modular_server_.property(constants::dispense_velocity_property_name).getElementValue(channel,dispense_velocity);
-
-    long acceleration_max;
-    modular_server_.property(step_dir_controller::constants::acceleration_max_property_name).getElementValue(channel,acceleration_max);
-
-    temporarilySetLimits(channel,velocity_min,dispense_velocity,acceleration_max);
+    setDispenseVelocityLimit(channel);
   }
 }
 
-void PelletDispenser::restoreVelocityLimit()
+void PelletDispenser::restoreVelocityLimits()
 {
   for (size_t channel=0; channel<getChannelCount(); ++channel)
   {
@@ -726,6 +732,14 @@ void PelletDispenser::setClientPropertyValuesHandler()
   modular_server_.response().endArray();
 
   modular_server_.response().endObject();
+}
+
+void PelletDispenser::setDispenseVelocityLimitHandler(size_t channel)
+{
+  if (assay_status_.state_ptr == &constants::state_ready_to_dispense_string)
+  {
+    setDispenseVelocityLimit(channel);
+  }
 }
 
 void PelletDispenser::getAssayStatusHandler()

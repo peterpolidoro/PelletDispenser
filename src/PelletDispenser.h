@@ -60,8 +60,9 @@ public:
   void moveStageToLoadPosition();
   void waitAtLoad();
   void moveStageToNextDeliverPosition();
-  void setDispenseVelocityLimit();
-  void restoreVelocityLimit();
+  void setDispenseVelocityLimit(size_t channel);
+  void setDispenseVelocityLimits();
+  void restoreVelocityLimits();
   void moveStageToNextDispensePosition();
   void playPositionTone();
   void setWaitToDispenseState();
@@ -95,6 +96,7 @@ private:
 
   // Handlers
   void setClientPropertyValuesHandler();
+  void setDispenseVelocityLimitHandler(size_t channel);
   void getAssayStatusHandler();
   void playPositionToneHandler();
   void buzzHandler();
