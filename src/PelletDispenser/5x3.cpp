@@ -42,8 +42,8 @@ const long velocity_min_default[stepper_controller::constants::CHANNEL_COUNT_MAX
 const long acceleration_max_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
   1200,
-  2500,
-  2500,
+  1200,
+  1200,
 };
 
 const long home_velocity_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
@@ -98,36 +98,36 @@ const long stage_position_max_default[stepper_controller::constants::CHANNEL_COU
 const long buzz_position_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
   10,
-  33,
-  64,
+  25,
+  65,
 };
 
 const long load_position_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
   1,
-  33,
-  64,
+  25,
+  65,
 };
 
 const long next_deliver_position_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
-  20,
-  38,
-  60,
+  17,
+  26,
+  64,
 };
 
 const long next_dispense_position_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
-  16,
-  38,
-  68,
+  13,
+  21,
+  74,
 };
 
 const long dispense_velocity_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
   500,
-  490,
-  490,
+  100,
+  100,
 };
 
 // Parameters

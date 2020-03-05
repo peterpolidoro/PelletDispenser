@@ -21,7 +21,7 @@ const modular_server::FirmwareInfo firmware_info =
   .name_ptr=&firmware_name,
   .version_major=11,
   .version_minor=0,
-  .version_patch=3,
+  .version_patch=4,
 };
 
 CONSTANT_STRING(state_string,"state");
@@ -114,7 +114,7 @@ modular_server::SubsetMemberType position_subset[POSITION_SUBSET_LENGTH] =
 const ConstantString * const position_ptr_default = &position_left;
 
 CONSTANT_STRING(position_tone_frequency_property_name,"positionToneFrequency");
-const long position_tone_frequency_default = 5400;
+const long position_tone_frequency_default = 3000;
 
 CONSTANT_STRING(position_tone_volume_property_name,"positionToneVolume");
 const long position_tone_volume_default = 25;
@@ -122,22 +122,22 @@ const long position_tone_volume_default = 25;
 CONSTANT_STRING(position_tone_delay_property_name,"positionToneDelay");
 const double position_tone_delay_min = 0.0;
 const double position_tone_delay_max = 100.0;
-const double position_tone_delay_default = 3.0;
+const double position_tone_delay_default = 0.0;
 
 CONSTANT_STRING(position_tone_duration_property_name,"positionToneDuration");
 const double position_tone_duration_min = 0.001;
 const double position_tone_duration_max = 10.0;
-const double position_tone_duration_default = 1.0;
+const double position_tone_duration_default = 0.2;
 
 CONSTANT_STRING(dispense_delay_property_name,"dispenseDelay");
 const double dispense_delay_min = 0.0;
 const double dispense_delay_max = 100.0;
-const double dispense_delay_default = 1.0;
+const double dispense_delay_default = 0.0;
 
 CONSTANT_STRING(return_delay_min_property_name,"returnDelayMin");
 const double return_delay_min = 1.0;
 const double return_delay_max = 3600.0;
-const double return_delay_min_default = 2.0;
+const double return_delay_min_default = 4.0;
 
 CONSTANT_STRING(return_delay_max_property_name,"returnDelayMax");
 const double return_delay_max_default = 4.0;
@@ -150,17 +150,17 @@ const long buzz_power_default = 21;
 CONSTANT_STRING(buzz_period_property_name,"buzzPeriod");
 const long buzz_period_min = 10;
 const long buzz_period_max = 100000;
-const long buzz_period_default = 500;
+const long buzz_period_default = 100;
 
 CONSTANT_STRING(buzz_on_duration_property_name,"buzzOnDuration");
 const long buzz_on_duration_min = 1;
 const long buzz_on_duration_max = 10000;
-const long buzz_on_duration_default = 20;
+const long buzz_on_duration_default = 1;
 
 CONSTANT_STRING(buzz_count_property_name,"buzzCount");
 const long buzz_count_min = 1;
 const long buzz_count_max = 5;
-const long buzz_count_default = 3;
+const long buzz_count_default = 1;
 
 CONSTANT_STRING(wait_at_load_duration_property_name,"waitAtLoadDuration");
 const long wait_at_load_duration_min = 1;
@@ -175,12 +175,12 @@ const long tap_period_default = 500;
 CONSTANT_STRING(tap_on_duration_property_name,"tapOnDuration");
 const long tap_on_duration_min = 1;
 const long tap_on_duration_max = 10000;
-const long tap_on_duration_default = 17;
+const long tap_on_duration_default = 15;
 
 CONSTANT_STRING(tap_count_property_name,"tapCount");
 const long tap_count_min = 1;
 const long tap_count_max = 5;
-const long tap_count_default = 3;
+const long tap_count_default = 5;
 
 CONSTANT_STRING(dispense_velocity_property_name,"dispenseVelocity");
 const long dispense_velocity_min = 1;
