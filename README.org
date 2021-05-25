@@ -4,7 +4,7 @@
 
 * Library Information
   - Name :: PelletDispenser
-  - Version :: 11.0.4
+  - Version :: 11.1.0
   - License :: BSD
   - URL :: https://github.com/janelia-arduino/PelletDispenser
   - Author :: Peter Polidoro

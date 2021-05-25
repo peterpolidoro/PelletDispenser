@@ -102,6 +102,12 @@ extern const long acceleration_max_default[stepper_controller::constants::CHANNE
 
 extern const long home_velocity_default[stepper_controller::constants::CHANNEL_COUNT_MAX];
 
+extern const bool right_switches_enabled_default[step_dir_controller::constants::CONTROLLER_COUNT_MAX];
+extern const bool right_switches_enabled_element_default;
+
+extern const bool right_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT_MAX];
+extern const bool right_switch_stop_enabled_element_default;
+
 extern const bool invert_driver_direction_default[stepper_controller::constants::CHANNEL_COUNT_MAX];
 
 extern const long run_current_default[stepper_controller::constants::CHANNEL_COUNT_MAX];

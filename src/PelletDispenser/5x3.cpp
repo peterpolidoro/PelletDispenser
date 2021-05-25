@@ -53,6 +53,26 @@ const long home_velocity_default[stepper_controller::constants::CHANNEL_COUNT_MA
   -20,
 };
 
+const bool right_switches_enabled_default[step_dir_controller::constants::CONTROLLER_COUNT_MAX] =
+{
+  right_switches_enabled_element_default,
+  right_switches_enabled_element_default,
+  right_switches_enabled_element_default,
+};
+
+const bool right_switch_stop_enabled_default[step_dir_controller::constants::CHANNEL_COUNT_MAX] =
+{
+  right_switch_stop_enabled_element_default,
+  right_switch_stop_enabled_element_default,
+  right_switch_stop_enabled_element_default,
+  right_switch_stop_enabled_element_default,
+  right_switch_stop_enabled_element_default,
+  right_switch_stop_enabled_element_default,
+  right_switch_stop_enabled_element_default,
+  right_switch_stop_enabled_element_default,
+  right_switch_stop_enabled_element_default,
+};
+
 const bool invert_driver_direction_default[stepper_controller::constants::CHANNEL_COUNT_MAX] =
 {
   true,

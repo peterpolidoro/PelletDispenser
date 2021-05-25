@@ -20,8 +20,8 @@ const modular_server::FirmwareInfo firmware_info =
 {
   .name_ptr=&firmware_name,
   .version_major=11,
-  .version_minor=0,
-  .version_patch=4,
+  .version_minor=1,
+  .version_patch=0,
 };
 
 CONSTANT_STRING(state_string,"state");
@@ -87,6 +87,10 @@ const long tone_frequency_min = 200;
 const long tone_frequency_max = 22000;
 
 // Properties
+const bool right_switches_enabled_element_default = false;
+
+const bool right_switch_stop_enabled_element_default = false;
+
 const long run_current_0_element_default = 4;
 const long run_current_1_2_element_default = 20;
 
