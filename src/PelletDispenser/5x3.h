@@ -3,7 +3,7 @@
 //
 //
 // Authors:
-// Peter Polidoro peterpolidoro@gmail.com
+// Peter Polidoro peter@polidoro.io
 // ----------------------------------------------------------------------------
 #ifndef PELLET_DISPENSER_5X3_CONSTANTS_H
 #define PELLET_DISPENSER_5X3_CONSTANTS_H
